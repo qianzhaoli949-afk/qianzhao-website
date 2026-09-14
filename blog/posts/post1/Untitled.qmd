@@ -1,13 +1,93 @@
 ---
-title: "My First Blog Post"
-date: 2026-06-16
+title: "Why More Income Can Mean Less Instant Noodles"
+subtitle: "Understanding inferior goods without confusing them with bad goods"
+author: "Qianzhao Li"
+date: 2026-09-09
 categories:
-  - personal
-  - data-science
+  - microeconomics
+  - intuition
 ---
 
-![](figure1.png){width="500px"}
+It sounds backwards: why would a person buy *less* of something after getting
+a raise? In economics, a product with that pattern is called an **inferior
+good**. The word “inferior” is easy to misunderstand. It does not mean the
+product is unsafe, low quality, or morally worse. It simply describes how a
+consumer's demand changes when income changes, holding prices and preferences
+constant.
 
-This is my first blog post. Example $\LaTeX$ equation: $\frac{1}{2}\sum_{i=1}^nx_i$
+An inferior good has a negative income elasticity of demand:
+
+$$
+\text{Income elasticity of demand} =
+\frac{\%\text{ change in quantity demanded}}{\%\text{ change in income}} < 0.
+$$
+
+In plain language, when income rises, the quantity demanded falls. When income
+falls, the quantity demanded rises. This result is unintuitive because we often
+expect people to buy more of everything when they can afford more. But people
+do not only buy *more*; they also change *what* they buy.
+
+## A practical example
+
+Imagine a student who regularly buys instant noodles because they are cheap,
+quick, and easy to store. When the student's budget expands, they may replace
+some noodle meals with fresh ingredients, restaurant meals, or other convenient
+options they prefer. Instant noodles have not changed. The student's choices
+have changed because better alternatives are now within reach.
+
+The figure below uses a small, hypothetical example. It shows monthly instant
+noodle purchases for households at different monthly incomes. The downward
+line illustrates the defining pattern of an inferior good: higher income is
+associated with fewer noodle packages purchased. The numbers are invented for
+teaching purposes, so this figure demonstrates the concept rather than making
+a claim about a real population.
+
+```{r}
+#| label: fig-inferior-good
+#| fig-cap: "Illustrative demand for an inferior good: instant noodles."
+#| fig-alt: "A downward-sloping line showing instant noodle purchases falling as monthly income rises."
+#| echo: true
+#| warning: false
+
+# Hypothetical data created for this example; no external data source is used.
+income <- c(1500, 2500, 3500, 4500, 5500, 6500)
+noodle_packages <- c(18, 15, 12, 9, 7, 5)
+
+plot(
+  income, noodle_packages,
+  type = "b", pch = 19, col = "#2C7FB8", lwd = 2,
+  xlab = "Monthly household income (USD)",
+  ylab = "Instant noodle packages purchased per month",
+  main = "An illustrative inferior good",
+  ylim = c(0, 20)
+)
+grid(col = "gray85")
+```
+
+This graph should not be read as proof that instant noodles are inferior for
+every household. A good can be inferior for one person, at one income level,
+and not for another. For example, someone who likes instant noodles as a snack
+may buy more of them after a raise. Economists therefore estimate income
+elasticities from data instead of assigning a permanent label to every product.
+
+It is also helpful to separate inferior goods from **Giffen goods**. A Giffen
+good is a rare special case in which a price increase leads consumers to buy
+more of the good. Inferior goods concern changes in income, while Giffen goods
+concern changes in price. Some Giffen goods must be inferior, but most inferior
+goods are not Giffen goods. Treating the two as identical is one of the most
+common mistakes in introductory economics.
+
+## Takeaway
+
+“Inferior” is a technical description of consumer behavior, not a judgment of
+a product. When income rises, consumers may move away from budget-oriented
+choices toward alternatives they value more. The concept is a useful reminder
+that higher income changes the composition of spending, not just its total.
+
+## Data source and reproducibility
+
+This post uses no external data. The six observations in the R code are
+hypothetical values created solely to visualize the definition of an inferior
+good. Running the code block reproduces the figure.
 
 ---

@@ -4,25 +4,26 @@ title: ""
 
 ::::: columns
 ::: {.column width="35%"}
-![](images/profile.png){width="100%"}
+![](images/profile.JPG){width="100%" fig-alt="Profile photo of Qianzhao Li"}
 :::
 
 ::: {.column width="65%"}
 ![](images/UniversityofPennsylvania_FullLogo_RGB.png){width="250px"}
 
-# Student Name
+# Qianzhao Li
 
-University of Pennsylvaina
+University of Pennsylvania
 
-Welcome to my personal website.
+Welcome to my personal website. I am a graduate student interested in
+econometrics, machine learning, and data analysis.
 
 ### Quick Links
 
 <div>
-  <a href="https://github.com/USERNAME"><i class="bi bi-github fs-3"></i></a>
-  <a href="https://linkedin.com/in/USERNAME"><i class="bi bi-linkedin fs-3"></i></a>
+  <a href="https://github.com/qianzhaoli949-afk" aria-label="Qianzhao Li on GitHub"><i class="bi bi-github fs-3"></i></a>
+  <a href="https://www.linkedin.com/in/qianzhao-li-53bb9529a" aria-label="Qianzhao Li on LinkedIn"><i class="bi bi-linkedin fs-3"></i></a>
   <a href="resume.qmd"><i class="bi bi-file-earmark-person-fill fs-3"></i></a>
-  <a href="mailto:student@email.com"><i class="bi bi-envelope-fill fs-3"></i></a>
+  <a href="mailto:liqianz@sas.upenn.edu" aria-label="Email Qianzhao Li"><i class="bi bi-envelope-fill fs-3"></i></a>
 </div>
 :::
 :::::

@@ -2,6 +2,40 @@
 title: "Resume"
 ---
 
-Download my resume here:
+# Qianzhao Li
 
-##  [Resume PDF](files/Resume.pdf)
+Graduate student in Applied Economics and Data Science at the University of
+Pennsylvania, with a background in Financial Mathematics and interests in
+financial modelling, machine learning, data analysis, and applied economics.
+
+## Download
+
+[View or download my CV (PDF)](files/Qianzhao-Li-CV.pdf){.btn .btn-primary}
+
+## Education
+
+**University of Pennsylvania**  
+Master of Applied Economics and Data Science  
+Expected 2027
+
+**Xi'an Jiaotong-Liverpool University**  
+BSc Financial Mathematics  
+Graduated 2026
+
+## Areas of Interest
+
+-   Financial Modelling
+-   Machine learning
+-   Data analysis
+-   Applied economic
+
+## Technical Skills
+
+-   **Programming:** Python, Matlab
+-   **Analysis:** Statistical analysis, Derivatives, and applied economics
+-   **Communication:** Data visualization and reproducible research
+
+## Professional Objective
+
+To apply economic reasoning, statistical methods, and computational tools to
+real-world problems.

@@ -1,24 +1,17 @@
 [
   {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "Student Name",
-    "section": "",
-    "text": "Student Name\nUniversity of Pennsylvaina\nWelcome to my personal website.\n\nQuick Links"
-  },
-  {
     "objectID": "bio.html",
     "href": "bio.html",
     "title": "About Me",
     "section": "",
-    "text": "Write a short biography here.\nInclude:"
+    "text": "I am a graduate student at the University of Pennsylvania pursuing a Master of Applied Economics and Data Science, with an expected graduation date of 2027. My academic interests center on using quantitative methods to understand economic questions and turn complex data into clear, useful insights.\nI am especially interested in econometrics, machine learning, and data analysis. I enjoy combining economic reasoning with computational tools to study real-world problems. My goal is to continue developing strong research and analytical skills and apply them in a data-focused career."
   },
   {
     "objectID": "bio.html#education",
     "href": "bio.html#education",
     "title": "About Me",
     "section": "Education",
-    "text": "Education\nMaster of Applied Economics and Data Science, University of Pennsylvania (expaceted 2027) Batelor of Science, University Name 2026"
+    "text": "Education\n\nMaster of Applied Economics and Data Science, University of Pennsylvania — Expected 2027"
   },
   {
     "objectID": "bio.html#interests",
@@ -28,46 +21,74 @@
     "text": "Interests\n\nEconometrics\nMachine Learning\nData Analysis"
   },
   {
-    "objectID": "bio.html#contact",
-    "href": "bio.html#contact",
+    "objectID": "bio.html#technical-skills",
+    "href": "bio.html#technical-skills",
     "title": "About Me",
-    "section": "Contact",
-    "text": "Contact"
-  },
-  {
-    "objectID": "bio.html#studentemail.edu",
-    "href": "bio.html#studentemail.edu",
-    "title": "About Me",
-    "section": "student@email.edu",
-    "text": "student@email.edu"
+    "section": "Technical Skills",
+    "text": "Technical Skills\n\nR\nStatistical analysis\nData visualization\nMachine learning"
   },
   {
     "objectID": "blog/index.html",
     "href": "blog/index.html",
     "title": "Blog",
     "section": "",
-    "text": "My First Blog Post\n\n\n\n\n\n\n\n\n\n\n\nJun 16, 2026\n\n\n\n\n\n\n\n\n\n\n\n\nMy Second Blog Post\n\n\n\n\n\n\n\n\n\n\n\nJun 16, 2026\n\n\n\n\n\n\nNo matching items"
+    "text": "Why More Income Can Mean Less Instant Noodles\n\n\nUnderstanding inferior goods without confusing them with bad goods\n\n\n\n\n\n\n\n\nSep 9, 2026\n\n\nQianzhao Li\n\n\n\n\n\n\n\n\n\n\n\n\nMy Second Blog Post\n\n\n\n\n\n\n\n\n\n\n\nJun 16, 2026\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "blog/posts/post1/Untitled.html",
     "href": "blog/posts/post1/Untitled.html",
-    "title": "My First Blog Post",
+    "title": "Why More Income Can Mean Less Instant Noodles",
     "section": "",
-    "text": "This is my first blog post. Example \\(\\LaTeX\\) equation: \\(\\frac{1}{2}\\sum_{i=1}^nx_i\\)"
+    "text": "It sounds backwards: why would a person buy less of something after getting a raise? In economics, a product with that pattern is called an inferior good. The word “inferior” is easy to misunderstand. It does not mean the product is unsafe, low quality, or morally worse. It simply describes how a consumer’s demand changes when income changes, holding prices and preferences constant.\nAn inferior good has a negative income elasticity of demand:\n\\[\n\\text{Income elasticity of demand} =\n\\frac{\\%\\text{ change in quantity demanded}}{\\%\\text{ change in income}} &lt; 0.\n\\]\nIn plain language, when income rises, the quantity demanded falls. When income falls, the quantity demanded rises. This result is unintuitive because we often expect people to buy more of everything when they can afford more. But people do not only buy more; they also change what they buy."
   },
   {
     "objectID": "resume.html",
     "href": "resume.html",
     "title": "Resume",
     "section": "",
-    "text": "Download my resume here:"
+    "text": "Graduate student in Applied Economics and Data Science at the University of Pennsylvania, with a background in Financial Mathematics and interests in financial modelling, machine learning, data analysis, and applied economics.\n\n\nView or download my CV (PDF)\n\n\n\nUniversity of Pennsylvania\nMaster of Applied Economics and Data Science\nExpected 2027\nXi’an Jiaotong-Liverpool University\nBSc Financial Mathematics\nGraduated 2026\n\n\n\n\nFinancial Modelling\nMachine learning\nData analysis\nApplied economic\n\n\n\n\n\nProgramming: Python, Matlab\nAnalysis: Statistical analysis, Derivatives, and applied economics\nCommunication: Data visualization and reproducible research\n\n\n\n\nTo apply economic reasoning, statistical methods, and computational tools to real-world problems."
   },
   {
-    "objectID": "resume.html#resume-pdf",
-    "href": "resume.html#resume-pdf",
+    "objectID": "resume.html#download",
+    "href": "resume.html#download",
     "title": "Resume",
-    "section": "Resume PDF",
-    "text": "Resume PDF"
+    "section": "",
+    "text": "View or download my CV (PDF)"
+  },
+  {
+    "objectID": "resume.html#education",
+    "href": "resume.html#education",
+    "title": "Resume",
+    "section": "",
+    "text": "University of Pennsylvania\nMaster of Applied Economics and Data Science\nExpected 2027\nXi’an Jiaotong-Liverpool University\nBSc Financial Mathematics\nGraduated 2026"
+  },
+  {
+    "objectID": "resume.html#areas-of-interest",
+    "href": "resume.html#areas-of-interest",
+    "title": "Resume",
+    "section": "",
+    "text": "Financial Modelling\nMachine learning\nData analysis\nApplied economic"
+  },
+  {
+    "objectID": "resume.html#technical-skills",
+    "href": "resume.html#technical-skills",
+    "title": "Resume",
+    "section": "",
+    "text": "Programming: Python, Matlab\nAnalysis: Statistical analysis, Derivatives, and applied economics\nCommunication: Data visualization and reproducible research"
+  },
+  {
+    "objectID": "resume.html#professional-objective",
+    "href": "resume.html#professional-objective",
+    "title": "Resume",
+    "section": "",
+    "text": "To apply economic reasoning, statistical methods, and computational tools to real-world problems."
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Qianzhao Li",
+    "section": "",
+    "text": "Qianzhao Li\nUniversity of Pennsylvania\nWelcome to my personal website. I am a graduate student interested in econometrics, machine learning, and data analysis.\n\nQuick Links"
   },
   {
     "objectID": "about.html",
@@ -75,5 +96,26 @@
     "title": "About",
     "section": "",
     "text": "About this site\n\n1 + 1\n\n[1] 2"
+  },
+  {
+    "objectID": "blog/posts/post1/Untitled.html#a-practical-example",
+    "href": "blog/posts/post1/Untitled.html#a-practical-example",
+    "title": "Why More Income Can Mean Less Instant Noodles",
+    "section": "A practical example",
+    "text": "A practical example\nImagine a student who regularly buys instant noodles because they are cheap, quick, and easy to store. When the student’s budget expands, they may replace some noodle meals with fresh ingredients, restaurant meals, or other convenient options they prefer. Instant noodles have not changed. The student’s choices have changed because better alternatives are now within reach.\nThe figure below uses a small, hypothetical example. It shows monthly instant noodle purchases for households at different monthly incomes. The downward line illustrates the defining pattern of an inferior good: higher income is associated with fewer noodle packages purchased. The numbers are invented for teaching purposes, so this figure demonstrates the concept rather than making a claim about a real population.\n\n# Hypothetical data created for this example; no external data source is used.\nincome &lt;- c(1500, 2500, 3500, 4500, 5500, 6500)\nnoodle_packages &lt;- c(18, 15, 12, 9, 7, 5)\n\nplot(\n  income, noodle_packages,\n  type = \"b\", pch = 19, col = \"#2C7FB8\", lwd = 2,\n  xlab = \"Monthly household income (USD)\",\n  ylab = \"Instant noodle packages purchased per month\",\n  main = \"An illustrative inferior good\",\n  ylim = c(0, 20)\n)\ngrid(col = \"gray85\")\n\n\n\n\n\n\n\nFigure 1: Illustrative demand for an inferior good: instant noodles.\n\n\n\n\n\nThis graph should not be read as proof that instant noodles are inferior for every household. A good can be inferior for one person, at one income level, and not for another. For example, someone who likes instant noodles as a snack may buy more of them after a raise. Economists therefore estimate income elasticities from data instead of assigning a permanent label to every product.\nIt is also helpful to separate inferior goods from Giffen goods. A Giffen good is a rare special case in which a price increase leads consumers to buy more of the good. Inferior goods concern changes in income, while Giffen goods concern changes in price. Some Giffen goods must be inferior, but most inferior goods are not Giffen goods. Treating the two as identical is one of the most common mistakes in introductory economics."
+  },
+  {
+    "objectID": "blog/posts/post1/Untitled.html#takeaway",
+    "href": "blog/posts/post1/Untitled.html#takeaway",
+    "title": "Why More Income Can Mean Less Instant Noodles",
+    "section": "Takeaway",
+    "text": "Takeaway\n“Inferior” is a technical description of consumer behavior, not a judgment of a product. When income rises, consumers may move away from budget-oriented choices toward alternatives they value more. The concept is a useful reminder that higher income changes the composition of spending, not just its total."
+  },
+  {
+    "objectID": "blog/posts/post1/Untitled.html#data-source-and-reproducibility",
+    "href": "blog/posts/post1/Untitled.html#data-source-and-reproducibility",
+    "title": "Why More Income Can Mean Less Instant Noodles",
+    "section": "Data source and reproducibility",
+    "text": "Data source and reproducibility\nThis post uses no external data. The six observations in the R code are hypothetical values created solely to visualize the definition of an inferior good. Running the code block reproduces the figure."
   }
 ]

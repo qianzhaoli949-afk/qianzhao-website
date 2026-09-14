@@ -2,18 +2,22 @@
 title: "About Me"
 ---
 
-Write a short biography here.
+![](images/profile.JPG){width="220px" fig-alt="Profile photo of Qianzhao Li"}
 
-Include:
+I am a graduate student at the University of Pennsylvania pursuing a
+Master of Applied Economics and Data Science, with an expected graduation
+date of 2027. My academic interests center on using quantitative methods to
+understand economic questions and turn complex data into clear, useful
+insights.
 
--   Educational background
--   Professional interests
--   Technical skills
--   Career goals
+I am especially interested in econometrics, machine learning, and data
+analysis. I enjoy combining economic reasoning with computational tools to
+study real-world problems. My goal is to continue developing strong research
+and analytical skills and apply them in a data-focused career.
 
 ## Education
 
-Master of Applied Economics and Data Science, University of Pennsylvania (expaceted 2027) Batelor of Science, University Name 2026
+- **Master of Applied Economics and Data Science**, University of Pennsylvania — Expected 2027
 
 ## Interests
 
@@ -21,8 +25,11 @@ Master of Applied Economics and Data Science, University of Pennsylvania (expace
 -   Machine Learning
 -   Data Analysis
 
-## Contact
+## Technical Skills
 
-## student\@email.edu
+-   R
+-   Statistical analysis
+-   Data visualization
+-   Machine learning
 
 ------------------------------------------------------------------------
