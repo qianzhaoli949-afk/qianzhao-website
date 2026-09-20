@@ -1,0 +1,30 @@
+User-agent: W3C-checklink
+Disallow:
+
+User-agent: *
+Disallow: /shared/rate
+Disallow: /shared/rate_resp
+Disallow: /vets/shared/rate
+Disallow: /shared/rate_resp
+Disallow: /exit
+Disallow: /help/exit
+Disallow: /share/
+Disallow: /follow/
+Disallow: /_tryout/
+Disallow: /_archived/
+Disallow: /Archive_ONET-SOC_2010_Taxonomy_09_2020
+Disallow: /profile/jobinfo/
+Disallow: /profile/jobinfo
+Disallow: /vets/profile/jobinfo/
+Disallow: /vets/profile/jobinfo
+Disallow: /link/jobinfo/
+Disallow: /link/jobinfo
+Disallow: /profile/localjobs/
+Disallow: /vets/profile/localjobs/
+Disallow: /link/localjobs/
+Disallow: /demo
+Disallow: /v1.9/demo
+Disallow: /v2.0/demo
+
+User-agent: Jobrapido
+Disallow: /

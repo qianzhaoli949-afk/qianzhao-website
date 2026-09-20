@@ -1,47 +1,5 @@
 [
   {
-    "objectID": "bio.html",
-    "href": "bio.html",
-    "title": "About Me",
-    "section": "",
-    "text": "I am a graduate student at the University of Pennsylvania pursuing a Master of Applied Economics and Data Science, with an expected graduation date of 2027. My academic interests center on using quantitative methods to understand economic questions and turn complex data into clear, useful insights.\nI am especially interested in econometrics, machine learning, and data analysis. I enjoy combining economic reasoning with computational tools to study real-world problems. My goal is to continue developing strong research and analytical skills and apply them in a data-focused career."
-  },
-  {
-    "objectID": "bio.html#education",
-    "href": "bio.html#education",
-    "title": "About Me",
-    "section": "Education",
-    "text": "Education\n\nMaster of Applied Economics and Data Science, University of Pennsylvania — Expected 2027"
-  },
-  {
-    "objectID": "bio.html#interests",
-    "href": "bio.html#interests",
-    "title": "About Me",
-    "section": "Interests",
-    "text": "Interests\n\nEconometrics\nMachine Learning\nData Analysis"
-  },
-  {
-    "objectID": "bio.html#technical-skills",
-    "href": "bio.html#technical-skills",
-    "title": "About Me",
-    "section": "Technical Skills",
-    "text": "Technical Skills\n\nR\nStatistical analysis\nData visualization\nMachine learning"
-  },
-  {
-    "objectID": "blog/index.html",
-    "href": "blog/index.html",
-    "title": "Blog",
-    "section": "",
-    "text": "Why More Income Can Mean Less Instant Noodles\n\n\nUnderstanding inferior goods without confusing them with bad goods\n\n\n\n\n\n\n\n\nSep 9, 2026\n\n\nQianzhao Li\n\n\n\n\n\n\n\n\n\n\n\n\nMy Second Blog Post\n\n\n\n\n\n\n\n\n\n\n\nJun 16, 2026\n\n\n\n\n\nNo matching items"
-  },
-  {
-    "objectID": "blog/posts/post1/Untitled.html",
-    "href": "blog/posts/post1/Untitled.html",
-    "title": "Why More Income Can Mean Less Instant Noodles",
-    "section": "",
-    "text": "It sounds backwards: why would a person buy less of something after getting a raise? In economics, a product with that pattern is called an inferior good. The word “inferior” is easy to misunderstand. It does not mean the product is unsafe, low quality, or morally worse. It simply describes how a consumer’s demand changes when income changes, holding prices and preferences constant.\nAn inferior good has a negative income elasticity of demand:\n\\[\n\\text{Income elasticity of demand} =\n\\frac{\\%\\text{ change in quantity demanded}}{\\%\\text{ change in income}} &lt; 0.\n\\]\nIn plain language, when income rises, the quantity demanded falls. When income falls, the quantity demanded rises. This result is unintuitive because we often expect people to buy more of everything when they can afford more. But people do not only buy more; they also change what they buy."
-  },
-  {
     "objectID": "resume.html",
     "href": "resume.html",
     "title": "Resume",
@@ -84,11 +42,46 @@
     "text": "To apply economic reasoning, statistical methods, and computational tools to real-world problems."
   },
   {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "Qianzhao Li",
+    "objectID": "blog/posts/post2/index.html",
+    "href": "blog/posts/post2/index.html",
+    "title": "Beyond the Highest Salary: Choosing a Quantitative Career",
     "section": "",
-    "text": "Qianzhao Li\nUniversity of Pennsylvania\nWelcome to my personal website. I am a graduate student interested in econometrics, machine learning, and data analysis.\n\nQuick Links"
+    "text": "As a graduate student in Applied Economics and Data Science with a Financial Mathematics background, I face a practical question: which careers deserve my limited job-search and preparation time? The highest salary is tempting, but it says little about the size of a job market or the preparation a role requires. I compare four relevant paths: data science, operations research, financial and investment analysis, and actuarial work."
+  },
+  {
+    "objectID": "blog/posts/post2/index.html#collecting-comparable-evidence",
+    "href": "blog/posts/post2/index.html#collecting-comparable-evidence",
+    "title": "Beyond the Highest Salary: Choosing a Quantitative Career",
+    "section": "Collecting comparable evidence",
+    "text": "Collecting comparable evidence\nI scraped four public O*NET® OnLine occupation profiles using R’s rvest package. These pages report BLS wage and employment data in a consistent format. This is a purposeful comparison of four careers, not a representative sample of all graduate jobs.\nThe script below identifies HTML field labels, extracts their adjacent values, removes dollar signs and commas, and saves numeric columns. It checks occupation names and reference periods before producing a CSV. Financial and investment analysts is a specific occupational category; I do not combine its salary with the broader financial-analyst category’s openings.\n\n\nShow the complete rvest collection and cleaning script\n\n# Collect and clean four O*NET occupation profiles.\n# Run from the post2 directory. Existing snapshots are reused by default.\n\ncareer_sources &lt;- data.frame(\n  soc = c(\"15-2051.00\", \"15-2031.00\", \"13-2051.00\", \"15-2011.00\"),\n  occupation = c(\"Data Scientists\", \"Operations Research Analysts\",\n                 \"Financial and Investment Analysts\", \"Actuaries\"),\n  stringsAsFactors = FALSE\n)\ncareer_sources$url &lt;- paste0(\"https://www.onetonline.org/link/summary/\",\n                             career_sources$soc)\nresearch_agent &lt;- paste0(\"StudentCareerResearch/1.0 (contact: \",\n                        \"https://qianzhaoli949-afk.github.io/qianzhao-website/)\")\n\n# Pause between requests and stop on HTTP errors.\nfetch_html &lt;- function(url, dest) {\n  Sys.sleep(4)\n  page &lt;- rvest::session(url, httr::user_agent(research_agent), httr::timeout(30))\n  status &lt;- httr::status_code(page$response)\n  if (status != 200L) stop(\"Fetch stopped: HTTP \", status, \" at \", url)\n  writeBin(page$response$content, dest)\n  invisible(format(Sys.time(), tz = \"UTC\", usetz = TRUE))\n}\n\n# Extract the value following a matching field label.\nfield &lt;- function(doc, prefix) {\n  labels &lt;- rvest::html_elements(doc, \"#WagesEmployment dt\")\n  text &lt;- rvest::html_text2(labels)\n  hit &lt;- which(startsWith(text, prefix))\n  if (length(hit) != 1L) stop(\"Expected one field: \", prefix)\n  value &lt;- rvest::html_element(labels[[hit]], xpath = \"following-sibling::dd[1]\")\n  list(label = text[hit], value = rvest::html_text2(value))\n}\n\nmatch_one &lt;- function(text, pattern) {\n  hit &lt;- regmatches(text, regexec(pattern, text, perl = TRUE))[[1]]\n  if (length(hit) &lt; 2L) stop(\"Could not parse: \", text)\n  hit[2]\n}\n\nparse_career &lt;- function(path, soc, url, retrieved_utc) {\n  doc &lt;- rvest::read_html(path)\n  title &lt;- rvest::html_text2(rvest::html_element(doc, \"h1 .main\"))\n  pay &lt;- field(doc, \"Median wages\")\n  employment &lt;- field(doc, \"Employment (\")\n  growth &lt;- field(doc, \"Projected growth\")\n  openings &lt;- field(doc, \"Projected job openings\")\n  education &lt;- rvest::html_text2(rvest::html_elements(doc, \"#Education li\"))\n  # Keep NA when the education section is absent.\n  degree &lt;- NA_character_\n  share &lt;- NA_real_\n  if (length(education)) {\n    shares &lt;- as.numeric(vapply(education, match_one, character(1),\n                               pattern = \"^([0-9]+)%\"))\n    top &lt;- which.max(shares)\n    degree &lt;- trimws(sub(\"^[0-9]+%\\\\s*(responded:\\\\s*)?\", \"\",\n                        education[top], perl = TRUE))\n    share &lt;- shares[top]\n  }\n  period &lt;- function(x) match_one(x, \"\\\\(([0-9]{4}[-\\u2013][0-9]{4})\\\\)\")\n  wage &lt;- as.numeric(gsub(\",\", \"\", match_one(pay$value, \"\\\\$([0-9,]+) annual\")))\n  jobs &lt;- as.numeric(gsub(\",\", \"\", openings$value))\n  if (!is.finite(wage) || !is.finite(jobs) || wage &lt;= 0 || jobs &lt;= 0)\n    stop(\"Invalid wage/openings for \", soc)\n  if (period(growth$label) != period(openings$label))\n    stop(\"Mismatched projection periods for \", soc)\n  data.frame(\n    soc = soc, occupation = title, median_annual_pay_usd = wage,\n    wage_year = as.integer(match_one(pay$label, \"([0-9]{4})\")),\n    employment = as.numeric(gsub(\",\", \"\", match_one(employment$value, \"^([0-9,]+)\"))),\n    employment_year = as.integer(match_one(employment$label, \"([0-9]{4})\")),\n    growth_category = growth$value, projection_period = period(growth$label),\n    annual_projected_openings = jobs,\n    top_education_response = degree, education_response_pct = share,\n    education_all_responses = if (length(education)) paste(education, collapse = \" | \") else NA_character_,\n    source_url = url, retrieved_utc = retrieved_utc,\n    stringsAsFactors = FALSE\n  )\n}\n\nbuild_careers &lt;- function(data_dir = \"data\", refresh = FALSE) {\n  if (!requireNamespace(\"rvest\", quietly = TRUE) ||\n      !requireNamespace(\"httr\", quietly = TRUE))\n    stop('Install packages first: install.packages(c(\"rvest\", \"httr\"))')\n  raw_dir &lt;- file.path(data_dir, \"raw\")\n  dir.create(raw_dir, recursive = TRUE, showWarnings = FALSE)\n  manifest_file &lt;- file.path(data_dir, \"manifest.csv\")\n  manifest &lt;- if (file.exists(manifest_file)) {\n    read.csv(manifest_file, stringsAsFactors = FALSE)\n  } else {\n    data.frame(soc = character(), url = character(), retrieved_utc = character(),\n               file = character(), md5 = character())\n  }\n  paths &lt;- file.path(raw_dir, paste0(career_sources$soc, \".html\"))\n  needs_fetch &lt;- refresh | !file.exists(paths)\n  if (any(needs_fetch)) {\n    robots_file &lt;- file.path(data_dir, \"robots.txt\")\n    fetch_html(\"https://www.onetonline.org/robots.txt\", robots_file)\n    rules &lt;- readLines(robots_file, warn = FALSE)\n    # Require a new policy review if robots.txt has changed.\n    if (!file.exists(\"ROBOTS-REVIEWED.txt\") ||\n        !identical(rules, readLines(\"ROBOTS-REVIEWED.txt\", warn = FALSE)))\n      stop(\"robots.txt needs manual review before collecting; see DATA-NOTES.md.\")\n    for (i in which(needs_fetch)) {\n      stamp &lt;- fetch_html(career_sources$url[i], paths[i])\n      manifest &lt;- manifest[manifest$soc != career_sources$soc[i], , drop = FALSE]\n      manifest &lt;- rbind(manifest, data.frame(\n        soc = career_sources$soc[i], url = career_sources$url[i],\n        retrieved_utc = stamp, file = basename(paths[i]),\n        md5 = unname(tools::md5sum(paths[i]))\n      ))\n      write.csv(manifest, manifest_file, row.names = FALSE)\n    }\n  }\n  rows &lt;- lapply(seq_len(nrow(career_sources)), function(i) {\n    m &lt;- manifest[manifest$soc == career_sources$soc[i], , drop = FALSE]\n    if (nrow(m) != 1L || m$md5 != unname(tools::md5sum(paths[i])))\n      stop(\"Missing or changed snapshot for \", career_sources$soc[i])\n    parse_career(paths[i], career_sources$soc[i], career_sources$url[i], m$retrieved_utc)\n  })\n  result &lt;- do.call(rbind, rows)\n  if (!identical(result$occupation, career_sources$occupation))\n    stop(\"Occupation labels have changed; review the source pages.\")\n  if (length(unique(result$wage_year)) != 1L ||\n      length(unique(result$projection_period)) != 1L)\n    stop(\"Sources mix reference years; review before comparing.\")\n  write.csv(result, file.path(data_dir, \"careers.csv\"), row.names = FALSE)\n  result\n}\n\nI checked the site’s robots rules and content license, used an identifiable user agent, and spaced requests four seconds apart. The script stops on HTTP errors and saves dated HTML snapshots. Re-rendering uses these snapshots, so it adds no traffic. No login, CAPTCHA, or access restriction was bypassed.\nThe snapshot was collected on September 19, 2026, in New York (September 20 UTC). It contains 2025 wages and 2024–2034 employment projections, as published by O*NET at collection time. These are different reference periods and should not be described as a single year’s observations. Growth is published in categories, so I preserve those labels rather than inventing precise percentages.\n\n\n\n\n\n\n\n\n\n\n\nOccupation\nMedian annual pay (2025)\nAnnual openings (2024–34 projection)\nGrowth category (2024–34)\n\n\n\n\nData Scientists\n$120,230\n23,400\nMuch faster than average (7% or higher)\n\n\nOperations Research Analysts\n$88,940\n9,600\nMuch faster than average (7% or higher)\n\n\nFinancial and Investment Analysts\n$102,740\n25,100\nFaster than average (5% to 6%)\n\n\nActuaries\n$130,000\n2,400\nMuch faster than average (7% or higher)"
+  },
+  {
+    "objectID": "blog/posts/post2/index.html#pay-and-opportunity-tell-different-stories",
+    "href": "blog/posts/post2/index.html#pay-and-opportunity-tell-different-stories",
+    "title": "Beyond the Highest Salary: Choosing a Quantitative Career",
+    "section": "Pay and opportunity tell different stories",
+    "text": "Pay and opportunity tell different stories\n\n\n\n\n\n\n\n\nFigure 1: National occupational median pay (2025) versus projected average annual openings (2024–2034). Source: BLS data displayed by O*NET OnLine; saved September 19, 2026 (New York).\n\n\n\n\n\nActuaries have the highest median pay, $130,000, but only 2,400 projected annual openings. Data scientists combine $120,230 median pay with 23,400 openings—about 9.8 times the actuarial total. For someone still exploring career directions, that difference makes data science worth investigating alongside the salary leader.\nFinancial and investment analysts have the most openings in this comparison, 25,100, despite a lower median wage of $102,740. Operations research offers 9,600 openings and $88,940 median pay. Its emphasis on quantitative decision-making makes it relevant to my training even though its wage is lower.\nPreparation also matters. In the available O*NET education responses, 48% of data-science respondents identify a bachelor’s degree as required, while 43% of operations-research respondents identify a master’s degree. These are survey responses, not universal hiring rules. The financial-and-investment profile lacks this education breakdown; the script records it as missing rather than guessing."
+  },
+  {
+    "objectID": "blog/posts/post2/index.html#turning-the-comparison-into-a-decision",
+    "href": "blog/posts/post2/index.html#turning-the-comparison-into-a-decision",
+    "title": "Beyond the Highest Salary: Choosing a Quantitative Career",
+    "section": "Turning the comparison into a decision",
+    "text": "Turning the comparison into a decision\nMy recommendation is to prioritize exploring data-science and financial-and-investment analyst roles, while keeping operations research on the shortlist. A concrete next step is to review ten current entry-level vacancies in each of the first two categories, record recurring qualifications, and build one relevant project for each. That follow-up would test whether broad occupational opportunities translate into realistic roles for my experience and location.\nActuarial work remains attractive if I want its specialized preparation: BLS describes a series of professional exams. I would investigate that commitment before choosing it solely for higher pay.\nThe comparison has limits. Occupational medians are not starting salaries. Projected annual openings include growth and replacement needs; they are not live vacancies or exclusively entry-level jobs. A larger count does not imply easier hiring without information about applicant supply. National data also omit personal fit, local living costs, and work-authorization requirements. The takeaway is to use pay and market size to build an informed shortlist, then validate it against actual job requirements."
+  },
+  {
+    "objectID": "blog/posts/post2/index.html#sources-and-reproducibility",
+    "href": "blog/posts/post2/index.html#sources-and-reproducibility",
+    "title": "Beyond the Highest Salary: Choosing a Quantitative Career",
+    "section": "Sources and reproducibility",
+    "text": "Sources and reproducibility\nThe four profile links, raw snapshots, retrieval times, checksums, and package versions are included in the reproduction bundle. Download the cleaned data, scraping script, plotting script, or data notes.\nSources: Data Scientists, Operations Research Analysts, Financial and Investment Analysts, and Actuaries. The source register identifies BLS as the provider of wage and projection figures.\nThis analysis adapts information from O*NET OnLine, U.S. Department of Labor, Employment and Training Administration, under CC BY 4.0. Qianzhao Li cleaned and visualized the data and added interpretation; USDOL/ETA has not approved or endorsed these changes. O*NET® is a trademark of USDOL/ETA. External BLS data are attributed separately above.\nTo reproduce, unzip the bundle, open R in that folder, install rvest and httr once, and run the following. The saved snapshots are used by default.\n\n\nShow R code\ninstall.packages(c(\"rvest\", \"httr\"))  # First run only\nsource(\"scrape-careers.R\")\ncareers &lt;- build_careers(\"data\", refresh = FALSE)\nsource(\"plot-careers.R\")\nplot_careers(careers)\n\n\nThe website’s GitHub repository contains the website source; this post’s code and data are in blog/posts/post2/."
+  },
+  {
+    "objectID": "blog/index.html",
+    "href": "blog/index.html",
+    "title": "Blog",
+    "section": "",
+    "text": "Beyond the Highest Salary: Choosing a Quantitative Career\n\n\nWhat four O*NET profiles suggest about where to focus a job search\n\n\nAn ethical rvest scraping project comparing pay, projected openings, and preparation across four quantitative careers.\n\n\n\n\n\nSep 19, 2026\n\n\n\n\n\n\n\n\n\n\n\n\nWhy More Income Can Mean Less Instant Noodles\n\n\nUnderstanding inferior goods without confusing them with bad goods\n\n\n\n\n\n\n\n\nSep 9, 2026\n\n\nQianzhao Li\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "about.html",
@@ -96,6 +89,41 @@
     "title": "About",
     "section": "",
     "text": "About this site\n\n1 + 1\n\n[1] 2"
+  },
+  {
+    "objectID": "bio.html",
+    "href": "bio.html",
+    "title": "About Me",
+    "section": "",
+    "text": "I am a graduate student at the University of Pennsylvania pursuing a Master of Applied Economics and Data Science, with an expected graduation date of 2027. My academic interests center on using quantitative methods to understand economic questions and turn complex data into clear, useful insights.\nI am especially interested in econometrics, machine learning, and data analysis. I enjoy combining economic reasoning with computational tools to study real-world problems. My goal is to continue developing strong research and analytical skills and apply them in a data-focused career."
+  },
+  {
+    "objectID": "bio.html#education",
+    "href": "bio.html#education",
+    "title": "About Me",
+    "section": "Education",
+    "text": "Education\n\nMaster of Applied Economics and Data Science, University of Pennsylvania — Expected 2027"
+  },
+  {
+    "objectID": "bio.html#interests",
+    "href": "bio.html#interests",
+    "title": "About Me",
+    "section": "Interests",
+    "text": "Interests\n\nEconometrics\nMachine Learning\nData Analysis"
+  },
+  {
+    "objectID": "bio.html#technical-skills",
+    "href": "bio.html#technical-skills",
+    "title": "About Me",
+    "section": "Technical Skills",
+    "text": "Technical Skills\n\nR\nStatistical analysis\nData visualization\nMachine learning"
+  },
+  {
+    "objectID": "blog/posts/post1/Untitled.html",
+    "href": "blog/posts/post1/Untitled.html",
+    "title": "Why More Income Can Mean Less Instant Noodles",
+    "section": "",
+    "text": "It sounds backwards: why would a person buy less of something after getting a raise? In economics, a product with that pattern is called an inferior good. The word “inferior” is easy to misunderstand. It does not mean the product is unsafe, low quality, or morally worse. It simply describes how a consumer’s demand changes when income changes, holding prices and preferences constant.\nAn inferior good has a negative income elasticity of demand:\n\\[\n\\text{Income elasticity of demand} =\n\\frac{\\%\\text{ change in quantity demanded}}{\\%\\text{ change in income}} &lt; 0.\n\\]\nIn plain language, when income rises, the quantity demanded falls. When income falls, the quantity demanded rises. This result is unintuitive because we often expect people to buy more of everything when they can afford more. But people do not only buy more; they also change what they buy."
   },
   {
     "objectID": "blog/posts/post1/Untitled.html#a-practical-example",
@@ -117,5 +145,12 @@
     "title": "Why More Income Can Mean Less Instant Noodles",
     "section": "Data source and reproducibility",
     "text": "Data source and reproducibility\nThis post uses no external data. The six observations in the R code are hypothetical values created solely to visualize the definition of an inferior good. Running the code block reproduces the figure."
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Qianzhao Li",
+    "section": "",
+    "text": "Qianzhao Li\nUniversity of Pennsylvania\nWelcome to my personal website. I am a graduate student interested in econometrics, machine learning, and data analysis.\n\nQuick Links"
   }
 ]
