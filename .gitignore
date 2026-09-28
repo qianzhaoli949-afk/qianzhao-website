@@ -7,3 +7,8 @@
 /.quarto/
 
 **/*.quarto_ipynb
+
+# Keep licensed CPS extracts out of the public repository.
+cps_*.dat
+cps_*.dat.gz
+cps_*.xml

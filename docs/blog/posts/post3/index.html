@@ -6,8 +6,10 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="dcterms.date" content="2026-09-28">
+<meta name="description" content="Three visualizations trace unemployment by education through the pandemic and recovery.">
 
-<title>Blog – Qianzhao Li</title>
+<title>Education and Unemployment: Unequal Shocks, Uneven Recovery – Qianzhao Li</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -23,28 +25,61 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
-<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="../site_libs/quarto-nav/headroom.min.js"></script>
-<script src="../site_libs/clipboard/clipboard.min.js"></script>
-<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="../site_libs/quarto-search/fuse.min.js"></script>
-<script src="../site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="../">
-<script src="../site_libs/quarto-listing/list.min.js"></script>
-<script src="../site_libs/quarto-listing/quarto-listing.js"></script>
-<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
-<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="../site_libs/quarto-html/popper.min.js"></script>
-<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="../site_libs/quarto-html/anchor.min.js"></script>
-<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-6033a600180109c3731f6a886c29932c.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="../../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../../">
+<script src="../../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../../site_libs/bootstrap/bootstrap-6033a600180109c3731f6a886c29932c.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -72,35 +107,6 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
-<script>
-
-  window.document.addEventListener("DOMContentLoaded", function (_event) {
-    const listingTargetEl = window.document.querySelector('#listing-listing .list');
-    if (!listingTargetEl) {
-      // No listing discovered, do not attach.
-      return; 
-    }
-
-    const options = {
-      valueNames: ['listing-date','listing-title','listing-author','listing-subtitle','listing-image','listing-description',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
-      
-      searchColumns: ["listing-date","listing-title","listing-author","listing-subtitle","listing-image","listing-description"],
-    };
-
-    window['quarto-listings'] = window['quarto-listings'] || {};
-    window['quarto-listings']['listing-listing'] = new List('listing-listing', options);
-
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  });
-
-  window.addEventListener('hashchange',() => {
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  })
-  </script>
 
   <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
   <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
@@ -132,7 +138,7 @@ window.Quarto = {
 };
 </script>
 
-<link rel="stylesheet" href="../styles.css">
+<link rel="stylesheet" href="../../../styles.css">
 </head>
 
 <body class="nav-fixed fullcontent quarto-light">
@@ -142,7 +148,7 @@ window.Quarto = {
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a class="navbar-brand" href="../index.html">
+    <a class="navbar-brand" href="../../../index.html">
     <span class="navbar-title">Qianzhao Li</span>
     </a>
   </div>
@@ -153,19 +159,19 @@ window.Quarto = {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="../index.html"> 
+    <a class="nav-link" href="../../../index.html"> 
 <span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../bio.html"> 
+    <a class="nav-link" href="../../../bio.html"> 
 <span class="menu-text">About Me</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../resume.html"> 
+    <a class="nav-link" href="../../../resume.html"> 
 <span class="menu-text">Resume</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link active" href="../blog/index.html" aria-current="page"> 
+    <a class="nav-link" href="../../../blog/index.html"> 
 <span class="menu-text">Blog</span></a>
   </li>  
 </ul>
@@ -185,14 +191,31 @@ window.Quarto = {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Blog</h1>
-</div>
+<h1 class="title">Education and Unemployment: Unequal Shocks, Uneven Recovery</h1>
+<p class="subtitle lead">What weighted CPS data reveal about working-age adults, 2019–2024</p>
+  <div class="quarto-categories">
+    <div class="quarto-category">data visualization</div>
+    <div class="quarto-category">labor economics</div>
+    <div class="quarto-category">CPS</div>
+  </div>
+  </div>
 
+<div>
+  <div class="description">
+    Three visualizations trace unemployment by education through the pandemic and recovery.
+  </div>
+</div>
 
 
 <div class="quarto-title-meta">
 
     
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">September 28, 2026</p>
+    </div>
+  </div>
   
     
   </div>
@@ -202,93 +225,71 @@ window.Quarto = {
 </header>
 
 
+<p>Did the pandemic erase the unemployment advantage associated with more education? For someone deciding how to prepare for the labor market, this question matters because a degree may be associated with stability as well as earnings. I use IPUMS Current Population Survey (CPS) microdata to compare four education groups before the pandemic, during its disruption, and through 2024. The story is not that college graduates escaped unemployment, but that the size of the shock and the level of risk differed substantially.</p>
+<section id="measuring-unemployment-consistently" class="level2">
+<h2 class="anchored" data-anchor-id="measuring-unemployment-consistently">Measuring unemployment consistently</h2>
+<p>The extract contains all 72 Basic Monthly samples from January 2019 to December 2024, restricted to ages 25–64. This focuses on working-age adults beyond the usual college years. I group education into less than high school, high school, some college or an associate degree, and a bachelor’s degree or higher. These groups describe completed education, not current enrollment.</p>
+<p>Every estimate uses <a href="https://cps.ipums.org/cps-action/variables/WTFINL">WTFINL</a>, the monthly person weight. The unemployment rate is weighted unemployed people divided by the weighted civilian labor force, not all adults:</p>
+<p><span class="math display">\[
+u_g = 100\frac{\sum_{i\in g} w_i\,1(\text{unemployed}_i)}
+{\sum_{i\in g} w_i\,1(\text{employed or unemployed}_i)}.
+\]</span></p>
+<p>People outside the labor force do not enter this denominator. Annual rates divide the sum of monthly weighted unemployment totals by the sum of monthly weighted labor-force totals. They are ratios of annual-average levels, not simple averages of monthly percentages. All figures are <strong>not seasonally adjusted</strong>.</p>
+</section>
+<section id="the-shock-amplified-an-existing-gap" class="level2">
+<h2 class="anchored" data-anchor-id="the-shock-amplified-an-existing-gap">1. The shock amplified an existing gap</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="figures/monthly.png" class="img-fluid figure-img" alt="Four monthly lines from 2019 to 2024 show a sharp 2020 increase in unemployment, largest for adults without a high school diploma and smallest for college graduates."></p>
+<figcaption>Monthly unemployment rates by education. The shaded interval marks March–June 2020.</figcaption>
+</figure>
+</div>
+<p>The monthly view reveals the abrupt disruption that annual averages can hide. All four groups experienced a sharp increase in spring 2020, followed by a decline. The spike was much larger for adults without a high school diploma than for college graduates. Education differences were visible before the pandemic and persisted afterward. The lines therefore suggest unequal exposure to a shared shock, rather than two entirely separate labor markets.</p>
+</section>
+<section id="recovery-did-not-quite-restore-the-baseline" class="level2">
+<h2 class="anchored" data-anchor-id="recovery-did-not-quite-restore-the-baseline">2. Recovery did not quite restore the baseline</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="figures/annual.png" class="img-fluid figure-img" alt="Grouped bars compare four education groups in 2019, 2020, and 2024. All groups rise in 2020 and fall by 2024, while remaining above their 2019 rates."></p>
+<figcaption>Annual unemployment rates for 2019, 2020, and 2024, calculated from weighted monthly totals.</figcaption>
+</figure>
+</div>
+<p>Among adults without a high school diploma, unemployment rose from <strong>5.5%</strong> in 2019 to <strong>11.7%</strong> in 2020. For adults with a bachelor’s degree or higher, it rose from <strong>2.1%</strong> to <strong>4.7%</strong>. The difference between these groups widened from 3.4 to 7.0 percentage points.</p>
+<p>By 2024, their rates had fallen to 6.3% and 2.3%, respectively. Each group’s 2024 estimate remained above its 2019 value. This is a descriptive comparison, not a claim that these small remaining differences are statistically significant.</p>
+</section>
+<section id="age-composition-is-not-the-whole-story" class="level2">
+<h2 class="anchored" data-anchor-id="age-composition-is-not-the-whole-story">3. Age composition is not the whole story</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="figures/age.png" class="img-fluid figure-img" alt="Three panels for ages 25–34, 35–49, and 50–64 show the education gradient within each age group across 2019, 2020, and 2024."></p>
+<figcaption>Annual rates within three age groups. Points show only 2019, 2020, and 2024; connecting segments are visual guides. All panels use the same vertical scale and WTFINL weights.</figcaption>
+</figure>
+</div>
+<p>Education groups may contain different mixes of younger and older workers. Splitting the sample into ages 25–34, 35–49, and 50–64 checks whether that mix alone explains the pattern. The broad education gradient appears within each age band, including during the pandemic. However, these are still broad groups: occupation, industry, experience, and other characteristics may differ within them. This is not an age-adjusted causal estimate of a degree’s value.</p>
+</section>
+<section id="takeaway-and-limitations" class="level2">
+<h2 class="anchored" data-anchor-id="takeaway-and-limitations">Takeaway and limitations</h2>
+<p>Higher education was associated with lower unemployment throughout this period, but it did not eliminate vulnerability. For workforce planning, the figures support examining job-search assistance and retraining needs among adults with less education; they do not establish which intervention works best.</p>
+<p>CPS respondents can appear in multiple months, so the 3,835,958 retained records are person-month observations, not unique people. The charts present weighted point estimates without confidence intervals. Pandemic-era <a href="https://cps.ipums.org/cps/covid19.shtml">collection disruptions and lower response rates</a> also warrant caution. Finally, unemployment alone cannot reveal whether people left the labor force, accepted fewer hours, or experienced wage losses.</p>
+</section>
+<section id="data-and-reproducibility" class="level2">
+<h2 class="anchored" data-anchor-id="data-and-reproducibility">Data and reproducibility</h2>
+<p>Source: <a href="https://cps.ipums.org/cps/citation.shtml">IPUMS CPS, University of Minnesota</a>, using underlying U.S. Census Bureau and Bureau of Labor Statistics data. Extract created September 27, 2026. Education definitions follow <a href="https://cps.ipums.org/cps-action/variables/EDUC">IPUMS EDUC documentation</a>.</p>
+<p>Download the <a href="code-and-summaries.zip">code and grouped summaries</a>, <a href="analyze.R">analysis script</a>, <a href="plots.R">plotting script</a>, and <a href="REPRODUCE.txt">reproduction instructions</a>. The <a href="https://github.com/qianzhaoli949-afk/qianzhao-website">GitHub repository</a> contains this post under <code>blog/posts/post3/</code>. Licensed microdata are not redistributed; registered users can recreate the extract using the documented selections.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Show R code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># From the post3 folder, after running analyze.R with your local extract paths:</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>s <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="st">"summary.rds"</span>)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">"plots.R"</span>)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">draw_figures</span>(s)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
 
 
+</section>
 
-
-<div class="quarto-listing quarto-listing-container-default" id="listing-listing">
-<div class="list quarto-listing-default">
-<div class="quarto-post image-right" data-index="0" data-categories="ZGF0YSUyMHZpc3VhbGl6YXRpb24lMkNsYWJvciUyMGVjb25vbWljcyUyQ0NQUw==" data-listing-date-sort="1790568000000" data-listing-file-modified-sort="1790624686216" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="4" data-listing-word-count-sort="728">
-<div class="thumbnail"><a href="../blog/posts/post3/index.html" class="no-external">
-
-<img loading="lazy" src="../blog/posts/post3/figures/monthly.png" class="thumbnail-image">
-
-</a></div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="../blog/posts/post3/index.html" class="no-external">Education and Unemployment: Unequal Shocks, Uneven Recovery</a>
-</h3>
-<div class="listing-subtitle">
-<a href="../blog/posts/post3/index.html" class="no-external">What weighted CPS data reveal about working-age adults, 2019–2024</a>
-</div>
-<div class="delink listing-description"><a href="../blog/posts/post3/index.html" class="no-external">
-<p>Three visualizations trace unemployment by education through the pandemic and recovery.</p>
-</a></div>
-</div>
-<div class="metadata">
-<a href="../blog/posts/post3/index.html" class="no-external">
-<div class="listing-date">
-Sep 28, 2026
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="1" data-categories="d2ViJTIwc2NyYXBpbmclMkNjYXJlZXIlMjBwbGFubmluZw==" data-listing-date-sort="1789790400000" data-listing-file-modified-sort="1789865242805" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="5" data-listing-word-count-sort="860">
-<div class="thumbnail"><a href="../blog/posts/post2/index.html" class="no-external">
-
-<img loading="lazy" src="../blog/posts/post2/figures/career-comparison.png" class="thumbnail-image">
-
-</a></div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="../blog/posts/post2/index.html" class="no-external">Beyond the Highest Salary: Choosing a Quantitative Career</a>
-</h3>
-<div class="listing-subtitle">
-<a href="../blog/posts/post2/index.html" class="no-external">What four O*NET profiles suggest about where to focus a job search</a>
-</div>
-<div class="delink listing-description"><a href="../blog/posts/post2/index.html" class="no-external">
-<p>An ethical rvest scraping project comparing pay, projected openings, and preparation across four quantitative careers.</p>
-</a></div>
-</div>
-<div class="metadata">
-<a href="../blog/posts/post2/index.html" class="no-external">
-<div class="listing-date">
-Sep 19, 2026
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="2" data-categories="bWljcm9lY29ub21pY3MlMkNpbnR1aXRpb24=" data-listing-date-sort="1788926400000" data-listing-file-modified-sort="1789361092225" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3" data-listing-word-count-sort="539">
-<div class="thumbnail"><a href="../blog/posts/post1/Untitled.html" class="no-external">
-
-<p class="card-img-top"><img loading='lazy' src="posts/post1/Untitled_files/figure-html/fig-inferior-good-1.png" alt="A downward-sloping line showing instant noodle purchases falling as monthly income rises."  class="thumbnail-image card-img"/></p>
-
-</a></div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="../blog/posts/post1/Untitled.html" class="no-external">Why More Income Can Mean Less Instant Noodles</a>
-</h3>
-<div class="listing-subtitle">
-<a href="../blog/posts/post1/Untitled.html" class="no-external">Understanding inferior goods without confusing them with bad goods</a>
-</div>
-<div class="delink listing-description"><a href="../blog/posts/post1/Untitled.html" class="no-external">
-It sounds backwards: why would a person buy <em>less</em> of something after getting a raise? In economics, a product with that pattern is called an <strong>inferior good</strong>. The word…
-</a></div>
-</div>
-<div class="metadata">
-<a href="../blog/posts/post1/Untitled.html" class="no-external">
-<div class="listing-date">
-Sep 9, 2026
-</div>
-<div class="listing-author">
-Qianzhao Li
-</div>
-</a>
-</div>
-</div>
-</div>
-<div class="listing-no-matching d-none">No matching items</div>
-</div></main> <!-- /main -->
+</main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     const icon = "";
@@ -693,7 +694,7 @@ Qianzhao Li
 <footer class="footer">
   <div class="nav-footer">
     <div class="nav-footer-left">
-<p><img src="../images/UniversityofPennsylvania_FullLogo_RGB.png" class="img-fluid" width="100"></p>
+<p><img src="../../../images/UniversityofPennsylvania_FullLogo_RGB.png" class="img-fluid" width="100"></p>
 </div>   
     <div class="nav-footer-center">
 <p>© 2026 Qianzhao Li</p>

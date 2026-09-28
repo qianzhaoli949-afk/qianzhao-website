@@ -1,0 +1,68 @@
+BLOG POST 3 — Qianzhao Li
+
+Research question: How did unemployment differ by education before, during,
+and after the pandemic among U.S. civilian adults ages 25–64?
+
+1. Obtain an authorized IPUMS CPS extract at https://cps.ipums.org/.
+   Choose Cross-sectional, Basic Monthly, every month January 2019–December
+   2024 (72 samples). Do not add ASEC samples. Select AGE, EMPSTAT, EDUC,
+   and WTFINL; YEAR and MONTH and technical identifiers are preselected.
+   Select cases: AGE 25 through 64 inclusive, selected individuals only.
+   Format: fixed-width .dat, rectangular. Download .dat.gz and DDI .xml.
+   Keep the extract outside the website folder. Do not commit or redistribute it.
+
+2. Install R and xml2 (install.packages("xml2")). The analysis uses base R
+   plus xml2, so ipumsr is not required. Run from this post's folder:
+   Rscript analyze.R /path/to/cps_00001.xml /path/to/cps_00001.dat.gz
+
+   The script reads column locations and implied decimals from the DDI.
+   It reads compressed fixed-width records in chunks and scales WTFINL by
+   10^4 once. It saves only grouped totals and rates in summary.rds.
+   It overwrites summary.rds and session-info.txt with the new results.
+
+3. Recreate the three charts in R:
+   s <- readRDS("summary.rds")
+   source("plots.R")
+   draw_figures(s)
+
+4. To render in the website, install knitr and rmarkdown and use Quarto:
+   quarto render blog/posts/post3/index.qmd
+   Rendering uses the saved summary.rds, not the original microdata.
+
+DEFINITIONS
+Employed: EMPSTAT 10,12. Unemployed: 20,21,22. Labor force = both groups.
+Other civilian statuses (30–36) are outside the unemployment denominator.
+Exclude nonpositive weights, noncivilian/NIU statuses, missing education.
+Education codes:
+  Less than high school: 002,010,020,030,040,050,060,071
+  High school diploma/equivalent: 073
+  Some college/associate: 081,091,092
+  Bachelor's or higher: 111,123,124,125
+Missing/ambiguous education: 000,001,999. Unexpected codes stop the script.
+Age bands: 25–34, 35–49, 50–64.
+
+Monthly rate = 100 * sum(weight * unemployed) / sum(weight * labor force).
+Annual rate = 100 * sum(monthly unemployment totals) / sum(monthly LF totals).
+Dividing both annual sums by 12 gives the same rate. Raw annual totals in
+summary.rds are person-month totals, not annual population counts.
+Observations repeat across months and must not be treated as independent
+unique people. No confidence intervals or significance tests are claimed.
+All statistics are unadjusted for seasonality and not causal estimates.
+
+VALIDATION
+The script checks year/month ranges, fixed-width line lengths, DDI scaling,
+missing fields, education mappings, 288 month-education cells, 24 annual cells,
+72 year-education-age cells, sample accounting, and valid rate bounds.
+The summary includes input MD5 checksums and sequential exclusion counts.
+session-info.txt records the software environment. Future source revisions
+may change estimates. The extraction date for this analysis is 2026-09-27.
+
+SOURCES
+https://cps.ipums.org/cps-action/variables/EMPSTAT
+https://cps.ipums.org/cps-action/variables/EDUC
+https://cps.ipums.org/cps-action/variables/WTFINL
+https://cps.ipums.org/cps/covid19.shtml
+https://cps.ipums.org/cps/citation.shtml
+IPUMS CPS, University of Minnesota; underlying CPS data from the U.S. Census
+Bureau and Bureau of Labor Statistics. Follow the IPUMS license and citation
+requirements. This public bundle contains no individual-level records or DDI.
