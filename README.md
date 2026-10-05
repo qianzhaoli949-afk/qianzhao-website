@@ -11,14 +11,18 @@ A Quarto website featuring my profile, résumé, and coursework in economics and
 | [1. Why More Income Can Mean Less Instant Noodles](https://qianzhaoli949-afk.github.io/qianzhao-website/blog/posts/post1/Untitled.html) | Explains inferior goods using a hypothetical example and an R plot. | [Post 1](blog/posts/post1/Untitled.qmd) |
 | [2. Beyond the Highest Salary: Choosing a Quantitative Career](https://qianzhaoli949-afk.github.io/qianzhao-website/blog/posts/post2/index.html) | Uses `rvest` to collect four O\*NET occupation profiles and compare pay and projected job openings. | [Post 2](blog/posts/post2/) |
 | [3. Education and Unemployment: Unequal Shocks, Uneven Recovery](https://qianzhaoli949-afk.github.io/qianzhao-website/blog/posts/post3/index.html) | Uses weighted IPUMS CPS microdata and three visualizations to examine unemployment by education, 2019–2024. | [Post 3](blog/posts/post3/) |
+| [4. Beyond the Sticker Price: The Cost of Financing a New Home](https://qianzhaoli949-afk.github.io/qianzhao-website/blog/posts/post4/index.html) | Combines FRED prices, rates, and CPI to compare real mortgage payments with three visualizations, 2015–2024. | [Post 4](blog/posts/post4/) |
 
 ## Run locally
+
+Post 4, [Beyond the Sticker Price](blog/posts/post4/index.qmd), uses new-home prices, mortgage rates, and CPI from FRED to compare inflation-adjusted mortgage payments. Its [replication guide](blog/posts/post4/README.md) documents the `code/`, `data/`, and `results/` folders and all assumptions.
 
 Each post has a dedicated guide mapping its code, data, and results and explaining how to reproduce them:
 
 - [Post 1 replication guide](blog/posts/post1/README.md)
 - [Post 2 replication guide](blog/posts/post2/README.md)
 - [Post 3 replication guide](blog/posts/post3/README.md)
+- [Post 4 replication guide](blog/posts/post4/README.md)
 
 You will need [R](https://www.r-project.org/) and [Quarto](https://quarto.org/). RStudio is optional.
 
@@ -47,7 +51,7 @@ You will need [R](https://www.r-project.org/) and [Quarto](https://quarto.org/).
    quarto render
    ```
 
-The output is written to `docs/`, as configured in `_quarto.yml`. Ordinary rendering uses the saved O\*NET snapshots and CPS grouped summaries; it does not require a new web scrape or access to CPS microdata.
+The output is written to `docs/`, as configured in `_quarto.yml`. Ordinary rendering uses the saved O\*NET snapshots, CPS grouped summaries, and FRED downloads; it does not require a new web scrape or access to CPS microdata.
 
 ## Reproduce the analyses
 
@@ -98,6 +102,7 @@ blog/index.qmd       Blog listing
 blog/posts/post1/    Inferior-goods explanation
 blog/posts/post2/    Web-scraping analysis and saved source snapshots
 blog/posts/post3/    CPS analysis, grouped summaries, and figures
+blog/posts/post4/    FRED housing analysis: code, data, results, and replication guide
 images/              Website images
 styles.css           Custom styling
 docs/                Rendered website for GitHub Pages
@@ -108,6 +113,8 @@ docs/                Rendered website for GitHub Pages
 Edit the source files, run `quarto render`, inspect the results, and commit the relevant source files together with the updated `docs/` output. Push the commit to GitHub to publish through the repository's GitHub Pages configuration. Local edits in RStudio do not automatically upload to GitHub. Edit `.qmd` sources rather than generated HTML files.
 
 ## Sources and data use
+
+- **Post 4:** Census Bureau/HUD new-home sales prices, Freddie Mac mortgage rates, and BLS CPI retrieved through FRED. See the post's README and download manifest for definitions, attribution, dates, and transformations.
 
 - **Post 1:** hypothetical data defined in the article.
 - **Post 2:** O\*NET OnLine, U.S. Department of Labor, Employment and Training Administration; wage and projection figures attributed to the Bureau of Labor Statistics. Detailed source links and reuse information are provided with the post.

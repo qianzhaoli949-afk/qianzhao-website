@@ -1,0 +1,4 @@
+"series","url","retrieved_utc","md5"
+"MSPUS","https://fred.stlouisfed.org/graph/fredgraph.csv?id=MSPUS&cosd=2015-01-01&coed=2024-12-31","2026-10-04 00:46:53 UTC","fb2c0845ad92a2b25a288a848ed88c12"
+"MORTGAGE30US","https://fred.stlouisfed.org/graph/fredgraph.csv?id=MORTGAGE30US&cosd=2015-01-01&coed=2024-12-31","2026-10-04 00:46:55 UTC","9afed3f4f7df4d0433b10e99f6ec4624"
+"CPIAUCNS","https://fred.stlouisfed.org/graph/fredgraph.csv?id=CPIAUCNS&cosd=2015-01-01&coed=2024-12-31","2026-10-04 00:46:56 UTC","7370ba8f729818500e4aaf276e51ca1a"

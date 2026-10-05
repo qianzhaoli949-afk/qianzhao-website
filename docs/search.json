@@ -81,7 +81,7 @@
     "href": "blog/index.html",
     "title": "Blog",
     "section": "",
-    "text": "Education and Unemployment: Unequal Shocks, Uneven Recovery\n\n\nWhat weighted CPS data reveal about working-age adults, 2019–2024\n\n\nThree visualizations trace unemployment by education through the pandemic and recovery.\n\n\n\n\n\nSep 28, 2026\n\n\n\n\n\n\n\n\n\n\n\n\nBeyond the Highest Salary: Choosing a Quantitative Career\n\n\nWhat four O*NET profiles suggest about where to focus a job search\n\n\nAn ethical rvest scraping project comparing pay, projected openings, and preparation across four quantitative careers.\n\n\n\n\n\nSep 19, 2026\n\n\n\n\n\n\n\n\n\n\n\n\nWhy More Income Can Mean Less Instant Noodles\n\n\nUnderstanding inferior goods without confusing them with bad goods\n\n\n\n\n\n\n\n\nSep 9, 2026\n\n\nQianzhao Li\n\n\n\n\n\nNo matching items"
+    "text": "Beyond the Sticker Price: The Cost of Financing a New Home\n\n\nSeparating house prices, inflation, and mortgage rates, 2015–2024\n\n\nThree figures explain how real new-home prices and mortgage rates jointly shape an illustrative buyer’s monthly payment.\n\n\n\n\n\nOct 3, 2026\n\n\nQianzhao Li\n\n\n\n\n\n\n\n\n\n\n\n\nEducation and Unemployment: Unequal Shocks, Uneven Recovery\n\n\nWhat weighted CPS data reveal about working-age adults, 2019–2024\n\n\nThree visualizations trace unemployment by education through the pandemic and recovery.\n\n\n\n\n\nSep 28, 2026\n\n\n\n\n\n\n\n\n\n\n\n\nBeyond the Highest Salary: Choosing a Quantitative Career\n\n\nWhat four O*NET profiles suggest about where to focus a job search\n\n\nAn ethical rvest scraping project comparing pay, projected openings, and preparation across four quantitative careers.\n\n\n\n\n\nSep 19, 2026\n\n\n\n\n\n\n\n\n\n\n\n\nWhy More Income Can Mean Less Instant Noodles\n\n\nUnderstanding inferior goods without confusing them with bad goods\n\n\n\n\n\n\n\n\nSep 9, 2026\n\n\nQianzhao Li\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "about.html",
@@ -201,5 +201,54 @@
     "title": "Education and Unemployment: Unequal Shocks, Uneven Recovery",
     "section": "Data and reproducibility",
     "text": "Data and reproducibility\nSource: IPUMS CPS, University of Minnesota, using underlying U.S. Census Bureau and Bureau of Labor Statistics data. Extract created September 27, 2026. Education definitions follow IPUMS EDUC documentation.\nDownload the code and grouped summaries, analysis script, plotting script, and reproduction instructions. The GitHub repository contains this post under blog/posts/post3/. Licensed microdata are not redistributed; registered users can recreate the extract using the documented selections.\n\n\nShow R code\n# From the post3 folder, after running analyze.R with your local extract paths:\ns &lt;- readRDS(\"summary.rds\")\nsource(\"plots.R\")\ndraw_figures(s)"
+  },
+  {
+    "objectID": "blog/posts/post4/index.html",
+    "href": "blog/posts/post4/index.html",
+    "title": "Beyond the Sticker Price: The Cost of Financing a New Home",
+    "section": "",
+    "text": "A lower advertised house price does not necessarily mean a lower monthly payment. Buyers finance both a property and the cost of borrowing. How did changes in real new-home prices and mortgage rates combine to change an illustrative buyer’s payment between 2019 and 2024? I place those endpoints within a decade of quarterly data, separating purchasing-power changes from financing costs. This is a payment comparison, not a complete measure of housing affordability relative to income."
+  },
+  {
+    "objectID": "blog/posts/post4/index.html#from-three-series-to-a-comparable-payment",
+    "href": "blog/posts/post4/index.html#from-three-series-to-a-comparable-payment",
+    "title": "Beyond the Sticker Price: The Cost of Financing a New Home",
+    "section": "From three series to a comparable payment",
+    "text": "From three series to a comparable payment\nI download three series programmatically from FRED: Census/HUD’s median new-home sales price (MSPUS), Freddie Mac’s 30-year mortgage rate (MORTGAGE30US), and BLS’s all-items CPI (CPIAUCNS). These are new data for this blog, distinct from the earlier O*NET and CPS projects.\nThe price series is quarterly. I average weekly mortgage observations and the three monthly CPI observations within each quarter, producing 40 quarters from 2015 through 2024. I stop at 2024 because the downloaded CPI series has no October 2025 observation; I do not impute it or average an incomplete quarter. All three series are not seasonally adjusted. Endpoint comparisons use Q4 in both years, although that does not remove all seasonal influences.\nFor a hypothetical purchase each quarter, I assume a 20% down payment and a fully amortizing 30-year fixed-rate mortgage. Monthly principal and interest are\n\\[\nM=0.8P\\frac{r/1200}{1-(1+r/1200)^{-360}},\n\\]\nwhere \\(P\\) is the sales price and \\(r\\) is the annual interest rate in percent. Multiplying prices and payments by \\(CPI_{2024Q4}/CPI_t\\) expresses them in 2024 Q4 dollars. These transformations make monetary comparisons meaningful without confusing general inflation with housing-specific changes."
+  },
+  {
+    "objectID": "blog/posts/post4/index.html#the-price-and-the-financing-cost-are-different-moving-parts",
+    "href": "blog/posts/post4/index.html#the-price-and-the-financing-cost-are-different-moving-parts",
+    "title": "Beyond the Sticker Price: The Cost of Financing a New Home",
+    "section": "1. The price and the financing cost are different moving parts",
+    "text": "1. The price and the financing cost are different moving parts\n\n\n\nReal median new-home prices and quarterly-average mortgage rates. Sources: Census/HUD, Freddie Mac, and BLS via FRED.\n\n\nThe first figure separates the two inputs rather than putting unlike units on a dual axis. From 2019 Q4 to 2024 Q4, the real median price changed by 4.5%, while the average mortgage rate moved from 3.7% to 6.6%. Price movements alone therefore cannot describe the change faced by a financed buyer."
+  },
+  {
+    "objectID": "blog/posts/post4/index.html#translate-those-inputs-into-monthly-dollars",
+    "href": "blog/posts/post4/index.html#translate-those-inputs-into-monthly-dollars",
+    "title": "Beyond the Sticker Price: The Cost of Financing a New Home",
+    "section": "2. Translate those inputs into monthly dollars",
+    "text": "2. Translate those inputs into monthly dollars\n\n\n\nIllustrative real monthly payments, with a comparison holding the rate at its 2019 Q4 level. Calculations use 20% down and a 30-year term.\n\n\nThe modeled real payment rose from $1,478 to $2,149, a 45.4% increase. The dashed line keeps each quarter’s price but holds the interest rate fixed at its 2019 Q4 value. By 2024 Q4, that calculation yields $1,544, or $606 less per month than the contemporaneous-rate scenario. This is a controlled arithmetic comparison, not a claim that buyers could actually obtain the old rate."
+  },
+  {
+    "objectID": "blog/posts/post4/index.html#change-one-input-at-a-time",
+    "href": "blog/posts/post4/index.html#change-one-input-at-a-time",
+    "title": "Beyond the Sticker Price: The Cost of Financing a New Home",
+    "section": "3. Change one input at a time",
+    "text": "3. Change one input at a time\n\n\n\nFour Q4 endpoint scenarios in constant purchasing-power dollars. The middle bars change only real price or only interest rate.\n\n\nThe third figure holds the other input constant in each middle bar. The price-only change adds $66 to the baseline payment; the rate-only change adds $580. These separate increments need not sum to the combined increase: a higher rate also applies to the changed loan amount. The chart isolates the financing mechanism, rather than estimating a causal effect of monetary policy on prices."
+  },
+  {
+    "objectID": "blog/posts/post4/index.html#takeaway-and-limits",
+    "href": "blog/posts/post4/index.html#takeaway-and-limits",
+    "title": "Beyond the Sticker Price: The Cost of Financing a New Home",
+    "section": "Takeaway and limits",
+    "text": "Takeaway and limits\nEvaluating a home by its sticker price alone misses a major part of the financing calculation. A practical budgeting exercise should vary both the price and the offered rate, then add taxes, insurance, maintenance, and fees, which are excluded here. The down payment itself is another constraint.\nThese are illustrative payments for new buyers, not average payments of existing homeowners. New-home medians change with the mix of homes sold and are not a constant-quality price index. National series mask local differences; the mortgage benchmark is not an individual loan quote. Freddie Mac also changed its survey methodology in November 2022. Without household income, credit, or wealth data, the figures cannot tell us who can afford to buy."
+  },
+  {
+    "objectID": "blog/posts/post4/index.html#reproduce-the-analysis",
+    "href": "blog/posts/post4/index.html#reproduce-the-analysis",
+    "title": "Beyond the Sticker Price: The Cost of Financing a New Home",
+    "section": "Reproduce the analysis",
+    "text": "Reproduce the analysis\nThe README documents folders, assumptions, and commands. Analysis code, plotting code, quarterly data, and download provenance are available alongside the GitHub repository. Ordinary rendering checks and reuses saved downloads; an explicit refresh retrieves new data, which may include revisions."
   }
 ]
