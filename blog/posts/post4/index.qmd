@@ -1,7 +1,6 @@
 ---
 title: "Beyond the Sticker Price: The Cost of Financing a New Home"
 subtitle: "Separating house prices, inflation, and mortgage rates, 2015–2024"
-author: "Qianzhao Li"
 date: 2026-10-03
 categories: [data visualization, housing, macroeconomics]
 description: "Three figures explain how real new-home prices and mortgage rates jointly shape an illustrative buyer's monthly payment."
@@ -29,9 +28,9 @@ pct <- function(x) sprintf("%.1f", x)
 ```
 
 A lower advertised house price does not necessarily mean a lower monthly
-payment. Buyers finance both a property and the cost of borrowing. **How did
+payment. Buyers finance both a property and the cost of borrowing. How did
 changes in real new-home prices and mortgage rates combine to change an
-illustrative buyer's payment between 2019 and 2024?** I place those endpoints
+illustrative buyer's payment between 2019 and 2024? I place those endpoints
 within a decade of quarterly data, separating purchasing-power changes from
 financing costs. This is a payment comparison, not a complete measure of
 housing affordability relative to income.
