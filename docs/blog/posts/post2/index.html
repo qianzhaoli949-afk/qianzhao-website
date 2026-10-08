@@ -195,11 +195,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<p>As a graduate student in Applied Economics and Data Science with a Financial Mathematics background, I face a practical question: <strong>which careers deserve my limited job-search and preparation time?</strong> The highest salary is tempting, but it says little about the size of a job market or the preparation a role requires. I compare four relevant paths: data science, operations research, financial and investment analysis, and actuarial work.</p>
-<section id="collecting-comparable-evidence" class="level2">
-<h2 class="anchored" data-anchor-id="collecting-comparable-evidence">Collecting comparable evidence</h2>
-<p>I scraped four public <a href="https://www.onetonline.org/">O*NET® OnLine</a> occupation profiles using R’s <code>rvest</code> package. These pages report BLS wage and employment data in a consistent format. This is a purposeful comparison of four careers, not a representative sample of all graduate jobs.</p>
-<p>The script below identifies HTML field labels, extracts their adjacent values, removes dollar signs and commas, and saves numeric columns. It checks occupation names and reference periods before producing a CSV. Financial and investment analysts is a specific occupational category; I do not combine its salary with the broader financial-analyst category’s openings.</p>
+<p>As a graduate student in Applied Economics and Data Science with a Financial Mathematics background, I face a practical question: which careers deserve my limited job-search and preparation time? The highest salary is tempting, but it says little about the size of a job market or the preparation a role requires. I compare four relevant paths: data science, operations research, financial and investment analysis, and actuarial work.</p>
+<section id="collecting-and-cleaning-the-data" class="level2">
+<h2 class="anchored" data-anchor-id="collecting-and-cleaning-the-data">Collecting and cleaning the data</h2>
+<p>I scraped four public <a href="https://www.onetonline.org/">O*NET® OnLine</a> occupation profiles using R’s <code>rvest</code> package. These pages report BLS wage and employment data in a consistent format. I chose these careers because they relate to my studies, so the comparison does not cover every option for graduates.</p>
+<p>My script finds the relevant labels on each page and extracts the values beside them. It removes dollar signs and commas so R can read the numbers, then checks the occupation names and years. I use the same occupation category for wages and openings rather than mixing different types of financial analysts.</p>
 <details>
 <summary>
 Show the complete rvest collection and cleaning script
@@ -334,8 +334,8 @@ Show the complete rvest collection and cleaning script
 <span id="cb1-128"><a href="#cb1-128" aria-hidden="true" tabindex="-1"></a>  result</span>
 <span id="cb1-129"><a href="#cb1-129" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
-<p>I checked the site’s <a href="https://www.onetonline.org/robots.txt">robots rules</a> and <a href="https://www.onetonline.org/help/license">content license</a>, used an identifiable user agent, and spaced requests four seconds apart. The script stops on HTTP errors and saves dated HTML snapshots. Re-rendering uses these snapshots, so it adds no traffic. No login, CAPTCHA, or access restriction was bypassed.</p>
-<p>The snapshot was collected on September 19, 2026, in New York (September 20 UTC). It contains <strong>2025 wages and 2024–2034 employment projections</strong>, as published by O*NET at collection time. These are different reference periods and should not be described as a single year’s observations. Growth is published in categories, so I preserve those labels rather than inventing precise percentages.</p>
+<p>I checked the site’s <a href="https://www.onetonline.org/robots.txt">robots rules</a> and <a href="https://www.onetonline.org/help/license">content license</a>, used an identifiable user agent, and spaced requests four seconds apart. The script stops on HTTP errors and saves dated HTML snapshots. Re-rendering uses these snapshots, so it adds no traffic. I did not bypass logins, CAPTCHAs, or access restrictions.</p>
+<p>I collected the pages on September 19, 2026, in New York (September 20 UTC). O<em>NET reported 2025 wages and 2024–2034 employment projections. These figures refer to different periods. O</em>NET also reports growth in categories, so I keep those labels instead of treating them as exact percentages.</p>
 <div class="cell">
 <div class="cell-output-display">
 <table class="caption-top table table-sm table-striped small">
@@ -403,18 +403,91 @@ Figure&nbsp;1: National occupational median pay (2025) versus projected average 
 <p>Financial and investment analysts have the most openings in this comparison, 25,100, despite a lower median wage of $102,740. Operations research offers 9,600 openings and $88,940 median pay. Its emphasis on quantitative decision-making makes it relevant to my training even though its wage is lower.</p>
 <p>Preparation also matters. In the available O*NET education responses, 48% of data-science respondents identify a bachelor’s degree as required, while 43% of operations-research respondents identify a master’s degree. These are survey responses, not universal hiring rules. The financial-and-investment profile lacks this education breakdown; the script records it as missing rather than guessing.</p>
 </section>
+<section id="does-faster-growth-mean-more-opportunities" class="level2">
+<h2 class="anchored" data-anchor-id="does-faster-growth-mean-more-opportunities">Does faster growth mean more opportunities?</h2>
+<p>O*NET projects employment growth of 7% or higher for data scientists, operations research analysts, and actuaries over 2024–2034. It places financial and investment analysts in the 5% to 6% group. These categories describe the change in the number of jobs over ten years, not each year. They also do not tell us which of the first three careers will grow fastest: “7% or higher” does not mean exactly 7%.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div id="fig-growth-openings" class="quarto-float quarto-figure quarto-figure-center anchored" alt="Data science has 9.5 annual openings per 100 base-year jobs, operations research 8.6, actuarial work 7.1, and financial and investment analysis 6.8. The first three share the 7 percent or higher net growth category; finance is in the 5 to 6 percent category.">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-growth-openings-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="figures/growth-openings.png" class="img-fluid figure-img" style="width:100.0%" alt="Data science has 9.5 annual openings per 100 base-year jobs, operations research 8.6, actuarial work 7.1, and financial and investment analysis 6.8. The first three share the 7 percent or higher net growth category; finance is in the 5 to 6 percent category.">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-growth-openings-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;2: Color shows projected net employment-growth categories; bar length shows gross annual openings relative to 2024 employment. Source: saved O*NET profiles, BLS projections for 2024–2034.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>Larger occupations can have more openings simply because they have more jobs. To account for size, I divide projected annual openings by employment in 2024 and multiply by 100. This gives annual openings per 100 existing jobs. Openings include both new jobs and opportunities to replace workers who leave. The measure does not show annual employment growth, current vacancies, or my chance of getting hired.</p>
+<div class="cell">
+<div class="cell-output-display">
+<table class="caption-top table table-sm table-striped small">
+<colgroup>
+<col style="width: 26%">
+<col style="width: 14%">
+<col style="width: 26%">
+<col style="width: 17%">
+<col style="width: 14%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Occupation</th>
+<th style="text-align: left;">Employment (2024)</th>
+<th style="text-align: left;">Annual openings per 100 base jobs</th>
+<th style="text-align: right;">Rank by openings count</th>
+<th style="text-align: right;">Rank after scaling</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Data Scientists</td>
+<td style="text-align: left;">245,900</td>
+<td style="text-align: left;">9.5</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">1</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Operations Research Analysts</td>
+<td style="text-align: left;">112,100</td>
+<td style="text-align: left;">8.6</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">2</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Financial and Investment Analysts</td>
+<td style="text-align: left;">368,500</td>
+<td style="text-align: left;">6.8</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">4</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Actuaries</td>
+<td style="text-align: left;">33,600</td>
+<td style="text-align: left;">7.1</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">3</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p>Financial analysis ranks first in total openings but fourth in openings per 100 existing jobs. Data science moves from second to first, and operations research moves from third to second. Actuarial work combines fast projected growth with a small job market and few total openings. Growth tells me how a career may expand; openings tell me more about the number of opportunities.</p>
+</section>
 <section id="turning-the-comparison-into-a-decision" class="level2">
 <h2 class="anchored" data-anchor-id="turning-the-comparison-into-a-decision">Turning the comparison into a decision</h2>
-<p>My recommendation is to <strong>prioritize exploring data-science and financial-and-investment analyst roles</strong>, while keeping operations research on the shortlist. A concrete next step is to review ten current entry-level vacancies in each of the first two categories, record recurring qualifications, and build one relevant project for each. That follow-up would test whether broad occupational opportunities translate into realistic roles for my experience and location.</p>
+<p>I would start by exploring data-science and financial-and-investment analyst roles. Data science combines strong pay, fast projected growth, and many openings relative to its size. Financial analysis offers the largest number of openings. The growth comparison also gives me a reason to take operations research more seriously, rather than dismissing it because of its lower pay.</p>
+<p>Next, I would review ten entry-level vacancies in each of the first two careers, list the skills employers ask for most often, and build a relevant project for each. I would keep operations research on my shortlist too. The data help me narrow my search, but my interests and preparation still matter.</p>
 <p>Actuarial work remains attractive if I want its specialized preparation: <a href="https://www.bls.gov/ooh/math/actuaries.htm">BLS describes a series of professional exams</a>. I would investigate that commitment before choosing it solely for higher pay.</p>
-<p>The comparison has limits. Occupational medians are not starting salaries. <a href="https://www.onetonline.org/link/localtrends/15-2051.00">Projected annual openings</a> include growth and replacement needs; they are not live vacancies or exclusively entry-level jobs. A larger count does not imply easier hiring without information about applicant supply. National data also omit personal fit, local living costs, and work-authorization requirements. The takeaway is to use pay and market size to build an informed shortlist, then validate it against actual job requirements.</p>
+<p>The comparison has limits. Median pay does not tell me what a new graduate earns. <a href="https://www.onetonline.org/link/localtrends/15-2051.00">Projected annual openings</a> include growth and replacement needs, not just entry-level jobs or current vacancies. More openings do not necessarily mean an easier job search because I do not know how many people will apply. The national figures also leave out local living costs and work-authorization requirements. I would use all three measures—pay, growth, and openings—to guide my search, then check actual job ads.</p>
 </section>
 <section id="sources-and-reproducibility" class="level2">
 <h2 class="anchored" data-anchor-id="sources-and-reproducibility">Sources and reproducibility</h2>
-<p>The four profile links, raw snapshots, retrieval times, checksums, and package versions are included in the <a href="career-reproduction.zip">reproduction bundle</a>. Download the <a href="data/careers.csv">cleaned data</a>, <a href="scrape-careers.R">scraping script</a>, <a href="plot-careers.R">plotting script</a>, or <a href="DATA-NOTES.md">data notes</a>.</p>
+<p>The <a href="career-reproduction.zip">reproduction bundle</a> contains the four profile links, saved pages, download times, file checksums, and package versions. Download the <a href="data/careers.csv">cleaned data</a>, <a href="scrape-careers.R">scraping script</a>, <a href="plot-careers.R">plotting script</a>, <a href="analyze-careers.R">growth-analysis script</a>, <a href="data/career-analysis.csv">derived comparisons</a>, or <a href="DATA-NOTES.md">data notes</a>.</p>
 <p>Sources: <a href="https://www.onetonline.org/link/summary/15-2051.00">Data Scientists</a>, <a href="https://www.onetonline.org/link/summary/15-2031.00">Operations Research Analysts</a>, <a href="https://www.onetonline.org/link/summary/13-2051.00">Financial and Investment Analysts</a>, and <a href="https://www.onetonline.org/link/summary/15-2011.00">Actuaries</a>. The <a href="https://www.onetonline.org/help/online/datasources">source register</a> identifies BLS as the provider of wage and projection figures.</p>
-<p>This analysis adapts information from O*NET OnLine, U.S. Department of Labor, Employment and Training Administration, under <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>. Qianzhao Li cleaned and visualized the data and added interpretation; USDOL/ETA has not approved or endorsed these changes. O*NET® is a trademark of USDOL/ETA. External BLS data are attributed separately above.</p>
-<p>To reproduce, unzip the bundle, open R in that folder, install <code>rvest</code> and <code>httr</code> once, and run the following. The saved snapshots are used by default.</p>
+<p>This analysis adapts information from O*NET OnLine, U.S. Department of Labor, Employment and Training Administration, under <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>. Qianzhao Li cleaned and visualized the data and added interpretation; USDOL/ETA has not approved or endorsed these changes. O*NET® is a trademark of USDOL/ETA. The source links above also credit BLS for its data.</p>
+<p>To reproduce, unzip the bundle, open R in that folder, install <code>rvest</code> and <code>httr</code> once, and run the following. The code uses the saved pages by default.</p>
 <div class="cell">
 <details class="code-fold">
 <summary>Show R code</summary>
@@ -422,7 +495,11 @@ Figure&nbsp;1: National occupational median pay (2025) versus projected average 
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">"scrape-careers.R"</span>)</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>careers <span class="ot">&lt;-</span> <span class="fu">build_careers</span>(<span class="st">"data"</span>, <span class="at">refresh =</span> <span class="cn">FALSE</span>)</span>
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">"plot-careers.R"</span>)</span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_careers</span>(careers)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_careers</span>(careers)</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">"analyze-careers.R"</span>)</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>analysis <span class="ot">&lt;-</span> <span class="fu">analyze_careers</span>(careers)</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="fu">write.csv</span>(analysis, <span class="st">"data/career-analysis.csv"</span>, <span class="at">row.names=</span><span class="cn">FALSE</span>)</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_growth</span>(analysis)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
 <p>The website’s <a href="https://github.com/qianzhaoli949-afk/qianzhao-website">GitHub repository</a> contains the website source; this post’s code and data are in <code>blog/posts/post2/</code>.</p>
@@ -901,173 +978,231 @@ Figure&nbsp;1: National occupational median pay (2025) versus projected average 
 <span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a><span class="an">resources:</span></span>
 <span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a><span class="co">  - scrape-careers.R</span></span>
 <span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a><span class="co">  - plot-careers.R</span></span>
-<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a><span class="co">  - data/careers.csv</span></span>
-<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a><span class="co">  - DATA-NOTES.md</span></span>
-<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a><span class="co">  - career-reproduction.zip</span></span>
-<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
-<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: setup</span></span>
-<span id="cb3-27"><a href="#cb3-27" aria-hidden="true" tabindex="-1"></a><span class="co">#| include: false</span></span>
-<span id="cb3-28"><a href="#cb3-28" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">"scrape-careers.R"</span>)</span>
-<span id="cb3-29"><a href="#cb3-29" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">"plot-careers.R"</span>)</span>
-<span id="cb3-30"><a href="#cb3-30" aria-hidden="true" tabindex="-1"></a>careers <span class="ot">&lt;-</span> <span class="fu">build_careers</span>(<span class="st">"data"</span>, <span class="at">refresh =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb3-31"><a href="#cb3-31" aria-hidden="true" tabindex="-1"></a>money <span class="ot">&lt;-</span> <span class="cf">function</span>(x) <span class="fu">paste0</span>(<span class="st">"$"</span>, <span class="fu">format</span>(x, <span class="at">big.mark =</span> <span class="st">","</span>, <span class="at">scientific =</span> <span class="cn">FALSE</span>, <span class="at">trim =</span> <span class="cn">TRUE</span>))</span>
-<span id="cb3-32"><a href="#cb3-32" aria-hidden="true" tabindex="-1"></a>count <span class="ot">&lt;-</span> <span class="cf">function</span>(x) <span class="fu">format</span>(x, <span class="at">big.mark =</span> <span class="st">","</span>, <span class="at">scientific =</span> <span class="cn">FALSE</span>, <span class="at">trim =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb3-33"><a href="#cb3-33" aria-hidden="true" tabindex="-1"></a>ds <span class="ot">&lt;-</span> careers[careers<span class="sc">$</span>soc <span class="sc">==</span> <span class="st">"15-2051.00"</span>, ]</span>
-<span id="cb3-34"><a href="#cb3-34" aria-hidden="true" tabindex="-1"></a>ora <span class="ot">&lt;-</span> careers[careers<span class="sc">$</span>soc <span class="sc">==</span> <span class="st">"15-2031.00"</span>, ]</span>
-<span id="cb3-35"><a href="#cb3-35" aria-hidden="true" tabindex="-1"></a>fin <span class="ot">&lt;-</span> careers[careers<span class="sc">$</span>soc <span class="sc">==</span> <span class="st">"13-2051.00"</span>, ]</span>
-<span id="cb3-36"><a href="#cb3-36" aria-hidden="true" tabindex="-1"></a>act <span class="ot">&lt;-</span> careers[careers<span class="sc">$</span>soc <span class="sc">==</span> <span class="st">"15-2011.00"</span>, ]</span>
-<span id="cb3-37"><a href="#cb3-37" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb3-38"><a href="#cb3-38" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-39"><a href="#cb3-39" aria-hidden="true" tabindex="-1"></a>As a graduate student in Applied Economics and Data Science with a Financial</span>
-<span id="cb3-40"><a href="#cb3-40" aria-hidden="true" tabindex="-1"></a>Mathematics background, I face a practical question: **which careers deserve</span>
-<span id="cb3-41"><a href="#cb3-41" aria-hidden="true" tabindex="-1"></a>my limited job-search and preparation time?** The highest salary is tempting,</span>
-<span id="cb3-42"><a href="#cb3-42" aria-hidden="true" tabindex="-1"></a>but it says little about the size of a job market or the preparation a role</span>
-<span id="cb3-43"><a href="#cb3-43" aria-hidden="true" tabindex="-1"></a>requires. I compare four relevant paths: data science, operations research,</span>
-<span id="cb3-44"><a href="#cb3-44" aria-hidden="true" tabindex="-1"></a>financial and investment analysis, and actuarial work.</span>
-<span id="cb3-45"><a href="#cb3-45" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-46"><a href="#cb3-46" aria-hidden="true" tabindex="-1"></a><span class="fu">## Collecting comparable evidence</span></span>
-<span id="cb3-47"><a href="#cb3-47" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-48"><a href="#cb3-48" aria-hidden="true" tabindex="-1"></a>I scraped four public <span class="co">[</span><span class="ot">O\*NET® OnLine</span><span class="co">](https://www.onetonline.org/)</span> occupation</span>
-<span id="cb3-49"><a href="#cb3-49" aria-hidden="true" tabindex="-1"></a>profiles using R's <span class="in">`rvest`</span> package. These pages report BLS wage and employment</span>
-<span id="cb3-50"><a href="#cb3-50" aria-hidden="true" tabindex="-1"></a>data in a consistent format. This is a purposeful</span>
-<span id="cb3-51"><a href="#cb3-51" aria-hidden="true" tabindex="-1"></a>comparison of four careers, not a representative sample of all graduate jobs.</span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a><span class="co">  - analyze-careers.R</span></span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a><span class="co">  - data/career-analysis.csv</span></span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a><span class="co">  - data/careers.csv</span></span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a><span class="co">  - DATA-NOTES.md</span></span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a><span class="co">  - career-reproduction.zip</span></span>
+<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-27"><a href="#cb3-27" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb3-28"><a href="#cb3-28" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: setup</span></span>
+<span id="cb3-29"><a href="#cb3-29" aria-hidden="true" tabindex="-1"></a><span class="co">#| include: false</span></span>
+<span id="cb3-30"><a href="#cb3-30" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">"scrape-careers.R"</span>)</span>
+<span id="cb3-31"><a href="#cb3-31" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">"plot-careers.R"</span>)</span>
+<span id="cb3-32"><a href="#cb3-32" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">"analyze-careers.R"</span>)</span>
+<span id="cb3-33"><a href="#cb3-33" aria-hidden="true" tabindex="-1"></a>careers <span class="ot">&lt;-</span> <span class="fu">build_careers</span>(<span class="st">"data"</span>, <span class="at">refresh =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb3-34"><a href="#cb3-34" aria-hidden="true" tabindex="-1"></a>analysis <span class="ot">&lt;-</span> <span class="fu">analyze_careers</span>(careers)</span>
+<span id="cb3-35"><a href="#cb3-35" aria-hidden="true" tabindex="-1"></a><span class="fu">write.csv</span>(analysis, <span class="st">"data/career-analysis.csv"</span>, <span class="at">row.names =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb3-36"><a href="#cb3-36" aria-hidden="true" tabindex="-1"></a>money <span class="ot">&lt;-</span> <span class="cf">function</span>(x) <span class="fu">paste0</span>(<span class="st">"$"</span>, <span class="fu">format</span>(x, <span class="at">big.mark =</span> <span class="st">","</span>, <span class="at">scientific =</span> <span class="cn">FALSE</span>, <span class="at">trim =</span> <span class="cn">TRUE</span>))</span>
+<span id="cb3-37"><a href="#cb3-37" aria-hidden="true" tabindex="-1"></a>count <span class="ot">&lt;-</span> <span class="cf">function</span>(x) <span class="fu">format</span>(x, <span class="at">big.mark =</span> <span class="st">","</span>, <span class="at">scientific =</span> <span class="cn">FALSE</span>, <span class="at">trim =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb3-38"><a href="#cb3-38" aria-hidden="true" tabindex="-1"></a>ds <span class="ot">&lt;-</span> careers[careers<span class="sc">$</span>soc <span class="sc">==</span> <span class="st">"15-2051.00"</span>, ]</span>
+<span id="cb3-39"><a href="#cb3-39" aria-hidden="true" tabindex="-1"></a>ora <span class="ot">&lt;-</span> careers[careers<span class="sc">$</span>soc <span class="sc">==</span> <span class="st">"15-2031.00"</span>, ]</span>
+<span id="cb3-40"><a href="#cb3-40" aria-hidden="true" tabindex="-1"></a>fin <span class="ot">&lt;-</span> careers[careers<span class="sc">$</span>soc <span class="sc">==</span> <span class="st">"13-2051.00"</span>, ]</span>
+<span id="cb3-41"><a href="#cb3-41" aria-hidden="true" tabindex="-1"></a>act <span class="ot">&lt;-</span> careers[careers<span class="sc">$</span>soc <span class="sc">==</span> <span class="st">"15-2011.00"</span>, ]</span>
+<span id="cb3-42"><a href="#cb3-42" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb3-43"><a href="#cb3-43" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-44"><a href="#cb3-44" aria-hidden="true" tabindex="-1"></a>As a graduate student in Applied Economics and Data Science with a Financial</span>
+<span id="cb3-45"><a href="#cb3-45" aria-hidden="true" tabindex="-1"></a>Mathematics background, I face a practical question: which careers deserve</span>
+<span id="cb3-46"><a href="#cb3-46" aria-hidden="true" tabindex="-1"></a>my limited job-search and preparation time? The highest salary is tempting,</span>
+<span id="cb3-47"><a href="#cb3-47" aria-hidden="true" tabindex="-1"></a>but it says little about the size of a job market or the preparation a role</span>
+<span id="cb3-48"><a href="#cb3-48" aria-hidden="true" tabindex="-1"></a>requires. I compare four relevant paths: data science, operations research,</span>
+<span id="cb3-49"><a href="#cb3-49" aria-hidden="true" tabindex="-1"></a>financial and investment analysis, and actuarial work.</span>
+<span id="cb3-50"><a href="#cb3-50" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-51"><a href="#cb3-51" aria-hidden="true" tabindex="-1"></a><span class="fu">## Collecting and cleaning the data</span></span>
 <span id="cb3-52"><a href="#cb3-52" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-53"><a href="#cb3-53" aria-hidden="true" tabindex="-1"></a>The script below identifies HTML field labels, extracts their adjacent values,</span>
-<span id="cb3-54"><a href="#cb3-54" aria-hidden="true" tabindex="-1"></a>removes dollar signs and commas, and saves numeric columns. It checks occupation</span>
-<span id="cb3-55"><a href="#cb3-55" aria-hidden="true" tabindex="-1"></a>names and reference periods before producing a CSV. Financial and investment</span>
-<span id="cb3-56"><a href="#cb3-56" aria-hidden="true" tabindex="-1"></a>analysts is a specific occupational category; I do not combine its salary with</span>
-<span id="cb3-57"><a href="#cb3-57" aria-hidden="true" tabindex="-1"></a>the broader financial-analyst category's openings.</span>
-<span id="cb3-58"><a href="#cb3-58" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-59"><a href="#cb3-59" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">details</span><span class="dt">&gt;</span></span>
-<span id="cb3-60"><a href="#cb3-60" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">summary</span><span class="dt">&gt;</span>Show the complete rvest collection and cleaning script<span class="dt">&lt;/</span><span class="kw">summary</span><span class="dt">&gt;</span></span>
-<span id="cb3-61"><a href="#cb3-61" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-64"><a href="#cb3-64" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb3-65"><a href="#cb3-65" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: false</span></span>
-<span id="cb3-66"><a href="#cb3-66" aria-hidden="true" tabindex="-1"></a><span class="co">#| results: asis</span></span>
-<span id="cb3-67"><a href="#cb3-67" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"</span><span class="sc">\n</span><span class="st">```r</span><span class="sc">\n</span><span class="st">"</span>, <span class="fu">paste</span>(<span class="fu">readLines</span>(<span class="st">"scrape-careers.R"</span>), <span class="at">collapse =</span> <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>), <span class="st">"</span><span class="sc">\n</span><span class="st">```</span><span class="sc">\n</span><span class="st">"</span>, <span class="at">sep =</span> <span class="st">""</span>)</span>
-<span id="cb3-68"><a href="#cb3-68" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb3-69"><a href="#cb3-69" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-70"><a href="#cb3-70" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;/</span><span class="kw">details</span><span class="dt">&gt;</span></span>
-<span id="cb3-71"><a href="#cb3-71" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-72"><a href="#cb3-72" aria-hidden="true" tabindex="-1"></a>I checked the site's <span class="co">[</span><span class="ot">robots rules</span><span class="co">](https://www.onetonline.org/robots.txt)</span> and</span>
-<span id="cb3-73"><a href="#cb3-73" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">content license</span><span class="co">](https://www.onetonline.org/help/license)</span>, used an identifiable</span>
-<span id="cb3-74"><a href="#cb3-74" aria-hidden="true" tabindex="-1"></a>user agent, and spaced requests four seconds apart. The script stops on HTTP</span>
-<span id="cb3-75"><a href="#cb3-75" aria-hidden="true" tabindex="-1"></a>errors and saves dated HTML snapshots. Re-rendering uses these snapshots, so</span>
-<span id="cb3-76"><a href="#cb3-76" aria-hidden="true" tabindex="-1"></a>it adds no traffic. No login, CAPTCHA, or access restriction was bypassed.</span>
-<span id="cb3-77"><a href="#cb3-77" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-78"><a href="#cb3-78" aria-hidden="true" tabindex="-1"></a>The snapshot was collected on September 19, 2026, in New York (September 20 UTC).</span>
-<span id="cb3-79"><a href="#cb3-79" aria-hidden="true" tabindex="-1"></a>It contains **2025 wages and 2024–2034 employment projections**, as published by</span>
-<span id="cb3-80"><a href="#cb3-80" aria-hidden="true" tabindex="-1"></a>O*NET at collection time. These are different reference periods and should not</span>
-<span id="cb3-81"><a href="#cb3-81" aria-hidden="true" tabindex="-1"></a>be described as a single year's observations. Growth is published in categories,</span>
-<span id="cb3-82"><a href="#cb3-82" aria-hidden="true" tabindex="-1"></a>so I preserve those labels rather than inventing precise percentages.</span>
-<span id="cb3-83"><a href="#cb3-83" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-86"><a href="#cb3-86" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb3-87"><a href="#cb3-87" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: career-table</span></span>
-<span id="cb3-88"><a href="#cb3-88" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: false</span></span>
-<span id="cb3-89"><a href="#cb3-89" aria-hidden="true" tabindex="-1"></a>comparison <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
-<span id="cb3-90"><a href="#cb3-90" aria-hidden="true" tabindex="-1"></a>  <span class="at">Occupation =</span> careers<span class="sc">$</span>occupation,</span>
-<span id="cb3-91"><a href="#cb3-91" aria-hidden="true" tabindex="-1"></a>  <span class="st">`</span><span class="at">Median annual pay (2025)</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">money</span>(careers<span class="sc">$</span>median_annual_pay_usd),</span>
-<span id="cb3-92"><a href="#cb3-92" aria-hidden="true" tabindex="-1"></a>  <span class="st">`</span><span class="at">Annual openings (2024–34 projection)</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">count</span>(careers<span class="sc">$</span>annual_projected_openings),</span>
-<span id="cb3-93"><a href="#cb3-93" aria-hidden="true" tabindex="-1"></a>  <span class="st">`</span><span class="at">Growth category (2024–34)</span><span class="st">`</span> <span class="ot">=</span> careers<span class="sc">$</span>growth_category,</span>
-<span id="cb3-94"><a href="#cb3-94" aria-hidden="true" tabindex="-1"></a>  <span class="at">check.names =</span> <span class="cn">FALSE</span></span>
-<span id="cb3-95"><a href="#cb3-95" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb3-96"><a href="#cb3-96" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(comparison)</span>
-<span id="cb3-97"><a href="#cb3-97" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb3-98"><a href="#cb3-98" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-99"><a href="#cb3-99" aria-hidden="true" tabindex="-1"></a><span class="fu">## Pay and opportunity tell different stories</span></span>
-<span id="cb3-100"><a href="#cb3-100" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-103"><a href="#cb3-103" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb3-104"><a href="#cb3-104" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fig-career-comparison</span></span>
-<span id="cb3-105"><a href="#cb3-105" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: false</span></span>
-<span id="cb3-106"><a href="#cb3-106" aria-hidden="true" tabindex="-1"></a><span class="co">#| out-width: 100%</span></span>
-<span id="cb3-107"><a href="#cb3-107" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-cap: "National occupational median pay (2025) versus projected average annual openings (2024–2034). Source: BLS data displayed by O*NET OnLine; saved September 19, 2026 (New York)."</span></span>
-<span id="cb3-108"><a href="#cb3-108" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-alt: "Scatterplot of four careers. Actuaries have the highest median salary but the fewest annual openings. Data scientists and financial and investment analysts have many more projected openings."</span></span>
-<span id="cb3-109"><a href="#cb3-109" aria-hidden="true" tabindex="-1"></a><span class="fu">dir.create</span>(<span class="st">"figures"</span>, <span class="at">showWarnings =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb3-110"><a href="#cb3-110" aria-hidden="true" tabindex="-1"></a><span class="fu">png</span>(<span class="st">"figures/career-comparison.png"</span>, <span class="at">width =</span> <span class="dv">1600</span>, <span class="at">height =</span> <span class="dv">1000</span>, <span class="at">res =</span> <span class="dv">180</span>)</span>
-<span id="cb3-111"><a href="#cb3-111" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_careers</span>(careers)</span>
-<span id="cb3-112"><a href="#cb3-112" aria-hidden="true" tabindex="-1"></a><span class="fu">invisible</span>(<span class="fu">dev.off</span>())</span>
-<span id="cb3-113"><a href="#cb3-113" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">include_graphics</span>(<span class="st">"figures/career-comparison.png"</span>)</span>
-<span id="cb3-114"><a href="#cb3-114" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb3-115"><a href="#cb3-115" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-116"><a href="#cb3-116" aria-hidden="true" tabindex="-1"></a>Actuaries have the highest median pay, <span class="in">`r money(act$median_annual_pay_usd)`</span>,</span>
-<span id="cb3-117"><a href="#cb3-117" aria-hidden="true" tabindex="-1"></a>but only <span class="in">`r count(act$annual_projected_openings)`</span> projected annual openings.</span>
-<span id="cb3-118"><a href="#cb3-118" aria-hidden="true" tabindex="-1"></a>Data scientists combine <span class="in">`r money(ds$median_annual_pay_usd)`</span> median pay with</span>
-<span id="cb3-119"><a href="#cb3-119" aria-hidden="true" tabindex="-1"></a><span class="in">`r count(ds$annual_projected_openings)`</span> openings—about</span>
-<span id="cb3-120"><a href="#cb3-120" aria-hidden="true" tabindex="-1"></a><span class="in">`r round(ds$annual_projected_openings / act$annual_projected_openings, 1)`</span> times</span>
-<span id="cb3-121"><a href="#cb3-121" aria-hidden="true" tabindex="-1"></a>the actuarial total. For someone still exploring career directions, that</span>
-<span id="cb3-122"><a href="#cb3-122" aria-hidden="true" tabindex="-1"></a>difference makes data science worth investigating alongside the salary leader.</span>
-<span id="cb3-123"><a href="#cb3-123" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-124"><a href="#cb3-124" aria-hidden="true" tabindex="-1"></a>Financial and investment analysts have the most openings in this comparison,</span>
-<span id="cb3-125"><a href="#cb3-125" aria-hidden="true" tabindex="-1"></a><span class="in">`r count(fin$annual_projected_openings)`</span>, despite a lower median wage of</span>
-<span id="cb3-126"><a href="#cb3-126" aria-hidden="true" tabindex="-1"></a><span class="in">`r money(fin$median_annual_pay_usd)`</span>. Operations research offers</span>
-<span id="cb3-127"><a href="#cb3-127" aria-hidden="true" tabindex="-1"></a><span class="in">`r count(ora$annual_projected_openings)`</span> openings and</span>
-<span id="cb3-128"><a href="#cb3-128" aria-hidden="true" tabindex="-1"></a><span class="in">`r money(ora$median_annual_pay_usd)`</span> median pay. Its emphasis on quantitative</span>
-<span id="cb3-129"><a href="#cb3-129" aria-hidden="true" tabindex="-1"></a>decision-making makes it relevant to my training even though its wage is lower.</span>
-<span id="cb3-130"><a href="#cb3-130" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-131"><a href="#cb3-131" aria-hidden="true" tabindex="-1"></a>Preparation also matters. In the available O*NET education responses,</span>
-<span id="cb3-132"><a href="#cb3-132" aria-hidden="true" tabindex="-1"></a><span class="in">`r ds$education_response_pct`</span>% of data-science respondents identify a bachelor's</span>
-<span id="cb3-133"><a href="#cb3-133" aria-hidden="true" tabindex="-1"></a>degree as required, while <span class="in">`r ora$education_response_pct`</span>% of operations-research</span>
-<span id="cb3-134"><a href="#cb3-134" aria-hidden="true" tabindex="-1"></a>respondents identify a master's degree. These are survey responses, not universal</span>
-<span id="cb3-135"><a href="#cb3-135" aria-hidden="true" tabindex="-1"></a>hiring rules. The financial-and-investment profile lacks this education breakdown;</span>
-<span id="cb3-136"><a href="#cb3-136" aria-hidden="true" tabindex="-1"></a>the script records it as missing rather than guessing.</span>
-<span id="cb3-137"><a href="#cb3-137" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-138"><a href="#cb3-138" aria-hidden="true" tabindex="-1"></a><span class="fu">## Turning the comparison into a decision</span></span>
-<span id="cb3-139"><a href="#cb3-139" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-140"><a href="#cb3-140" aria-hidden="true" tabindex="-1"></a>My recommendation is to **prioritize exploring data-science and financial-and-investment</span>
-<span id="cb3-141"><a href="#cb3-141" aria-hidden="true" tabindex="-1"></a>analyst roles**, while keeping operations research on the shortlist. A concrete</span>
-<span id="cb3-142"><a href="#cb3-142" aria-hidden="true" tabindex="-1"></a>next step is to review ten current entry-level vacancies in each of the first</span>
-<span id="cb3-143"><a href="#cb3-143" aria-hidden="true" tabindex="-1"></a>two categories, record recurring qualifications, and build one relevant project</span>
-<span id="cb3-144"><a href="#cb3-144" aria-hidden="true" tabindex="-1"></a>for each. That follow-up would test whether broad occupational opportunities</span>
-<span id="cb3-145"><a href="#cb3-145" aria-hidden="true" tabindex="-1"></a>translate into realistic roles for my experience and location.</span>
-<span id="cb3-146"><a href="#cb3-146" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-147"><a href="#cb3-147" aria-hidden="true" tabindex="-1"></a>Actuarial work remains attractive if I want its specialized preparation:</span>
-<span id="cb3-148"><a href="#cb3-148" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">BLS describes a series of professional exams</span><span class="co">](https://www.bls.gov/ooh/math/actuaries.htm)</span>.</span>
-<span id="cb3-149"><a href="#cb3-149" aria-hidden="true" tabindex="-1"></a>I would investigate that commitment before choosing it solely for higher pay.</span>
-<span id="cb3-150"><a href="#cb3-150" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-151"><a href="#cb3-151" aria-hidden="true" tabindex="-1"></a>The comparison has limits. Occupational medians are not starting salaries.</span>
-<span id="cb3-152"><a href="#cb3-152" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">Projected annual openings</span><span class="co">](https://www.onetonline.org/link/localtrends/15-2051.00)</span></span>
-<span id="cb3-153"><a href="#cb3-153" aria-hidden="true" tabindex="-1"></a>include growth and replacement needs; they are not live vacancies or exclusively</span>
-<span id="cb3-154"><a href="#cb3-154" aria-hidden="true" tabindex="-1"></a>entry-level jobs. A larger count does not imply easier hiring without information</span>
-<span id="cb3-155"><a href="#cb3-155" aria-hidden="true" tabindex="-1"></a>about applicant supply. National data also omit personal fit, local living costs,</span>
-<span id="cb3-156"><a href="#cb3-156" aria-hidden="true" tabindex="-1"></a>and work-authorization requirements. The takeaway is to use pay and market size</span>
-<span id="cb3-157"><a href="#cb3-157" aria-hidden="true" tabindex="-1"></a>to build an informed shortlist, then validate it against actual job requirements.</span>
-<span id="cb3-158"><a href="#cb3-158" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-159"><a href="#cb3-159" aria-hidden="true" tabindex="-1"></a><span class="fu">## Sources and reproducibility</span></span>
-<span id="cb3-160"><a href="#cb3-160" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-161"><a href="#cb3-161" aria-hidden="true" tabindex="-1"></a>The four profile links, raw snapshots, retrieval times, checksums, and package</span>
-<span id="cb3-162"><a href="#cb3-162" aria-hidden="true" tabindex="-1"></a>versions are included in the <span class="co">[</span><span class="ot">reproduction bundle</span><span class="co">](career-reproduction.zip)</span>.</span>
-<span id="cb3-163"><a href="#cb3-163" aria-hidden="true" tabindex="-1"></a>Download the <span class="co">[</span><span class="ot">cleaned data</span><span class="co">](data/careers.csv)</span>, <span class="co">[</span><span class="ot">scraping script</span><span class="co">](scrape-careers.R)</span>,</span>
-<span id="cb3-164"><a href="#cb3-164" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">plotting script</span><span class="co">](plot-careers.R)</span>, or <span class="co">[</span><span class="ot">data notes</span><span class="co">](DATA-NOTES.md)</span>.</span>
-<span id="cb3-165"><a href="#cb3-165" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-166"><a href="#cb3-166" aria-hidden="true" tabindex="-1"></a>Sources: <span class="co">[</span><span class="ot">Data Scientists</span><span class="co">](https://www.onetonline.org/link/summary/15-2051.00)</span>,</span>
-<span id="cb3-167"><a href="#cb3-167" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">Operations Research Analysts</span><span class="co">](https://www.onetonline.org/link/summary/15-2031.00)</span>,</span>
-<span id="cb3-168"><a href="#cb3-168" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">Financial and Investment Analysts</span><span class="co">](https://www.onetonline.org/link/summary/13-2051.00)</span>,</span>
-<span id="cb3-169"><a href="#cb3-169" aria-hidden="true" tabindex="-1"></a>and <span class="co">[</span><span class="ot">Actuaries</span><span class="co">](https://www.onetonline.org/link/summary/15-2011.00)</span>.</span>
-<span id="cb3-170"><a href="#cb3-170" aria-hidden="true" tabindex="-1"></a>The <span class="co">[</span><span class="ot">source register</span><span class="co">](https://www.onetonline.org/help/online/datasources)</span> identifies</span>
-<span id="cb3-171"><a href="#cb3-171" aria-hidden="true" tabindex="-1"></a>BLS as the provider of wage and projection figures.</span>
-<span id="cb3-172"><a href="#cb3-172" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-173"><a href="#cb3-173" aria-hidden="true" tabindex="-1"></a>This analysis adapts information from O<span class="sc">\*</span>NET OnLine, U.S. Department of Labor,</span>
-<span id="cb3-174"><a href="#cb3-174" aria-hidden="true" tabindex="-1"></a>Employment and Training Administration, under <span class="co">[</span><span class="ot">CC BY 4.0</span><span class="co">](https://creativecommons.org/licenses/by/4.0/)</span>.</span>
-<span id="cb3-175"><a href="#cb3-175" aria-hidden="true" tabindex="-1"></a>Qianzhao Li cleaned and visualized the data and added interpretation; USDOL/ETA</span>
-<span id="cb3-176"><a href="#cb3-176" aria-hidden="true" tabindex="-1"></a>has not approved or endorsed these changes. O<span class="sc">\*</span>NET® is a trademark of USDOL/ETA.</span>
-<span id="cb3-177"><a href="#cb3-177" aria-hidden="true" tabindex="-1"></a>External BLS data are attributed separately above.</span>
-<span id="cb3-178"><a href="#cb3-178" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-179"><a href="#cb3-179" aria-hidden="true" tabindex="-1"></a>To reproduce, unzip the bundle, open R in that folder, install <span class="in">`rvest`</span> and <span class="in">`httr`</span></span>
-<span id="cb3-180"><a href="#cb3-180" aria-hidden="true" tabindex="-1"></a>once, and run the following. The saved snapshots are used by default.</span>
-<span id="cb3-181"><a href="#cb3-181" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-184"><a href="#cb3-184" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb3-185"><a href="#cb3-185" aria-hidden="true" tabindex="-1"></a><span class="co">#| eval: false</span></span>
-<span id="cb3-186"><a href="#cb3-186" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="fu">c</span>(<span class="st">"rvest"</span>, <span class="st">"httr"</span>))  <span class="co"># First run only</span></span>
-<span id="cb3-187"><a href="#cb3-187" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">"scrape-careers.R"</span>)</span>
-<span id="cb3-188"><a href="#cb3-188" aria-hidden="true" tabindex="-1"></a>careers <span class="ot">&lt;-</span> <span class="fu">build_careers</span>(<span class="st">"data"</span>, <span class="at">refresh =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb3-189"><a href="#cb3-189" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">"plot-careers.R"</span>)</span>
-<span id="cb3-190"><a href="#cb3-190" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_careers</span>(careers)</span>
-<span id="cb3-191"><a href="#cb3-191" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb3-53"><a href="#cb3-53" aria-hidden="true" tabindex="-1"></a>I scraped four public <span class="co">[</span><span class="ot">O\*NET® OnLine</span><span class="co">](https://www.onetonline.org/)</span> occupation</span>
+<span id="cb3-54"><a href="#cb3-54" aria-hidden="true" tabindex="-1"></a>profiles using R's <span class="in">`rvest`</span> package. These pages report BLS wage and employment</span>
+<span id="cb3-55"><a href="#cb3-55" aria-hidden="true" tabindex="-1"></a>data in a consistent format. I chose these careers because they relate to my</span>
+<span id="cb3-56"><a href="#cb3-56" aria-hidden="true" tabindex="-1"></a>studies, so the comparison does not cover every option for graduates.</span>
+<span id="cb3-57"><a href="#cb3-57" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-58"><a href="#cb3-58" aria-hidden="true" tabindex="-1"></a>My script finds the relevant labels on each page and extracts the values beside</span>
+<span id="cb3-59"><a href="#cb3-59" aria-hidden="true" tabindex="-1"></a>them. It removes dollar signs and commas so R can read the numbers, then checks</span>
+<span id="cb3-60"><a href="#cb3-60" aria-hidden="true" tabindex="-1"></a>the occupation names and years. I use the same occupation category for wages</span>
+<span id="cb3-61"><a href="#cb3-61" aria-hidden="true" tabindex="-1"></a>and openings rather than mixing different types of financial analysts.</span>
+<span id="cb3-62"><a href="#cb3-62" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-63"><a href="#cb3-63" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">details</span><span class="dt">&gt;</span></span>
+<span id="cb3-64"><a href="#cb3-64" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">summary</span><span class="dt">&gt;</span>Show the complete rvest collection and cleaning script<span class="dt">&lt;/</span><span class="kw">summary</span><span class="dt">&gt;</span></span>
+<span id="cb3-65"><a href="#cb3-65" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-68"><a href="#cb3-68" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb3-69"><a href="#cb3-69" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: false</span></span>
+<span id="cb3-70"><a href="#cb3-70" aria-hidden="true" tabindex="-1"></a><span class="co">#| results: asis</span></span>
+<span id="cb3-71"><a href="#cb3-71" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"</span><span class="sc">\n</span><span class="st">```r</span><span class="sc">\n</span><span class="st">"</span>, <span class="fu">paste</span>(<span class="fu">readLines</span>(<span class="st">"scrape-careers.R"</span>), <span class="at">collapse =</span> <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>), <span class="st">"</span><span class="sc">\n</span><span class="st">```</span><span class="sc">\n</span><span class="st">"</span>, <span class="at">sep =</span> <span class="st">""</span>)</span>
+<span id="cb3-72"><a href="#cb3-72" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb3-73"><a href="#cb3-73" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-74"><a href="#cb3-74" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;/</span><span class="kw">details</span><span class="dt">&gt;</span></span>
+<span id="cb3-75"><a href="#cb3-75" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-76"><a href="#cb3-76" aria-hidden="true" tabindex="-1"></a>I checked the site's <span class="co">[</span><span class="ot">robots rules</span><span class="co">](https://www.onetonline.org/robots.txt)</span> and</span>
+<span id="cb3-77"><a href="#cb3-77" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">content license</span><span class="co">](https://www.onetonline.org/help/license)</span>, used an identifiable</span>
+<span id="cb3-78"><a href="#cb3-78" aria-hidden="true" tabindex="-1"></a>user agent, and spaced requests four seconds apart. The script stops on HTTP</span>
+<span id="cb3-79"><a href="#cb3-79" aria-hidden="true" tabindex="-1"></a>errors and saves dated HTML snapshots. Re-rendering uses these snapshots, so</span>
+<span id="cb3-80"><a href="#cb3-80" aria-hidden="true" tabindex="-1"></a>it adds no traffic. I did not bypass logins, CAPTCHAs, or access restrictions.</span>
+<span id="cb3-81"><a href="#cb3-81" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-82"><a href="#cb3-82" aria-hidden="true" tabindex="-1"></a>I collected the pages on September 19, 2026, in New York (September 20 UTC).</span>
+<span id="cb3-83"><a href="#cb3-83" aria-hidden="true" tabindex="-1"></a>O*NET reported 2025 wages and 2024–2034 employment projections. These figures</span>
+<span id="cb3-84"><a href="#cb3-84" aria-hidden="true" tabindex="-1"></a>refer to different periods. O*NET also reports growth in categories, so I keep</span>
+<span id="cb3-85"><a href="#cb3-85" aria-hidden="true" tabindex="-1"></a>those labels instead of treating them as exact percentages.</span>
+<span id="cb3-86"><a href="#cb3-86" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-89"><a href="#cb3-89" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb3-90"><a href="#cb3-90" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: career-table</span></span>
+<span id="cb3-91"><a href="#cb3-91" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: false</span></span>
+<span id="cb3-92"><a href="#cb3-92" aria-hidden="true" tabindex="-1"></a>comparison <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb3-93"><a href="#cb3-93" aria-hidden="true" tabindex="-1"></a>  <span class="at">Occupation =</span> careers<span class="sc">$</span>occupation,</span>
+<span id="cb3-94"><a href="#cb3-94" aria-hidden="true" tabindex="-1"></a>  <span class="st">`</span><span class="at">Median annual pay (2025)</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">money</span>(careers<span class="sc">$</span>median_annual_pay_usd),</span>
+<span id="cb3-95"><a href="#cb3-95" aria-hidden="true" tabindex="-1"></a>  <span class="st">`</span><span class="at">Annual openings (2024–34 projection)</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">count</span>(careers<span class="sc">$</span>annual_projected_openings),</span>
+<span id="cb3-96"><a href="#cb3-96" aria-hidden="true" tabindex="-1"></a>  <span class="st">`</span><span class="at">Growth category (2024–34)</span><span class="st">`</span> <span class="ot">=</span> careers<span class="sc">$</span>growth_category,</span>
+<span id="cb3-97"><a href="#cb3-97" aria-hidden="true" tabindex="-1"></a>  <span class="at">check.names =</span> <span class="cn">FALSE</span></span>
+<span id="cb3-98"><a href="#cb3-98" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb3-99"><a href="#cb3-99" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(comparison)</span>
+<span id="cb3-100"><a href="#cb3-100" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb3-101"><a href="#cb3-101" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-102"><a href="#cb3-102" aria-hidden="true" tabindex="-1"></a><span class="fu">## Pay and opportunity tell different stories</span></span>
+<span id="cb3-103"><a href="#cb3-103" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-106"><a href="#cb3-106" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb3-107"><a href="#cb3-107" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fig-career-comparison</span></span>
+<span id="cb3-108"><a href="#cb3-108" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: false</span></span>
+<span id="cb3-109"><a href="#cb3-109" aria-hidden="true" tabindex="-1"></a><span class="co">#| out-width: 100%</span></span>
+<span id="cb3-110"><a href="#cb3-110" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-cap: "National occupational median pay (2025) versus projected average annual openings (2024–2034). Source: BLS data displayed by O*NET OnLine; saved September 19, 2026 (New York)."</span></span>
+<span id="cb3-111"><a href="#cb3-111" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-alt: "Scatterplot of four careers. Actuaries have the highest median salary but the fewest annual openings. Data scientists and financial and investment analysts have many more projected openings."</span></span>
+<span id="cb3-112"><a href="#cb3-112" aria-hidden="true" tabindex="-1"></a><span class="fu">dir.create</span>(<span class="st">"figures"</span>, <span class="at">showWarnings =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb3-113"><a href="#cb3-113" aria-hidden="true" tabindex="-1"></a><span class="fu">png</span>(<span class="st">"figures/career-comparison.png"</span>, <span class="at">width =</span> <span class="dv">1600</span>, <span class="at">height =</span> <span class="dv">1000</span>, <span class="at">res =</span> <span class="dv">180</span>)</span>
+<span id="cb3-114"><a href="#cb3-114" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_careers</span>(careers)</span>
+<span id="cb3-115"><a href="#cb3-115" aria-hidden="true" tabindex="-1"></a><span class="fu">invisible</span>(<span class="fu">dev.off</span>())</span>
+<span id="cb3-116"><a href="#cb3-116" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">include_graphics</span>(<span class="st">"figures/career-comparison.png"</span>)</span>
+<span id="cb3-117"><a href="#cb3-117" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb3-118"><a href="#cb3-118" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-119"><a href="#cb3-119" aria-hidden="true" tabindex="-1"></a>Actuaries have the highest median pay, <span class="in">`r money(act$median_annual_pay_usd)`</span>,</span>
+<span id="cb3-120"><a href="#cb3-120" aria-hidden="true" tabindex="-1"></a>but only <span class="in">`r count(act$annual_projected_openings)`</span> projected annual openings.</span>
+<span id="cb3-121"><a href="#cb3-121" aria-hidden="true" tabindex="-1"></a>Data scientists combine <span class="in">`r money(ds$median_annual_pay_usd)`</span> median pay with</span>
+<span id="cb3-122"><a href="#cb3-122" aria-hidden="true" tabindex="-1"></a><span class="in">`r count(ds$annual_projected_openings)`</span> openings—about</span>
+<span id="cb3-123"><a href="#cb3-123" aria-hidden="true" tabindex="-1"></a><span class="in">`r round(ds$annual_projected_openings / act$annual_projected_openings, 1)`</span> times</span>
+<span id="cb3-124"><a href="#cb3-124" aria-hidden="true" tabindex="-1"></a>the actuarial total. For someone still exploring career directions, that</span>
+<span id="cb3-125"><a href="#cb3-125" aria-hidden="true" tabindex="-1"></a>difference makes data science worth investigating alongside the salary leader.</span>
+<span id="cb3-126"><a href="#cb3-126" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-127"><a href="#cb3-127" aria-hidden="true" tabindex="-1"></a>Financial and investment analysts have the most openings in this comparison,</span>
+<span id="cb3-128"><a href="#cb3-128" aria-hidden="true" tabindex="-1"></a><span class="in">`r count(fin$annual_projected_openings)`</span>, despite a lower median wage of</span>
+<span id="cb3-129"><a href="#cb3-129" aria-hidden="true" tabindex="-1"></a><span class="in">`r money(fin$median_annual_pay_usd)`</span>. Operations research offers</span>
+<span id="cb3-130"><a href="#cb3-130" aria-hidden="true" tabindex="-1"></a><span class="in">`r count(ora$annual_projected_openings)`</span> openings and</span>
+<span id="cb3-131"><a href="#cb3-131" aria-hidden="true" tabindex="-1"></a><span class="in">`r money(ora$median_annual_pay_usd)`</span> median pay. Its emphasis on quantitative</span>
+<span id="cb3-132"><a href="#cb3-132" aria-hidden="true" tabindex="-1"></a>decision-making makes it relevant to my training even though its wage is lower.</span>
+<span id="cb3-133"><a href="#cb3-133" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-134"><a href="#cb3-134" aria-hidden="true" tabindex="-1"></a>Preparation also matters. In the available O*NET education responses,</span>
+<span id="cb3-135"><a href="#cb3-135" aria-hidden="true" tabindex="-1"></a><span class="in">`r ds$education_response_pct`</span>% of data-science respondents identify a bachelor's</span>
+<span id="cb3-136"><a href="#cb3-136" aria-hidden="true" tabindex="-1"></a>degree as required, while <span class="in">`r ora$education_response_pct`</span>% of operations-research</span>
+<span id="cb3-137"><a href="#cb3-137" aria-hidden="true" tabindex="-1"></a>respondents identify a master's degree. These are survey responses, not universal</span>
+<span id="cb3-138"><a href="#cb3-138" aria-hidden="true" tabindex="-1"></a>hiring rules. The financial-and-investment profile lacks this education breakdown;</span>
+<span id="cb3-139"><a href="#cb3-139" aria-hidden="true" tabindex="-1"></a>the script records it as missing rather than guessing.</span>
+<span id="cb3-140"><a href="#cb3-140" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-141"><a href="#cb3-141" aria-hidden="true" tabindex="-1"></a><span class="fu">## Does faster growth mean more opportunities?</span></span>
+<span id="cb3-142"><a href="#cb3-142" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-143"><a href="#cb3-143" aria-hidden="true" tabindex="-1"></a>O*NET projects employment growth of 7% or higher for data scientists,</span>
+<span id="cb3-144"><a href="#cb3-144" aria-hidden="true" tabindex="-1"></a>operations research analysts, and actuaries over 2024–2034. It places financial</span>
+<span id="cb3-145"><a href="#cb3-145" aria-hidden="true" tabindex="-1"></a>and investment analysts in the 5% to 6% group. These categories describe the</span>
+<span id="cb3-146"><a href="#cb3-146" aria-hidden="true" tabindex="-1"></a>change in the number of jobs over ten years, not each year. They also do not</span>
+<span id="cb3-147"><a href="#cb3-147" aria-hidden="true" tabindex="-1"></a>tell us which of the first three careers will grow fastest: "7% or higher"</span>
+<span id="cb3-148"><a href="#cb3-148" aria-hidden="true" tabindex="-1"></a>does not mean exactly 7%.</span>
+<span id="cb3-149"><a href="#cb3-149" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-152"><a href="#cb3-152" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb3-153"><a href="#cb3-153" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fig-growth-openings</span></span>
+<span id="cb3-154"><a href="#cb3-154" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: false</span></span>
+<span id="cb3-155"><a href="#cb3-155" aria-hidden="true" tabindex="-1"></a><span class="co">#| out-width: 100%</span></span>
+<span id="cb3-156"><a href="#cb3-156" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-cap: "Color shows projected net employment-growth categories; bar length shows gross annual openings relative to 2024 employment. Source: saved O*NET profiles, BLS projections for 2024–2034."</span></span>
+<span id="cb3-157"><a href="#cb3-157" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-alt: "Data science has 9.5 annual openings per 100 base-year jobs, operations research 8.6, actuarial work 7.1, and financial and investment analysis 6.8. The first three share the 7 percent or higher net growth category; finance is in the 5 to 6 percent category."</span></span>
+<span id="cb3-158"><a href="#cb3-158" aria-hidden="true" tabindex="-1"></a><span class="fu">png</span>(<span class="st">"figures/growth-openings.png"</span>, <span class="at">width=</span><span class="dv">1800</span>, <span class="at">height=</span><span class="dv">1100</span>, <span class="at">res=</span><span class="dv">180</span>)</span>
+<span id="cb3-159"><a href="#cb3-159" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_growth</span>(analysis)</span>
+<span id="cb3-160"><a href="#cb3-160" aria-hidden="true" tabindex="-1"></a><span class="fu">invisible</span>(<span class="fu">dev.off</span>())</span>
+<span id="cb3-161"><a href="#cb3-161" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">include_graphics</span>(<span class="st">"figures/growth-openings.png"</span>)</span>
+<span id="cb3-162"><a href="#cb3-162" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb3-163"><a href="#cb3-163" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-164"><a href="#cb3-164" aria-hidden="true" tabindex="-1"></a>Larger occupations can have more openings simply because they have more jobs.</span>
+<span id="cb3-165"><a href="#cb3-165" aria-hidden="true" tabindex="-1"></a>To account for size, I divide projected annual openings by employment in 2024</span>
+<span id="cb3-166"><a href="#cb3-166" aria-hidden="true" tabindex="-1"></a>and multiply by 100. This gives annual openings per 100 existing jobs. Openings</span>
+<span id="cb3-167"><a href="#cb3-167" aria-hidden="true" tabindex="-1"></a>include both new jobs and opportunities to replace workers who leave. The</span>
+<span id="cb3-168"><a href="#cb3-168" aria-hidden="true" tabindex="-1"></a>measure does not show annual employment growth, current vacancies, or my chance</span>
+<span id="cb3-169"><a href="#cb3-169" aria-hidden="true" tabindex="-1"></a>of getting hired.</span>
+<span id="cb3-170"><a href="#cb3-170" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-173"><a href="#cb3-173" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb3-174"><a href="#cb3-174" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: false</span></span>
+<span id="cb3-175"><a href="#cb3-175" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="fu">data.frame</span>(</span>
+<span id="cb3-176"><a href="#cb3-176" aria-hidden="true" tabindex="-1"></a>  <span class="at">Occupation=</span>analysis<span class="sc">$</span>occupation,</span>
+<span id="cb3-177"><a href="#cb3-177" aria-hidden="true" tabindex="-1"></a>  <span class="st">`</span><span class="at">Employment (2024)</span><span class="st">`</span><span class="ot">=</span><span class="fu">count</span>(analysis<span class="sc">$</span>employment),</span>
+<span id="cb3-178"><a href="#cb3-178" aria-hidden="true" tabindex="-1"></a>  <span class="st">`</span><span class="at">Annual openings per 100 base jobs</span><span class="st">`</span><span class="ot">=</span><span class="fu">sprintf</span>(<span class="st">"%.1f"</span>, analysis<span class="sc">$</span>annual_openings_per_100_base_jobs),</span>
+<span id="cb3-179"><a href="#cb3-179" aria-hidden="true" tabindex="-1"></a>  <span class="st">`</span><span class="at">Rank by openings count</span><span class="st">`</span><span class="ot">=</span>analysis<span class="sc">$</span>openings_rank,</span>
+<span id="cb3-180"><a href="#cb3-180" aria-hidden="true" tabindex="-1"></a>  <span class="st">`</span><span class="at">Rank after scaling</span><span class="st">`</span><span class="ot">=</span>analysis<span class="sc">$</span>relative_openings_rank,</span>
+<span id="cb3-181"><a href="#cb3-181" aria-hidden="true" tabindex="-1"></a>  <span class="at">check.names=</span><span class="cn">FALSE</span></span>
+<span id="cb3-182"><a href="#cb3-182" aria-hidden="true" tabindex="-1"></a>))</span>
+<span id="cb3-183"><a href="#cb3-183" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb3-184"><a href="#cb3-184" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-185"><a href="#cb3-185" aria-hidden="true" tabindex="-1"></a>Financial analysis ranks first in total openings but fourth in openings per</span>
+<span id="cb3-186"><a href="#cb3-186" aria-hidden="true" tabindex="-1"></a>100 existing jobs. Data science moves from second to first, and operations</span>
+<span id="cb3-187"><a href="#cb3-187" aria-hidden="true" tabindex="-1"></a>research moves from third to second. Actuarial work combines fast projected</span>
+<span id="cb3-188"><a href="#cb3-188" aria-hidden="true" tabindex="-1"></a>growth with a small job market and few total openings. Growth tells me how a</span>
+<span id="cb3-189"><a href="#cb3-189" aria-hidden="true" tabindex="-1"></a>career may expand; openings tell me more about the number of opportunities.</span>
+<span id="cb3-190"><a href="#cb3-190" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-191"><a href="#cb3-191" aria-hidden="true" tabindex="-1"></a><span class="fu">## Turning the comparison into a decision</span></span>
 <span id="cb3-192"><a href="#cb3-192" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-193"><a href="#cb3-193" aria-hidden="true" tabindex="-1"></a>The website's <span class="co">[</span><span class="ot">GitHub repository</span><span class="co">](https://github.com/qianzhaoli949-afk/qianzhao-website)</span></span>
-<span id="cb3-194"><a href="#cb3-194" aria-hidden="true" tabindex="-1"></a>contains the website source; this post's code and data are in <span class="in">`blog/posts/post2/`</span>.</span>
+<span id="cb3-193"><a href="#cb3-193" aria-hidden="true" tabindex="-1"></a>I would start by exploring data-science and financial-and-investment analyst</span>
+<span id="cb3-194"><a href="#cb3-194" aria-hidden="true" tabindex="-1"></a>roles. Data science combines strong pay, fast projected growth, and many openings</span>
+<span id="cb3-195"><a href="#cb3-195" aria-hidden="true" tabindex="-1"></a>relative to its size. Financial analysis offers the largest number of openings.</span>
+<span id="cb3-196"><a href="#cb3-196" aria-hidden="true" tabindex="-1"></a>The growth comparison also gives me a reason to take operations research more</span>
+<span id="cb3-197"><a href="#cb3-197" aria-hidden="true" tabindex="-1"></a>seriously, rather than dismissing it because of its lower pay.</span>
+<span id="cb3-198"><a href="#cb3-198" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-199"><a href="#cb3-199" aria-hidden="true" tabindex="-1"></a>Next, I would review ten entry-level vacancies in each of the first two careers,</span>
+<span id="cb3-200"><a href="#cb3-200" aria-hidden="true" tabindex="-1"></a>list the skills employers ask for most often, and build a relevant project for</span>
+<span id="cb3-201"><a href="#cb3-201" aria-hidden="true" tabindex="-1"></a>each. I would keep operations research on my shortlist too. The data help me</span>
+<span id="cb3-202"><a href="#cb3-202" aria-hidden="true" tabindex="-1"></a>narrow my search, but my interests and preparation still matter.</span>
+<span id="cb3-203"><a href="#cb3-203" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-204"><a href="#cb3-204" aria-hidden="true" tabindex="-1"></a>Actuarial work remains attractive if I want its specialized preparation:</span>
+<span id="cb3-205"><a href="#cb3-205" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">BLS describes a series of professional exams</span><span class="co">](https://www.bls.gov/ooh/math/actuaries.htm)</span>.</span>
+<span id="cb3-206"><a href="#cb3-206" aria-hidden="true" tabindex="-1"></a>I would investigate that commitment before choosing it solely for higher pay.</span>
+<span id="cb3-207"><a href="#cb3-207" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-208"><a href="#cb3-208" aria-hidden="true" tabindex="-1"></a>The comparison has limits. Median pay does not tell me what a new graduate earns.</span>
+<span id="cb3-209"><a href="#cb3-209" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">Projected annual openings</span><span class="co">](https://www.onetonline.org/link/localtrends/15-2051.00)</span></span>
+<span id="cb3-210"><a href="#cb3-210" aria-hidden="true" tabindex="-1"></a>include growth and replacement needs, not just entry-level jobs or current</span>
+<span id="cb3-211"><a href="#cb3-211" aria-hidden="true" tabindex="-1"></a>vacancies. More openings do not necessarily mean an easier job search because</span>
+<span id="cb3-212"><a href="#cb3-212" aria-hidden="true" tabindex="-1"></a>I do not know how many people will apply. The national figures also leave out</span>
+<span id="cb3-213"><a href="#cb3-213" aria-hidden="true" tabindex="-1"></a>local living costs and work-authorization requirements. I would use all three</span>
+<span id="cb3-214"><a href="#cb3-214" aria-hidden="true" tabindex="-1"></a>measures—pay, growth, and openings—to guide my search, then check actual job ads.</span>
+<span id="cb3-215"><a href="#cb3-215" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-216"><a href="#cb3-216" aria-hidden="true" tabindex="-1"></a><span class="fu">## Sources and reproducibility</span></span>
+<span id="cb3-217"><a href="#cb3-217" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-218"><a href="#cb3-218" aria-hidden="true" tabindex="-1"></a>The <span class="co">[</span><span class="ot">reproduction bundle</span><span class="co">](career-reproduction.zip)</span> contains the four profile</span>
+<span id="cb3-219"><a href="#cb3-219" aria-hidden="true" tabindex="-1"></a>links, saved pages, download times, file checksums, and package versions.</span>
+<span id="cb3-220"><a href="#cb3-220" aria-hidden="true" tabindex="-1"></a>Download the <span class="co">[</span><span class="ot">cleaned data</span><span class="co">](data/careers.csv)</span>, <span class="co">[</span><span class="ot">scraping script</span><span class="co">](scrape-careers.R)</span>,</span>
+<span id="cb3-221"><a href="#cb3-221" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">plotting script</span><span class="co">](plot-careers.R)</span>, <span class="co">[</span><span class="ot">growth-analysis script</span><span class="co">](analyze-careers.R)</span>,</span>
+<span id="cb3-222"><a href="#cb3-222" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">derived comparisons</span><span class="co">](data/career-analysis.csv)</span>, or <span class="co">[</span><span class="ot">data notes</span><span class="co">](DATA-NOTES.md)</span>.</span>
+<span id="cb3-223"><a href="#cb3-223" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-224"><a href="#cb3-224" aria-hidden="true" tabindex="-1"></a>Sources: <span class="co">[</span><span class="ot">Data Scientists</span><span class="co">](https://www.onetonline.org/link/summary/15-2051.00)</span>,</span>
+<span id="cb3-225"><a href="#cb3-225" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">Operations Research Analysts</span><span class="co">](https://www.onetonline.org/link/summary/15-2031.00)</span>,</span>
+<span id="cb3-226"><a href="#cb3-226" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">Financial and Investment Analysts</span><span class="co">](https://www.onetonline.org/link/summary/13-2051.00)</span>,</span>
+<span id="cb3-227"><a href="#cb3-227" aria-hidden="true" tabindex="-1"></a>and <span class="co">[</span><span class="ot">Actuaries</span><span class="co">](https://www.onetonline.org/link/summary/15-2011.00)</span>.</span>
+<span id="cb3-228"><a href="#cb3-228" aria-hidden="true" tabindex="-1"></a>The <span class="co">[</span><span class="ot">source register</span><span class="co">](https://www.onetonline.org/help/online/datasources)</span> identifies</span>
+<span id="cb3-229"><a href="#cb3-229" aria-hidden="true" tabindex="-1"></a>BLS as the provider of wage and projection figures.</span>
+<span id="cb3-230"><a href="#cb3-230" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-231"><a href="#cb3-231" aria-hidden="true" tabindex="-1"></a>This analysis adapts information from O<span class="sc">\*</span>NET OnLine, U.S. Department of Labor,</span>
+<span id="cb3-232"><a href="#cb3-232" aria-hidden="true" tabindex="-1"></a>Employment and Training Administration, under <span class="co">[</span><span class="ot">CC BY 4.0</span><span class="co">](https://creativecommons.org/licenses/by/4.0/)</span>.</span>
+<span id="cb3-233"><a href="#cb3-233" aria-hidden="true" tabindex="-1"></a>Qianzhao Li cleaned and visualized the data and added interpretation; USDOL/ETA</span>
+<span id="cb3-234"><a href="#cb3-234" aria-hidden="true" tabindex="-1"></a>has not approved or endorsed these changes. O<span class="sc">\*</span>NET® is a trademark of USDOL/ETA.</span>
+<span id="cb3-235"><a href="#cb3-235" aria-hidden="true" tabindex="-1"></a>The source links above also credit BLS for its data.</span>
+<span id="cb3-236"><a href="#cb3-236" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-237"><a href="#cb3-237" aria-hidden="true" tabindex="-1"></a>To reproduce, unzip the bundle, open R in that folder, install <span class="in">`rvest`</span> and <span class="in">`httr`</span></span>
+<span id="cb3-238"><a href="#cb3-238" aria-hidden="true" tabindex="-1"></a>once, and run the following. The code uses the saved pages by default.</span>
+<span id="cb3-239"><a href="#cb3-239" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-242"><a href="#cb3-242" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb3-243"><a href="#cb3-243" aria-hidden="true" tabindex="-1"></a><span class="co">#| eval: false</span></span>
+<span id="cb3-244"><a href="#cb3-244" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="fu">c</span>(<span class="st">"rvest"</span>, <span class="st">"httr"</span>))  <span class="co"># First run only</span></span>
+<span id="cb3-245"><a href="#cb3-245" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">"scrape-careers.R"</span>)</span>
+<span id="cb3-246"><a href="#cb3-246" aria-hidden="true" tabindex="-1"></a>careers <span class="ot">&lt;-</span> <span class="fu">build_careers</span>(<span class="st">"data"</span>, <span class="at">refresh =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb3-247"><a href="#cb3-247" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">"plot-careers.R"</span>)</span>
+<span id="cb3-248"><a href="#cb3-248" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_careers</span>(careers)</span>
+<span id="cb3-249"><a href="#cb3-249" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">"analyze-careers.R"</span>)</span>
+<span id="cb3-250"><a href="#cb3-250" aria-hidden="true" tabindex="-1"></a>analysis <span class="ot">&lt;-</span> <span class="fu">analyze_careers</span>(careers)</span>
+<span id="cb3-251"><a href="#cb3-251" aria-hidden="true" tabindex="-1"></a><span class="fu">write.csv</span>(analysis, <span class="st">"data/career-analysis.csv"</span>, <span class="at">row.names=</span><span class="cn">FALSE</span>)</span>
+<span id="cb3-252"><a href="#cb3-252" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_growth</span>(analysis)</span>
+<span id="cb3-253"><a href="#cb3-253" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb3-254"><a href="#cb3-254" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-255"><a href="#cb3-255" aria-hidden="true" tabindex="-1"></a>The website's <span class="co">[</span><span class="ot">GitHub repository</span><span class="co">](https://github.com/qianzhaoli949-afk/qianzhao-website)</span></span>
+<span id="cb3-256"><a href="#cb3-256" aria-hidden="true" tabindex="-1"></a>contains the website source; this post's code and data are in <span class="in">`blog/posts/post2/`</span>.</span>
 </code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
 </div></div></div></div></div>
 </div> <!-- /content -->

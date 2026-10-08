@@ -68,6 +68,10 @@ source("scrape-careers.R")
 careers <- build_careers("data", refresh = FALSE)
 source("plot-careers.R")
 plot_careers(careers)
+source("analyze-careers.R")
+analysis <- analyze_careers(careers)
+write.csv(analysis, "data/career-analysis.csv", row.names=FALSE)
+plot_growth(analysis)
 ```
 
 The default reuses saved HTML snapshots. The folder includes cleaned data, retrieval timestamps, checksums, and source documentation. Online collection is rate-limited and stops if the reviewed robots policy changes. See [data and reproduction notes](blog/posts/post2/DATA-NOTES.md) for definitions, attribution, and refresh instructions.

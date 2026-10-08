@@ -82,6 +82,10 @@ source("scrape-careers.R")
 careers <- build_careers("data", refresh = FALSE)
 source("plot-careers.R")
 plot_careers(careers)
+source("analyze-careers.R")
+analysis <- analyze_careers(careers)
+write.csv(analysis, "data/career-analysis.csv", row.names=FALSE)
+plot_growth(analysis)
 ```
 
 Rendering the Quarto page additionally requires Quarto, knitr and rmarkdown.
@@ -91,6 +95,14 @@ current data folder, then deliberately use `build_careers("data", refresh = TRUE
 An ordinary render does not refresh the snapshot.
 
 ## Attribution and transformations
+
+The revised analysis keeps projected net growth categorical rather than assigning
+numeric point estimates to ranges. The second figure uses color for the ten-year
+growth category and bar length for `100 * annual_projected_openings / employment`.
+The latter is gross average annual openings per 100 base-year (2024) jobs, not a
+net growth rate, vacancy rate, or hiring probability. `data/career-analysis.csv`
+also records descending ranks for absolute and relative openings. No new scrape
+was performed for this revision; all calculations use the original saved profiles.
 
 O*NET OnLine is provided by the U.S. Department of Labor, Employment and Training
 Administration. Its own content is used under CC BY 4.0:
@@ -102,5 +114,6 @@ license to third-party material that its license explicitly excludes.
 Transformations by Qianzhao Li: selected four profiles; extracted HTML labels and
 values; converted annual currency and counts to numbers; retained education
 missingness and source growth categories; calculated a ratio; made a comparison
-table and scatterplot; added interpretation. USDOL/ETA has not approved, endorsed,
+table and scatterplot; compared growth categories and size-adjusted openings with
+a second figure and rank comparison; added interpretation. USDOL/ETA has not approved, endorsed,
 or tested these modifications. The project does not reproduce source-site images.

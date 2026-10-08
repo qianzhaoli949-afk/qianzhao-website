@@ -1,4 +1,26 @@
 # Compare median pay and projected annual openings.
+plot_growth <- function(analysis) {
+  short <- c("Data science", "Operations research", "Financial & investment", "Actuarial work")
+  labels <- short[match(analysis$soc, c("15-2051.00", "15-2031.00", "13-2051.00", "15-2011.00"))]
+  stopifnot(!anyNA(labels))
+  ord <- order(analysis$annual_openings_per_100_base_jobs)
+  x <- analysis$annual_openings_per_100_base_jobs[ord]
+  cols <- ifelse(analysis$growth_category[ord] == "Much faster than average (7% or higher)",
+                 "#176D96", "#B76731")
+  old <- par(mar=c(5.7, 10.5, 5.5, 2), las=1, family="sans", fg="#283441")
+  on.exit(par(old))
+  b <- barplot(x, horiz=TRUE, names.arg=labels[ord], col=cols, border=NA,
+               xlim=c(0, 11), xlab="Projected annual openings per 100 jobs in 2024",
+               cex.names=.9)
+  text(x+.15, b, sprintf("%.1f", x), adj=0, col="#283441")
+  title("Fast growth is not the same as a large job market", adj=0, line=3.8, cex.main=1.05)
+  legend("top", inset=c(0,-.12), xpd=NA, bty="n", cex=.78,
+         legend=c("2024–34 net growth: 7% or higher", "2024–34 net growth: 5% to 6%"),
+         fill=c("#176D96", "#B76731"))
+  mtext("Bar length: gross annual openings / base employment, not a growth rate or hiring probability",
+        side=1, line=4.1, cex=.68)
+}
+
 plot_careers <- function(careers) {
   short <- c("Data science", "Operations research",
              "Financial & investment analysis", "Actuarial work")
