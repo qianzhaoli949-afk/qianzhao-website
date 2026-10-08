@@ -12,8 +12,11 @@ A Quarto website featuring my profile, résumé, and coursework in economics and
 | [2. Beyond the Highest Salary: Choosing a Quantitative Career](https://qianzhaoli949-afk.github.io/qianzhao-website/blog/posts/post2/index.html) | Uses `rvest` to collect four O\*NET occupation profiles and compare pay and projected job openings. | [Post 2](blog/posts/post2/) |
 | [3. Education and Unemployment: Unequal Shocks, Uneven Recovery](https://qianzhaoli949-afk.github.io/qianzhao-website/blog/posts/post3/index.html) | Uses weighted IPUMS CPS microdata and three visualizations to examine unemployment by education, 2019–2024. | [Post 3](blog/posts/post3/) |
 | [4. Beyond the Sticker Price: The Cost of Financing a New Home](https://qianzhaoli949-afk.github.io/qianzhao-website/blog/posts/post4/index.html) | Combines FRED prices, rates, and CPI to compare real mortgage payments with three visualizations, 2015–2024. | [Post 4](blog/posts/post4/) |
+| [5. A Growing State, but Not Everywhere](https://qianzhaoli949-afk.github.io/qianzhao-website/blog/posts/post5/index.html) | Maps population change across 67 Pennsylvania counties and examines migration and natural change, 2020–2024. | [Post 5](blog/posts/post5/) |
 
 ## Run locally
+
+Post 5, [A Growing State, but Not Everywhere](blog/posts/post5/index.qmd), maps Pennsylvania county population change and examines migration and natural change. Its [replication guide](blog/posts/post5/README.md) covers Census downloads, GIS joins, and map construction. Install `sf` for this post: `install.packages("sf")`.
 
 Post 4, [Beyond the Sticker Price](blog/posts/post4/index.qmd), uses new-home prices, mortgage rates, and CPI from FRED to compare inflation-adjusted mortgage payments. Its [replication guide](blog/posts/post4/README.md) documents the `code/`, `data/`, and `results/` folders and all assumptions.
 
@@ -23,6 +26,7 @@ Each post has a dedicated guide mapping its code, data, and results and explaini
 - [Post 2 replication guide](blog/posts/post2/README.md)
 - [Post 3 replication guide](blog/posts/post3/README.md)
 - [Post 4 replication guide](blog/posts/post4/README.md)
+- [Post 5 replication guide](blog/posts/post5/README.md)
 
 You will need [R](https://www.r-project.org/) and [Quarto](https://quarto.org/). RStudio is optional.
 
@@ -107,6 +111,7 @@ blog/posts/post1/    Inferior-goods explanation
 blog/posts/post2/    Web-scraping analysis and saved source snapshots
 blog/posts/post3/    CPS analysis, grouped summaries, and figures
 blog/posts/post4/    FRED housing analysis: code, data, results, and replication guide
+blog/posts/post5/    Census county GIS analysis: code, data, maps, and replication guide
 images/              Website images
 styles.css           Custom styling
 docs/                Rendered website for GitHub Pages
@@ -117,6 +122,8 @@ docs/                Rendered website for GitHub Pages
 Edit the source files, run `quarto render`, inspect the results, and commit the relevant source files together with the updated `docs/` output. Push the commit to GitHub to publish through the repository's GitHub Pages configuration. Local edits in RStudio do not automatically upload to GitHub. Edit `.qmd` sources rather than generated HTML files.
 
 ## Sources and data use
+
+- **Post 5:** U.S. Census Bureau Vintage 2024 county population estimates and 2024 cartographic county boundaries; fixed-vintage analysis of Pennsylvania, April 2020–July 2024.
 
 - **Post 4:** Census Bureau/HUD new-home sales prices, Freddie Mac mortgage rates, and BLS CPI retrieved through FRED. See the post's README and download manifest for definitions, attribution, dates, and transformations.
 
