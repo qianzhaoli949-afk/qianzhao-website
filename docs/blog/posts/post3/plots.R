@@ -1,4 +1,19 @@
 # All figures use the weighted summaries created by analyze.R.
+education_gaps <- function(s) {
+  a <- s$annual
+  low <- a[a$education == 1, c("YEAR", "unemployment_rate")]
+  high <- a[a$education == 4, c("YEAR", "unemployment_rate")]
+  stopifnot(!anyDuplicated(low$YEAR), !anyDuplicated(high$YEAR),
+            setequal(low$YEAR, 2019:2024), setequal(high$YEAR, 2019:2024))
+  names(low)[2] <- "less_than_high_school_rate"
+  names(high)[2] <- "bachelors_or_higher_rate"
+  g <- merge(low, high, by="YEAR", sort=TRUE)
+  stopifnot(!anyNA(g), all(g$bachelors_or_higher_rate > 0))
+  g$gap_percentage_points <- g$less_than_high_school_rate - g$bachelors_or_higher_rate
+  g$rate_ratio <- g$less_than_high_school_rate / g$bachelors_or_higher_rate
+  g
+}
+
 draw_figures <- function(s) {
   dir.create("figures", showWarnings = FALSE)
   cols <- c("#AD4931", "#C28B20", "#25857D", "#345AA3")
@@ -20,7 +35,7 @@ draw_figures <- function(s) {
   ticks <- as.Date(paste0(2019:2024, "-01-01"))
   axis.Date(1, at = ticks, format = "%Y")
   for (g in 1:4) { z <- d[d$education == g, ]; z <- z[order(z$date), ]; lines(z$date, z$unemployment_rate, col = cols[g], lwd = 2) }
-  title("The pandemic widened an existing education gap", adj = 0, col.main = "#20354A")
+  title("Unemployment rose across all four education groups in 2020", adj = 0, col.main = "#20354A", cex.main=.95)
   legend("topright", legend = short, col = cols, lty = 1, lwd = 2, bty = "n", cex = .82)
   footer(); dev.off()
   open_plot("annual.png")
@@ -30,8 +45,22 @@ draw_figures <- function(s) {
                 names.arg = short, ylim = c(0, max(mat) + 3), border = NA,
                 ylab = "Annual unemployment rate (%)", cex.names = .85)
   text(bp, t(mat) + .35, sprintf("%.1f", t(mat)), cex = .78, col = "#243447")
-  title("Rates fell, but remained above 2019 in 2024", adj = 0, col.main = "#20354A")
+  title("2024 point estimates remained above their 2019 levels", adj = 0, col.main = "#20354A", cex.main=1.0)
   legend("topright", legend = c("2019", "2020", "2024"), fill = c("#B8C9DC", "#AD4931", "#25857D"), bty = "n", horiz = TRUE)
+  footer(); dev.off()
+  g <- education_gaps(s)
+  write.csv(g, "education-gaps.csv", row.names=FALSE)
+  open_plot("gap.png")
+  plot(g$YEAR, g$gap_percentage_points, type="n", xaxt="n",
+       ylim=c(0, max(g$gap_percentage_points)+1.5),
+       xlab="", ylab="Unemployment-rate difference (percentage points)")
+  abline(h=seq(0,10,2), col="#E6EBF0")
+  axis(1, at=g$YEAR)
+  lines(g$YEAR, g$gap_percentage_points, type="b", pch=19, lwd=2.5, col="#345AA3")
+  text(g$YEAR, g$gap_percentage_points, sprintf("%.1f",g$gap_percentage_points),
+       pos=3, cex=.9, col="#243447")
+  title("The percentage-point gap rose in 2020, then narrowed", adj=0, col.main="#20354A", cex.main=1.0)
+  mtext("Less than high school minus bachelor's or higher | Annual point estimates",side=3,line=.6,adj=0,cex=.78)
   footer(); dev.off()
   open_plot("age.png", 1100)
   par(mfrow = c(1, 3), mar = c(4.0, 4.8, 3.1, .7), oma = c(4, 0, 3, 0))

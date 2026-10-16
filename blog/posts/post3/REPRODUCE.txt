@@ -20,10 +20,17 @@ and after the pandemic among U.S. civilian adults ages 25–64?
    10^4 once. It saves only grouped totals and rates in summary.rds.
    It overwrites summary.rds and session-info.txt with the new results.
 
-3. Recreate the three charts in R:
+3. Recreate the four charts and education-gaps.csv in R:
    s <- readRDS("summary.rds")
    source("plots.R")
    draw_figures(s)
+
+   education_gaps(s) joins annual rates by year, then subtracts the
+   bachelor's-or-higher rate from the less-than-high-school rate.
+   The difference uses percentage points, not percent change. The CSV
+   also reports the ratio of those two rates for 2019 through 2024.
+   A wider absolute difference need not imply a larger relative ratio.
+   The gap chart is descriptive, with no causal or significance claim.
 
 4. To render in the website, install knitr and rmarkdown and use Quarto:
    quarto render blog/posts/post3/index.qmd

@@ -7,9 +7,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="dcterms.date" content="2026-09-28">
-<meta name="description" content="Three visualizations trace unemployment by education through the pandemic and recovery.">
+<meta name="description" content="Four figures distinguish education-group rankings from changes in the unemployment-rate gap.">
 
-<title>Education and Unemployment: Unequal Shocks, Uneven Recovery – Qianzhao Li</title>
+<title>Education and Unemployment: How Did the Gap Change? – Qianzhao Li</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -191,7 +191,7 @@ window.Quarto = {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Education and Unemployment: Unequal Shocks, Uneven Recovery</h1>
+<h1 class="title">Education and Unemployment: How Did the Gap Change?</h1>
 <p class="subtitle lead">What weighted CPS data reveal about working-age adults, 2019–2024</p>
   <div class="quarto-categories">
     <div class="quarto-category">data visualization</div>
@@ -202,7 +202,7 @@ window.Quarto = {
 
 <div>
   <div class="description">
-    Three visualizations trace unemployment by education through the pandemic and recovery.
+    Four figures distinguish education-group rankings from changes in the unemployment-rate gap.
   </div>
 </div>
 
@@ -225,7 +225,7 @@ window.Quarto = {
 </header>
 
 
-<p>Did the pandemic erase the unemployment advantage associated with more education? For someone deciding how to prepare for the labor market, this question matters because a degree may be associated with stability as well as earnings. I use IPUMS Current Population Survey (CPS) microdata to compare four education groups before the pandemic, during its disruption, and through 2024. The story is not that college graduates escaped unemployment, but that the size of the shock and the level of risk differed substantially.</p>
+<p>How did unemployment differ across education groups from 2019 to 2024? I use IPUMS Current Population Survey (CPS) data to look at two separate questions: which groups had higher unemployment, and how far apart were their rates? A group can stay at the top of the ranking even when the distance between groups changes. I first compare the rates, then calculate that distance directly.</p>
 <section id="measuring-unemployment-consistently" class="level2">
 <h2 class="anchored" data-anchor-id="measuring-unemployment-consistently">Measuring unemployment consistently</h2>
 <p>The extract contains all 72 Basic Monthly samples from January 2019 to December 2024, restricted to ages 25–64. This focuses on working-age adults beyond the usual college years. I group education into less than high school, high school, some college or an associate degree, and a bachelor’s degree or higher. These groups describe completed education, not current enrollment.</p>
@@ -236,46 +236,58 @@ u_g = 100\frac{\sum_{i\in g} w_i\,1(\text{unemployed}_i)}
 \]</span></p>
 <p>People outside the labor force do not enter this denominator. Annual rates divide the sum of monthly weighted unemployment totals by the sum of monthly weighted labor-force totals. They are ratios of annual-average levels, not simple averages of monthly percentages. All figures are <strong>not seasonally adjusted</strong>.</p>
 </section>
-<section id="the-shock-amplified-an-existing-gap" class="level2">
-<h2 class="anchored" data-anchor-id="the-shock-amplified-an-existing-gap">1. The shock amplified an existing gap</h2>
+<section id="all-four-groups-experienced-a-rise-in-unemployment" class="level2">
+<h2 class="anchored" data-anchor-id="all-four-groups-experienced-a-rise-in-unemployment">1. All four groups experienced a rise in unemployment</h2>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="figures/monthly.png" class="img-fluid figure-img" alt="Four monthly lines from 2019 to 2024 show a sharp 2020 increase in unemployment, largest for adults without a high school diploma and smallest for college graduates."></p>
 <figcaption>Monthly unemployment rates by education. The shaded interval marks March–June 2020.</figcaption>
 </figure>
 </div>
-<p>The monthly view reveals the abrupt disruption that annual averages can hide. All four groups experienced a sharp increase in spring 2020, followed by a decline. The spike was much larger for adults without a high school diploma than for college graduates. Education differences were visible before the pandemic and persisted afterward. The lines therefore suggest unequal exposure to a shared shock, rather than two entirely separate labor markets.</p>
+<p>The monthly lines show a sharp rise in spring 2020, followed by a decline. Adults without a high school diploma generally have the highest rate, while college graduates generally have the lowest. This shows a persistent difference in unemployment levels. The ranking alone does not tell us whether the gap grew: we need to compare the size of the differences, not just the order of the lines.</p>
 </section>
-<section id="recovery-did-not-quite-restore-the-baseline" class="level2">
-<h2 class="anchored" data-anchor-id="recovery-did-not-quite-restore-the-baseline">2. Recovery did not quite restore the baseline</h2>
+<section id="annual-rates-make-the-comparison-easier" class="level2">
+<h2 class="anchored" data-anchor-id="annual-rates-make-the-comparison-easier">2. Annual rates make the comparison easier</h2>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="figures/annual.png" class="img-fluid figure-img" alt="Grouped bars compare four education groups in 2019, 2020, and 2024. All groups rise in 2020 and fall by 2024, while remaining above their 2019 rates."></p>
 <figcaption>Annual unemployment rates for 2019, 2020, and 2024, calculated from weighted monthly totals.</figcaption>
 </figure>
 </div>
-<p>Among adults without a high school diploma, unemployment rose from <strong>5.5%</strong> in 2019 to <strong>11.7%</strong> in 2020. For adults with a bachelor’s degree or higher, it rose from <strong>2.1%</strong> to <strong>4.7%</strong>. The difference between these groups widened from 3.4 to 7.0 percentage points.</p>
+<p>Among adults without a high school diploma, unemployment rose from 5.5% in 2019 to 11.7% in 2020. For adults with a bachelor’s degree or higher, it rose from 2.1% to 4.7%. All four groups had higher annual rates in 2020 than in 2019, even though their ranking stayed the same.</p>
 <p>By 2024, their rates had fallen to 6.3% and 2.3%, respectively. Each group’s 2024 estimate remained above its 2019 value. This is a descriptive comparison, not a claim that these small remaining differences are statistically significant.</p>
 </section>
-<section id="age-composition-is-not-the-whole-story" class="level2">
-<h2 class="anchored" data-anchor-id="age-composition-is-not-the-whole-story">3. Age composition is not the whole story</h2>
+<section id="measure-the-gap-directly" class="level2">
+<h2 class="anchored" data-anchor-id="measure-the-gap-directly">3. Measure the gap directly</h2>
+<p>For a clear comparison, I define the gap as the unemployment rate for adults without a high school diploma minus the rate for adults with a bachelor’s degree or higher. I measure this difference in percentage points, not percent. This comparison covers two groups; it does not summarize every education gap.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="figures/gap.png" class="img-fluid figure-img" alt="A line with annual labels directly shows the percentage-point difference between the lowest and highest education groups from 2019 through 2024."></p>
+<figcaption>Annual unemployment-rate difference: less than high school minus bachelor’s or higher. Labels show percentage points. Source: weighted IPUMS CPS estimates, ages 25–64.</figcaption>
+</figure>
+</div>
+<p>The estimated gap rose from 3.4 percentage points in 2019 to 7.0 in 2020, then fell to 4.0 by 2024. It did not fall every year: the estimate reached 3.6 points in 2022 before rising slightly in 2023 and 2024. This calculation, rather than the unchanged rankings, supports the description of a larger absolute gap in 2020.</p>
+<p>The choice of measure matters. Dividing the two rates instead gives a ratio of 2.67 in 2019 and 2.49 in 2020: the relative gap became smaller. I therefore describe an increase in the percentage-point gap, not an increase under every measure. These are descriptive estimates without confidence intervals. They do not establish statistical significance or show that the pandemic itself caused the change.</p>
+</section>
+<section id="compare-adults-within-age-groups" class="level2">
+<h2 class="anchored" data-anchor-id="compare-adults-within-age-groups">4. Compare adults within age groups</h2>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="figures/age.png" class="img-fluid figure-img" alt="Three panels for ages 25–34, 35–49, and 50–64 show the education gradient within each age group across 2019, 2020, and 2024."></p>
 <figcaption>Annual rates within three age groups. Points show only 2019, 2020, and 2024; connecting segments are visual guides. All panels use the same vertical scale and WTFINL weights.</figcaption>
 </figure>
 </div>
-<p>Education groups may contain different mixes of younger and older workers. Splitting the sample into ages 25–34, 35–49, and 50–64 checks whether that mix alone explains the pattern. The broad education gradient appears within each age band, including during the pandemic. However, these are still broad groups: occupation, industry, experience, and other characteristics may differ within them. This is not an age-adjusted causal estimate of a degree’s value.</p>
+<p>Education groups may contain different mixes of younger and older workers. I also compare rates within ages 25–34, 35–49, and 50–64. The figure shows a similar education pattern within these broad age groups: adults with less education tend to have higher unemployment. This adds detail to the overall comparison, but it does not hold age or other characteristics fully constant. People in the same age band can still differ in experience, occupation, and industry. The figure does not measure the causal effect of a degree.</p>
 </section>
 <section id="takeaway-and-limitations" class="level2">
 <h2 class="anchored" data-anchor-id="takeaway-and-limitations">Takeaway and limitations</h2>
-<p>Higher education was associated with lower unemployment throughout this period, but it did not eliminate vulnerability. For workforce planning, the figures support examining job-search assistance and retraining needs among adults with less education; they do not establish which intervention works best.</p>
+<p>The figures tell a specific story. All four groups had higher unemployment in 2020 than in 2019. The percentage-point gap between the lowest and highest education groups grew in 2020 and narrowed by 2024, while the rate ratio tells a different story about 2019–2020. The age panels also show differences within broad age groups. These findings describe who had higher unemployment and how the rates changed; they do not explain why or tell us which policy would help.</p>
 <p>CPS respondents can appear in multiple months, so the 3,835,958 retained records are person-month observations, not unique people. The charts present weighted point estimates without confidence intervals. Pandemic-era <a href="https://cps.ipums.org/cps/covid19.shtml">collection disruptions and lower response rates</a> also warrant caution. Finally, unemployment alone cannot reveal whether people left the labor force, accepted fewer hours, or experienced wage losses.</p>
 </section>
 <section id="data-and-reproducibility" class="level2">
 <h2 class="anchored" data-anchor-id="data-and-reproducibility">Data and reproducibility</h2>
 <p>Source: <a href="https://cps.ipums.org/cps/citation.shtml">IPUMS CPS, University of Minnesota</a>, using underlying U.S. Census Bureau and Bureau of Labor Statistics data. Extract created September 27, 2026. Education definitions follow <a href="https://cps.ipums.org/cps-action/variables/EDUC">IPUMS EDUC documentation</a>.</p>
-<p>Download the <a href="code-and-summaries.zip">code and grouped summaries</a>, <a href="analyze.R">analysis script</a>, <a href="plots.R">plotting script</a>, and <a href="REPRODUCE.txt">reproduction instructions</a>. The <a href="https://github.com/qianzhaoli949-afk/qianzhao-website">GitHub repository</a> contains this post under <code>blog/posts/post3/</code>. Licensed microdata are not redistributed; registered users can recreate the extract using the documented selections.</p>
+<p>Download the <a href="code-and-summaries.zip">code and grouped summaries</a>, <a href="analyze.R">analysis script</a>, <a href="plots.R">plotting script</a>, <a href="education-gaps.csv">annual gap calculations</a>, and <a href="REPRODUCE.txt">reproduction instructions</a>. The <a href="https://github.com/qianzhaoli949-afk/qianzhao-website">GitHub repository</a> contains this post under <code>blog/posts/post3/</code>. Licensed microdata are not redistributed; registered users can recreate the extract using the documented selections.</p>
 <div class="cell">
 <details class="code-fold">
 <summary>Show R code</summary>
