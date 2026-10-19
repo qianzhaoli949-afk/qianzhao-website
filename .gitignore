@@ -12,3 +12,10 @@
 cps_*.dat
 cps_*.dat.gz
 cps_*.xml
+
+# Keep PSID Data Center person-level extracts outside the public repository.
+J[0-9]*.zip
+J[0-9]*.txt
+J[0-9]*.do
+J[0-9]*.trp
+J[0-9]*.xlsx

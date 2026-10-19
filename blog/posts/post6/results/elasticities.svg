@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 910 430" role="img" aria-labelledby="title desc">
+<title id="title">Income elasticity across four measurement choices</title>
+<desc id="desc">The early career estimates are lower than the midcareer estimates. Five year averages differ from single year measures. A dashed line marks the simulated long run benchmark.</desc>
+<rect width="100%" height="100%" fill="white"/>
+<text x="24" y="32" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="#18324c">Estimated intergenerational income elasticity</text>
+<line x1="330.0" y1="75" x2="330.0" y2="345" stroke="#e4e9ee"/>
+<text x="330.0" y="370" text-anchor="middle" font-family="Arial, sans-serif" font-size="13" fill="#526271">0.0</text>
+<line x1="411.7" y1="75" x2="411.7" y2="345" stroke="#e4e9ee"/>
+<text x="411.7" y="370" text-anchor="middle" font-family="Arial, sans-serif" font-size="13" fill="#526271">0.1</text>
+<line x1="493.3" y1="75" x2="493.3" y2="345" stroke="#e4e9ee"/>
+<text x="493.3" y="370" text-anchor="middle" font-family="Arial, sans-serif" font-size="13" fill="#526271">0.2</text>
+<line x1="575.0" y1="75" x2="575.0" y2="345" stroke="#e4e9ee"/>
+<text x="575.0" y="370" text-anchor="middle" font-family="Arial, sans-serif" font-size="13" fill="#526271">0.3</text>
+<line x1="656.7" y1="75" x2="656.7" y2="345" stroke="#e4e9ee"/>
+<text x="656.7" y="370" text-anchor="middle" font-family="Arial, sans-serif" font-size="13" fill="#526271">0.4</text>
+<line x1="738.3" y1="75" x2="738.3" y2="345" stroke="#e4e9ee"/>
+<text x="738.3" y="370" text-anchor="middle" font-family="Arial, sans-serif" font-size="13" fill="#526271">0.5</text>
+<line x1="820.0" y1="75" x2="820.0" y2="345" stroke="#e4e9ee"/>
+<text x="820.0" y="370" text-anchor="middle" font-family="Arial, sans-serif" font-size="13" fill="#526271">0.6</text>
+<line x1="692.5" y1="75" x2="692.5" y2="345" stroke="#6b4c9a" stroke-width="2" stroke-dasharray="7 5"/>
+<text x="692.5" y="65" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" fill="#6b4c9a">Long-run sample benchmark: 0.44</text>
+<text x="305" y="120" text-anchor="end" font-family="Arial, sans-serif" font-size="15" fill="#18324c">Age 25, single year</text>
+<line x1="330" y1="115" x2="451.5" y2="115" stroke="#d38438" stroke-width="8" stroke-linecap="round"/>
+<circle cx="451.5" cy="115" r="8" fill="#d38438"/>
+<text x="465.5" y="120" font-family="Arial, sans-serif" font-size="15" font-weight="bold" fill="#d38438">0.149</text>
+<text x="305" y="183" text-anchor="end" font-family="Arial, sans-serif" font-size="15" fill="#18324c">Ages 25–29, five years</text>
+<line x1="330" y1="178" x2="538.1" y2="178" stroke="#d38438" stroke-width="8" stroke-linecap="round"/>
+<circle cx="538.1" cy="178" r="8" fill="#d38438"/>
+<text x="552.1" y="183" font-family="Arial, sans-serif" font-size="15" font-weight="bold" fill="#d38438">0.255</text>
+<text x="305" y="246" text-anchor="end" font-family="Arial, sans-serif" font-size="15" fill="#18324c">Age 37, single year</text>
+<line x1="330" y1="241" x2="583.8" y2="241" stroke="#177e84" stroke-width="8" stroke-linecap="round"/>
+<circle cx="583.8" cy="241" r="8" fill="#177e84"/>
+<text x="597.8" y="246" font-family="Arial, sans-serif" font-size="15" font-weight="bold" fill="#177e84">0.311</text>
+<text x="305" y="309" text-anchor="end" font-family="Arial, sans-serif" font-size="15" fill="#18324c">Ages 35–39, five years</text>
+<line x1="330" y1="304" x2="671.6" y2="304" stroke="#177e84" stroke-width="8" stroke-linecap="round"/>
+<circle cx="671.6" cy="304" r="8" fill="#177e84"/>
+<text x="659.6" y="290" text-anchor="end" font-family="Arial, sans-serif" font-size="15" font-weight="bold" fill="#177e84">0.418</text>
+<text x="24" y="407" font-family="Arial, sans-serif" font-size="12" fill="#526271">Simulated families; identical sample of 600 for all four estimates.</text>
+</svg>

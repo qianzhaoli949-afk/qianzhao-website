@@ -1,6 +1,6 @@
 # Qianzhao Li — Personal Website & Economics Blog
 
-A Quarto website featuring my profile, résumé, and coursework in economics and data analysis. The blog combines economic intuition, reproducible R code, and data visualization.
+A Quarto website featuring my profile, résumé, and coursework in economics and data analysis. The blog combines economic intuition, reproducible R and Python code, and data visualization.
 
 **[Visit the website](https://qianzhaoli949-afk.github.io/qianzhao-website/)** · **[Read the blog](https://qianzhaoli949-afk.github.io/qianzhao-website/blog/)** · **[View my résumé](https://qianzhaoli949-afk.github.io/qianzhao-website/resume.html)**
 
@@ -13,6 +13,7 @@ A Quarto website featuring my profile, résumé, and coursework in economics and
 | [3. Education and Unemployment: How Did the Gap Change?](https://qianzhaoli949-afk.github.io/qianzhao-website/blog/posts/post3/index.html) | Uses weighted IPUMS CPS data and four figures to distinguish unemployment levels from percentage-point gaps and rate ratios, 2019–2024. | [Post 3](blog/posts/post3/) |
 | [4. Beyond the Sticker Price: The Cost of Financing a New Home](https://qianzhaoli949-afk.github.io/qianzhao-website/blog/posts/post4/index.html) | Combines FRED prices, rates, and CPI to compare real mortgage payments with three visualizations, 2015–2024. | [Post 4](blog/posts/post4/) |
 | [5. A Growing State, but Not Everywhere](https://qianzhaoli949-afk.github.io/qianzhao-website/blog/posts/post5/index.html) | Maps population change across 67 Pennsylvania counties and examines migration and natural change, 2020–2024. | [Post 5](blog/posts/post5/) |
+| [6. Matching Parents and Children with SQL in Python](https://qianzhaoli949-afk.github.io/qianzhao-website/blog/posts/post6/index.html) | Links PSID birth mothers and adult children with SQL, then compares single-year and multi-year family-income elasticities. | [Post 6](blog/posts/post6/) |
 
 ## Run locally
 
@@ -27,8 +28,10 @@ Each post has a dedicated guide mapping its code, data, and results and explaini
 - [Post 3 replication guide](blog/posts/post3/README.md)
 - [Post 4 replication guide](blog/posts/post4/README.md)
 - [Post 5 replication guide](blog/posts/post5/README.md)
+- [Post 6 replication guide](blog/posts/post6/README.md)
 
 You will need [R](https://www.r-project.org/) and [Quarto](https://quarto.org/). RStudio is optional.
+Post 6 additionally uses Python 3.9 or later; its scripts need no third-party Python packages.
 
 1. Clone this repository and open its folder:
 
@@ -55,7 +58,7 @@ You will need [R](https://www.r-project.org/) and [Quarto](https://quarto.org/).
    quarto render
    ```
 
-The output is written to `docs/`, as configured in `_quarto.yml`. Ordinary rendering uses the saved O\*NET snapshots, CPS grouped summaries, and FRED downloads; it does not require a new web scrape or access to CPS microdata.
+The output is written to `docs/`, as configured in `_quarto.yml`. Ordinary rendering uses saved data and figures; it does not require a new web scrape or access to CPS or PSID microdata.
 
 ## Reproduce the analyses
 
@@ -99,6 +102,18 @@ This regenerates `summary.rds` and `session-info.txt`. The analysis covers adult
 
 **CPS microdata and their DDI files are not included.** Keep licensed extracts outside the website directory. The `.gitignore` rules also exclude files named `cps_*.dat`, `cps_*.dat.gz`, and `cps_*.xml`. Public outputs contain grouped summaries rather than individual records.
 
+### Post 6: Matching parents and children
+
+Obtain the two PSID extracts described in the [Post 6 replication guide](blog/posts/post6/README.md), keep them outside the repository, and run:
+
+```sh
+python3 blog/posts/post6/code/analyze_psid.py \
+  --pid-zip /path/to/J366440.zip \
+  --income-zip /path/to/J366441.zip
+```
+
+This regenerates only aggregate estimates and a figure. The guide explains the identifiers, income windows, sample restrictions, and limits of the empirical comparison. Separate simulation files in the same folder illustrate a possible life-cycle measurement problem; those invented results are not PSID estimates.
+
 ## Repository layout
 
 ```text
@@ -112,6 +127,7 @@ blog/posts/post2/    Web-scraping analysis and saved source snapshots
 blog/posts/post3/    CPS analysis, grouped summaries, and figures
 blog/posts/post4/    FRED housing analysis: code, data, results, and replication guide
 blog/posts/post5/    Census county GIS analysis: code, data, maps, and replication guide
+blog/posts/post6/    PSID mother-child SQL analysis, aggregate results, and separate simulation
 images/              Website images
 styles.css           Custom styling
 docs/                Rendered website for GitHub Pages
@@ -122,6 +138,8 @@ docs/                Rendered website for GitHub Pages
 Edit the source files, run `quarto render`, inspect the results, and commit the relevant source files together with the updated `docs/` output. Push the commit to GitHub to publish through the repository's GitHub Pages configuration. Local edits in RStudio do not automatically upload to GitHub. Edit `.qmd` sources rather than generated HTML files.
 
 ## Sources and data use
+
+- **Post 6:** PSID public-use Parent Identification and Cross-Year Individual extracts, plus FRED CPIAUCNS for inflation adjustment. Raw PSID person-level records are not included. A separate fixed-seed simulation uses invented records to illustrate life-cycle measurement concerns.
 
 - **Post 5:** U.S. Census Bureau Vintage 2024 county population estimates and 2024 cartographic county boundaries; fixed-vintage analysis of Pennsylvania, April 2020–July 2024.
 

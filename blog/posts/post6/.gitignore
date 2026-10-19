@@ -1,0 +1,5 @@
+# PSID person-level extracts are downloaded separately and stay off GitHub.
+data/private/
+J*.zip
+J*.txt
+J*.do
