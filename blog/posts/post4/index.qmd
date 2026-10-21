@@ -1,9 +1,9 @@
 ---
 title: "Beyond the Sticker Price: The Cost of Financing a New Home"
-subtitle: "Separating house prices, inflation, and mortgage rates, 2015–2024"
+subtitle: "Prices, mortgage rates, and the income benchmark, 2015–2024"
 date: 2026-10-03
 categories: [data visualization, housing, macroeconomics]
-description: "Three figures explain how real new-home prices and mortgage rates jointly shape an illustrative buyer's monthly payment."
+description: "How prices and mortgage rates changed a modeled new-home payment—and how that payment compares with median income."
 image: results/figures/payments.png
 resources:
   - code/analyze.R
@@ -11,7 +11,9 @@ resources:
   - data/quarterly.csv
   - data/manifest.csv
   - data/raw/*.csv
+  - data/raw/h05.xlsx
   - results/scenarios.csv
+  - results/affordability.csv
   - README.md
 format:
   html:
@@ -23,99 +25,98 @@ format:
 source("code/analyze.R")
 old <- d[d$quarter == "2019Q4", ]
 end <- d[d$quarter == "2024Q4", ]
+income_old <- affordability[affordability$year == 2019, ]
+income_end <- affordability[affordability$year == 2024, ]
 usd <- function(x) paste0("$", format(round(x), big.mark=",", trim=TRUE))
 pct <- function(x) sprintf("%.1f", x)
 ```
 
-A lower advertised house price does not necessarily mean a lower monthly
-payment. Buyers finance both a property and the cost of borrowing. How did
-changes in real new-home prices and mortgage rates combine to change an
-illustrative buyer's payment between 2019 and 2024? I place those endpoints
-within a decade of quarterly data, separating purchasing-power changes from
-financing costs. This is a payment comparison, not a complete measure of
-housing affordability relative to income.
+What changed a new-home buyer's monthly payment more between late 2019 and
+late 2024: the home's price or the mortgage rate? In my model, the payment
+rose about **`r usd(scenarios$payment[4]-scenarios$payment[1])` per month** in
+2024 dollars. Changing only the rate adds about
+`r usd(scenarios$payment[3]-scenarios$payment[1])`; changing only the
+inflation-adjusted price adds about
+`r usd(scenarios$payment[2]-scenarios$payment[1])`. The two changes also
+interact, adding the remaining
+`r usd(scenarios$payment[4]-scenarios$payment[3]-scenarios$payment[2]+scenarios$payment[1])`.
+The rate increase did most of the work.
 
-## From three series to a comparable payment
-
-I download three series programmatically from FRED: Census/HUD's
-[median new-home sales price (MSPUS)](https://fred.stlouisfed.org/series/MSPUS),
-Freddie Mac's [30-year mortgage rate (MORTGAGE30US)](https://fred.stlouisfed.org/series/MORTGAGE30US),
-and BLS's [all-items CPI (CPIAUCNS)](https://fred.stlouisfed.org/series/CPIAUCNS).
-These are new data for this blog, distinct from the earlier O*NET and CPS projects.
-
-The price series is quarterly. I average weekly mortgage observations and the
-three monthly CPI observations within each quarter, producing 40 quarters
-from 2015 through 2024. I stop at 2024 because the downloaded CPI series has
-no October 2025 observation; I do not impute it or average an incomplete quarter.
-All three series are not seasonally adjusted. Endpoint comparisons use Q4
-in both years, although that does not remove all seasonal influences.
-
-For a hypothetical purchase each quarter, I assume a 20% down payment and a
-fully amortizing 30-year fixed-rate mortgage. Monthly principal and interest are
-
-$$
-M=0.8P\frac{r/1200}{1-(1+r/1200)^{-360}},
-$$
-
-where $P$ is the sales price and $r$ is the annual interest rate in percent.
-Multiplying prices and payments by $CPI_{2024Q4}/CPI_t$ expresses them in
-**2024 Q4 dollars**. These transformations make monetary comparisons meaningful
-without confusing general inflation with housing-specific changes.
-
-## 1. The price and the financing cost are different moving parts
+## 1. Prices and rates moved differently
 
 ![Real median new-home prices and quarterly-average mortgage rates. Sources: Census/HUD, Freddie Mac, and BLS via FRED.](results/figures/prices-rates.png){fig-alt="Two aligned panels show inflation-adjusted new-home prices and mortgage rates from 2015 to 2024."}
 
-The first figure separates the two inputs rather than putting unlike units on
-a dual axis. From 2019 Q4 to 2024 Q4, the real median price changed by
-`r pct(100*(end$real_price/old$real_price-1))`%, while the average mortgage
-rate moved from `r pct(old$rate)`% to `r pct(end$rate)`%. Price movements
-alone therefore cannot describe the change faced by a financed buyer.
+The median price of a new home rose just
+`r pct(100*(end$real_price/old$real_price-1))`% after adjusting for overall
+inflation between 2019 Q4 and 2024 Q4. The average 30-year mortgage rate,
+however, climbed from `r pct(old$rate)`% to `r pct(end$rate)`%. A home can
+therefore cost much more each month even when its inflation-adjusted price
+changes only a little.
 
-## 2. Translate those inputs into monthly dollars
+## 2. Turn those changes into a monthly payment
 
 ![Illustrative real monthly payments, with a comparison holding the rate at its 2019 Q4 level. Calculations use 20% down and a 30-year term.](results/figures/payments.png){fig-alt="Two lines compare real mortgage payments using each quarter's rate with payments at a fixed 2019 Q4 rate."}
 
-The modeled real payment rose from **`r usd(old$payment_real)`** to
-**`r usd(end$payment_real)`**, a `r pct(100*(end$payment_real/old$payment_real-1))`%
-increase. The dashed line keeps each quarter's price but holds the interest
-rate fixed at its 2019 Q4 value. By 2024 Q4, that calculation yields
-`r usd(end$payment_fixed_rate_real)`, or
-`r usd(end$payment_real-end$payment_fixed_rate_real)` less per month than
-the contemporaneous-rate scenario. This is a controlled arithmetic comparison,
-not a claim that buyers could actually obtain the old rate.
+I assume a 20% down payment and a 30-year fixed-rate loan. Under those
+assumptions, the monthly principal-and-interest payment rose from
+`r usd(old$payment_real)` to `r usd(end$payment_real)` in 2024 Q4 dollars.
+The dashed line asks what the payment would have been if the rate had stayed
+at its 2019 Q4 level while prices followed their actual path. At the 2024
+price, that payment would have been `r usd(end$payment_fixed_rate_real)`,
+`r usd(end$payment_real-end$payment_fixed_rate_real)` below the modeled
+payment with the 2024 rate. This gap includes the small interaction between
+the higher rate and the changed price; it is not the rate-only figure quoted
+above.
 
-## 3. Change one input at a time
+## 3. Compare the payment with income
 
-![Four Q4 endpoint scenarios in constant purchasing-power dollars. The middle bars change only real price or only interest rate.](results/figures/scenarios.png){fig-alt="Four bars show payments at the baseline, with only the price changed, with only the rate changed, and with both changed."}
+![Annualized modeled Q4 new-home payment as a share of same-year U.S. median household income. Sources: Census Table H-5 and FRED series.](results/figures/affordability.png){fig-alt="A line chart shows the modeled payment rising from about 21 percent of median household income in 2019 to about 31 percent in 2024."}
 
-The third figure holds the other input constant in each middle bar. The
-price-only change adds `r usd(scenarios$payment[2]-scenarios$payment[1])`
-to the baseline payment; the rate-only change adds
-`r usd(scenarios$payment[3]-scenarios$payment[1])`.
-These separate increments need not sum to the combined increase: a higher rate
-also applies to the changed loan amount. The chart isolates the financing
-mechanism, rather than estimating a causal effect of monetary policy on prices.
+This third figure asks a different question: how large is the modeled payment
+beside a typical household's income? I multiply each fourth-quarter monthly
+payment by 12 and divide it by the [Census Bureau's annual U.S. median
+household income](https://www.census.gov/data/tables/time-series/demo/income-poverty/historical-income-households.html).
+I use current dollars for both the payment and income in each year. The share
+rose from `r pct(100*income_old$payment_share)`% in 2019 to
+`r pct(100*income_end$payment_share)`% in 2024. Median income grew, but it
+did not keep up with the payment in this comparison.
 
-## Takeaway and limits
+## Takeaway
 
-Evaluating a home by its sticker price alone misses a major part of the
-financing calculation. A practical budgeting exercise should vary both the
-price and the offered rate, then add taxes, insurance, maintenance, and fees,
-which are excluded here. The down payment itself is another constraint.
+Of the roughly `r usd(scenarios$payment[4]-scenarios$payment[1])` increase in
+the inflation-adjusted monthly payment, about
+`r usd(scenarios$payment[3]-scenarios$payment[1])` comes from the higher rate
+alone and only about `r usd(scenarios$payment[2]-scenarios$payment[1])` from
+the higher real price alone. Their interaction accounts for the rest. The
+payment also rose from about `r pct(100*income_old$payment_share)`% to
+`r pct(100*income_end$payment_share)`% of median income. For a prospective
+buyer, the interest rate deserves as much attention as the listing price.
 
-These are illustrative payments for new buyers, not average payments of
-existing homeowners. New-home medians change with the mix of homes sold and
-are not a constant-quality price index. National series mask local differences;
-the mortgage benchmark is not an individual loan quote. Freddie Mac also
-changed its survey methodology in November 2022. Without household income,
-credit, or wealth data, the figures cannot tell us who can afford to buy.
+These figures provide a national benchmark, not a measure of what a particular
+buyer can afford. The new-home median changes with the mix of homes sold; the
+median-income household need not buy a new home. I also leave out property
+taxes, insurance, maintenance, fees, and the down payment itself. The price,
+rate, and CPI data are not seasonally adjusted, so I compare the same quarter
+in each year. Freddie Mac changed its mortgage survey methodology in 2022.
+
+## Data and method
+
+I use [new-home prices](https://fred.stlouisfed.org/series/MSPUS),
+[mortgage rates](https://fred.stlouisfed.org/series/MORTGAGE30US), and
+[consumer prices](https://fred.stlouisfed.org/series/CPIAUCNS) from FRED,
+plus [Census Table H-5](https://www2.census.gov/programs-surveys/cps/tables/time-series/historical-income-households/h05.xlsx)
+for income. I average the weekly rates and monthly CPI values within each
+quarter, then convert prices and payments to 2024 Q4 dollars. I calculate
+the payment for each quarter's price and rate and repeat the calculation with
+one 2019 Q4 input held fixed at a time. Those comparisons describe loan
+arithmetic, not a causal effect of interest-rate policy on house prices.
 
 ## Reproduce the analysis
 
 The [README](README.md) documents folders, assumptions, and commands.
 [Analysis code](code/analyze.R), [plotting code](code/plots.R),
-[quarterly data](data/quarterly.csv), and [download provenance](data/manifest.csv)
+[quarterly data](data/quarterly.csv), [income comparison](results/affordability.csv),
+and [download provenance](data/manifest.csv)
 are available alongside the [GitHub repository](https://github.com/qianzhaoli949-afk/qianzhao-website/tree/main/blog/posts/post4).
 Ordinary rendering checks and reuses saved downloads; an explicit refresh
 retrieves new data, which may include revisions.

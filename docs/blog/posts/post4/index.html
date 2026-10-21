@@ -2,22 +2,25 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.9.38">
+<meta name="generator" content="quarto-1.10.18">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="dcterms.date" content="2026-10-03">
-<meta name="description" content="Three figures explain how real new-home prices and mortgage rates jointly shape an illustrative buyer’s monthly payment.">
+<meta name="description" content="How prices and mortgage rates changed a modeled new-home payment—and how that payment compares with median income.">
 
 <title>Beyond the Sticker Price: The Cost of Financing a New Home – Qianzhao Li</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
 */
-code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
-div.columns{display: flex; gap: min(4vw, 1.5em);}
-div.column{flex: auto; overflow-x: auto;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
 div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
 ul.task-list li input[type="checkbox"] {
@@ -41,10 +44,10 @@ ul.task-list li input[type="checkbox"] {
 <script src="../../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../../../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../../site_libs/bootstrap/bootstrap-6033a600180109c3731f6a886c29932c.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../../../site_libs/bootstrap/bootstrap-9d96f532d65220ca877c0304385df42f.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -73,35 +76,6 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
-  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
-  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
-
-<script type="text/javascript">
-const typesetMath = (el) => {
-  if (window.MathJax) {
-    // MathJax Typeset
-    window.MathJax.typeset([el]);
-  } else if (window.katex) {
-    // KaTeX Render
-    var mathElements = el.getElementsByClassName("math");
-    var macros = [];
-    for (var i = 0; i < mathElements.length; i++) {
-      var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
-        window.katex.render(texText.data, mathElements[i], {
-          displayMode: mathElements[i].classList.contains('display'),
-          throwOnError: false,
-          macros: macros,
-          fleqn: false
-        });
-      }
-    }
-  }
-}
-window.Quarto = {
-  typesetMath
-};
-</script>
 
 <link rel="stylesheet" href="../../../styles.css">
 </head>
@@ -157,7 +131,7 @@ window.Quarto = {
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
 <h1 class="title">Beyond the Sticker Price: The Cost of Financing a New Home</h1>
-<p class="subtitle lead">Separating house prices, inflation, and mortgage rates, 2015–2024</p>
+<p class="subtitle lead">Prices, mortgage rates, and the income benchmark, 2015–2024</p>
   <div class="quarto-categories">
     <div class="quarto-category">data visualization</div>
     <div class="quarto-category">housing</div>
@@ -167,7 +141,7 @@ window.Quarto = {
 
 <div>
   <div class="description">
-    Three figures explain how real new-home prices and mortgage rates jointly shape an illustrative buyer’s monthly payment.
+    How prices and mortgage rates changed a modeled new-home payment—and how that payment compares with median income.
   </div>
 </div>
 
@@ -190,55 +164,49 @@ window.Quarto = {
 </header>
 
 
-<p>A lower advertised house price does not necessarily mean a lower monthly payment. Buyers finance both a property and the cost of borrowing. How did changes in real new-home prices and mortgage rates combine to change an illustrative buyer’s payment between 2019 and 2024? I place those endpoints within a decade of quarterly data, separating purchasing-power changes from financing costs. This is a payment comparison, not a complete measure of housing affordability relative to income.</p>
-<section id="from-three-series-to-a-comparable-payment" class="level2">
-<h2 class="anchored" data-anchor-id="from-three-series-to-a-comparable-payment">From three series to a comparable payment</h2>
-<p>I download three series programmatically from FRED: Census/HUD’s <a href="https://fred.stlouisfed.org/series/MSPUS">median new-home sales price (MSPUS)</a>, Freddie Mac’s <a href="https://fred.stlouisfed.org/series/MORTGAGE30US">30-year mortgage rate (MORTGAGE30US)</a>, and BLS’s <a href="https://fred.stlouisfed.org/series/CPIAUCNS">all-items CPI (CPIAUCNS)</a>. These are new data for this blog, distinct from the earlier O*NET and CPS projects.</p>
-<p>The price series is quarterly. I average weekly mortgage observations and the three monthly CPI observations within each quarter, producing 40 quarters from 2015 through 2024. I stop at 2024 because the downloaded CPI series has no October 2025 observation; I do not impute it or average an incomplete quarter. All three series are not seasonally adjusted. Endpoint comparisons use Q4 in both years, although that does not remove all seasonal influences.</p>
-<p>For a hypothetical purchase each quarter, I assume a 20% down payment and a fully amortizing 30-year fixed-rate mortgage. Monthly principal and interest are</p>
-<p><span class="math display">\[
-M=0.8P\frac{r/1200}{1-(1+r/1200)^{-360}},
-\]</span></p>
-<p>where <span class="math inline">\(P\)</span> is the sales price and <span class="math inline">\(r\)</span> is the annual interest rate in percent. Multiplying prices and payments by <span class="math inline">\(CPI_{2024Q4}/CPI_t\)</span> expresses them in <strong>2024 Q4 dollars</strong>. These transformations make monetary comparisons meaningful without confusing general inflation with housing-specific changes.</p>
-</section>
-<section id="the-price-and-the-financing-cost-are-different-moving-parts" class="level2">
-<h2 class="anchored" data-anchor-id="the-price-and-the-financing-cost-are-different-moving-parts">1. The price and the financing cost are different moving parts</h2>
+<p>What changed a new-home buyer’s monthly payment more between late 2019 and late 2024: the home’s price or the mortgage rate? In my model, the payment rose about <strong>$671 per month</strong> in 2024 dollars. Changing only the rate adds about $580; changing only the inflation-adjusted price adds about $66. The two changes also interact, adding the remaining $26. The rate increase did most of the work.</p>
+<section id="prices-and-rates-moved-differently" class="level2">
+<h2 class="anchored" data-anchor-id="prices-and-rates-moved-differently">1. Prices and rates moved differently</h2>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="results/figures/prices-rates.png" class="img-fluid figure-img" alt="Two aligned panels show inflation-adjusted new-home prices and mortgage rates from 2015 to 2024."></p>
 <figcaption>Real median new-home prices and quarterly-average mortgage rates. Sources: Census/HUD, Freddie Mac, and BLS via FRED.</figcaption>
 </figure>
 </div>
-<p>The first figure separates the two inputs rather than putting unlike units on a dual axis. From 2019 Q4 to 2024 Q4, the real median price changed by 4.5%, while the average mortgage rate moved from 3.7% to 6.6%. Price movements alone therefore cannot describe the change faced by a financed buyer.</p>
+<p>The median price of a new home rose just 4.5% after adjusting for overall inflation between 2019 Q4 and 2024 Q4. The average 30-year mortgage rate, however, climbed from 3.7% to 6.6%. A home can therefore cost much more each month even when its inflation-adjusted price changes only a little.</p>
 </section>
-<section id="translate-those-inputs-into-monthly-dollars" class="level2">
-<h2 class="anchored" data-anchor-id="translate-those-inputs-into-monthly-dollars">2. Translate those inputs into monthly dollars</h2>
+<section id="turn-those-changes-into-a-monthly-payment" class="level2">
+<h2 class="anchored" data-anchor-id="turn-those-changes-into-a-monthly-payment">2. Turn those changes into a monthly payment</h2>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="results/figures/payments.png" class="img-fluid figure-img" alt="Two lines compare real mortgage payments using each quarter's rate with payments at a fixed 2019 Q4 rate."></p>
 <figcaption>Illustrative real monthly payments, with a comparison holding the rate at its 2019 Q4 level. Calculations use 20% down and a 30-year term.</figcaption>
 </figure>
 </div>
-<p>The modeled real payment rose from <strong>$1,478</strong> to <strong>$2,149</strong>, a 45.4% increase. The dashed line keeps each quarter’s price but holds the interest rate fixed at its 2019 Q4 value. By 2024 Q4, that calculation yields $1,544, or $606 less per month than the contemporaneous-rate scenario. This is a controlled arithmetic comparison, not a claim that buyers could actually obtain the old rate.</p>
+<p>I assume a 20% down payment and a 30-year fixed-rate loan. Under those assumptions, the monthly principal-and-interest payment rose from $1,478 to $2,149 in 2024 Q4 dollars. The dashed line asks what the payment would have been if the rate had stayed at its 2019 Q4 level while prices followed their actual path. At the 2024 price, that payment would have been $1,544, $606 below the modeled payment with the 2024 rate. This gap includes the small interaction between the higher rate and the changed price; it is not the rate-only figure quoted above.</p>
 </section>
-<section id="change-one-input-at-a-time" class="level2">
-<h2 class="anchored" data-anchor-id="change-one-input-at-a-time">3. Change one input at a time</h2>
+<section id="compare-the-payment-with-income" class="level2">
+<h2 class="anchored" data-anchor-id="compare-the-payment-with-income">3. Compare the payment with income</h2>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="results/figures/scenarios.png" class="img-fluid figure-img" alt="Four bars show payments at the baseline, with only the price changed, with only the rate changed, and with both changed."></p>
-<figcaption>Four Q4 endpoint scenarios in constant purchasing-power dollars. The middle bars change only real price or only interest rate.</figcaption>
+<p><img src="results/figures/affordability.png" class="img-fluid figure-img" alt="A line chart shows the modeled payment rising from about 21 percent of median household income in 2019 to about 31 percent in 2024."></p>
+<figcaption>Annualized modeled Q4 new-home payment as a share of same-year U.S. median household income. Sources: Census Table H-5 and FRED series.</figcaption>
 </figure>
 </div>
-<p>The third figure holds the other input constant in each middle bar. The price-only change adds $66 to the baseline payment; the rate-only change adds $580. These separate increments need not sum to the combined increase: a higher rate also applies to the changed loan amount. The chart isolates the financing mechanism, rather than estimating a causal effect of monetary policy on prices.</p>
+<p>This third figure asks a different question: how large is the modeled payment beside a typical household’s income? I multiply each fourth-quarter monthly payment by 12 and divide it by the <a href="https://www.census.gov/data/tables/time-series/demo/income-poverty/historical-income-households.html">Census Bureau’s annual U.S. median household income</a>. I use current dollars for both the payment and income in each year. The share rose from 21.0% in 2019 to 31.0% in 2024. Median income grew, but it did not keep up with the payment in this comparison.</p>
 </section>
-<section id="takeaway-and-limits" class="level2">
-<h2 class="anchored" data-anchor-id="takeaway-and-limits">Takeaway and limits</h2>
-<p>Evaluating a home by its sticker price alone misses a major part of the financing calculation. A practical budgeting exercise should vary both the price and the offered rate, then add taxes, insurance, maintenance, and fees, which are excluded here. The down payment itself is another constraint.</p>
-<p>These are illustrative payments for new buyers, not average payments of existing homeowners. New-home medians change with the mix of homes sold and are not a constant-quality price index. National series mask local differences; the mortgage benchmark is not an individual loan quote. Freddie Mac also changed its survey methodology in November 2022. Without household income, credit, or wealth data, the figures cannot tell us who can afford to buy.</p>
+<section id="takeaway" class="level2">
+<h2 class="anchored" data-anchor-id="takeaway">Takeaway</h2>
+<p>Of the roughly $671 increase in the inflation-adjusted monthly payment, about $580 comes from the higher rate alone and only about $66 from the higher real price alone. Their interaction accounts for the rest. The payment also rose from about 21.0% to 31.0% of median income. For a prospective buyer, the interest rate deserves as much attention as the listing price.</p>
+<p>These figures provide a national benchmark, not a measure of what a particular buyer can afford. The new-home median changes with the mix of homes sold; the median-income household need not buy a new home. I also leave out property taxes, insurance, maintenance, fees, and the down payment itself. The price, rate, and CPI data are not seasonally adjusted, so I compare the same quarter in each year. Freddie Mac changed its mortgage survey methodology in 2022.</p>
+</section>
+<section id="data-and-method" class="level2">
+<h2 class="anchored" data-anchor-id="data-and-method">Data and method</h2>
+<p>I use <a href="https://fred.stlouisfed.org/series/MSPUS">new-home prices</a>, <a href="https://fred.stlouisfed.org/series/MORTGAGE30US">mortgage rates</a>, and <a href="https://fred.stlouisfed.org/series/CPIAUCNS">consumer prices</a> from FRED, plus <a href="https://www2.census.gov/programs-surveys/cps/tables/time-series/historical-income-households/h05.xlsx">Census Table H-5</a> for income. I average the weekly rates and monthly CPI values within each quarter, then convert prices and payments to 2024 Q4 dollars. I calculate the payment for each quarter’s price and rate and repeat the calculation with one 2019 Q4 input held fixed at a time. Those comparisons describe loan arithmetic, not a causal effect of interest-rate policy on house prices.</p>
 </section>
 <section id="reproduce-the-analysis" class="level2">
 <h2 class="anchored" data-anchor-id="reproduce-the-analysis">Reproduce the analysis</h2>
-<p>The <a href="README.md">README</a> documents folders, assumptions, and commands. <a href="code/analyze.R">Analysis code</a>, <a href="code/plots.R">plotting code</a>, <a href="data/quarterly.csv">quarterly data</a>, and <a href="data/manifest.csv">download provenance</a> are available alongside the <a href="https://github.com/qianzhaoli949-afk/qianzhao-website/tree/main/blog/posts/post4">GitHub repository</a>. Ordinary rendering checks and reuses saved downloads; an explicit refresh retrieves new data, which may include revisions.</p>
+<p>The <a href="README.md">README</a> documents folders, assumptions, and commands. <a href="code/analyze.R">Analysis code</a>, <a href="code/plots.R">plotting code</a>, <a href="data/quarterly.csv">quarterly data</a>, <a href="results/affordability.csv">income comparison</a>, and <a href="data/manifest.csv">download provenance</a> are available alongside the <a href="https://github.com/qianzhaoli949-afk/qianzhao-website/tree/main/blog/posts/post4">GitHub repository</a>. Ordinary rendering checks and reuses saved downloads; an explicit refresh retrieves new data, which may include revisions.</p>
 
 
 </section>

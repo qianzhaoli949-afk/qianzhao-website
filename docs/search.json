@@ -81,7 +81,7 @@
     "href": "blog/index.html",
     "title": "Blog",
     "section": "",
-    "text": "Matching Parents and Children with SQL in Python\n\n\nHow income timing changes an intergenerational elasticity\n\n\nA PSID tutorial links birth mothers and adult children, then compares single-year and multi-year family-income measures.\n\n\n\n\n\nOct 19, 2026\n\n\n\n\n\n\n\n\n\n\n\n\nA Growing State, but Not Everywhere\n\n\nMapping population change across Pennsylvania’s counties, 2020–2024\n\n\nA county map shows where Pennsylvania gained and lost residents, while population components help explain the differences.\n\n\n\n\n\nOct 8, 2026\n\n\nQianzhao Li\n\n\n\n\n\n\n\n\n\n\n\n\nBeyond the Sticker Price: The Cost of Financing a New Home\n\n\nSeparating house prices, inflation, and mortgage rates, 2015–2024\n\n\nThree figures explain how real new-home prices and mortgage rates jointly shape an illustrative buyer’s monthly payment.\n\n\n\n\n\nOct 3, 2026\n\n\n\n\n\n\n\n\n\n\n\n\nEducation and Unemployment: How Did the Gap Change?\n\n\nWhat weighted CPS data reveal about working-age adults, 2019–2024\n\n\nFour figures distinguish education-group rankings from changes in the unemployment-rate gap.\n\n\n\n\n\nSep 28, 2026\n\n\n\n\n\n\n\n\n\n\n\n\nBeyond the Highest Salary: Choosing a Quantitative Career\n\n\nWhat four O*NET profiles suggest about where to focus a job search\n\n\nAn ethical rvest scraping project comparing pay, projected openings, and preparation across four quantitative careers.\n\n\n\n\n\nSep 19, 2026\n\n\n\n\n\n\n\n\n\n\n\n\nWhy More Income Can Mean Less Instant Noodles\n\n\nUnderstanding inferior goods without confusing them with bad goods\n\n\n\n\n\n\n\n\nSep 9, 2026\n\n\nQianzhao Li\n\n\n\n\n\nNo matching items"
+    "text": "Matching Parents and Children with SQL in Python\n\n\nHow income timing changes an intergenerational elasticity\n\n\nA PSID tutorial links birth mothers and adult children, then compares single-year and multi-year family-income measures.\n\n\n\n\n\nOct 19, 2026\n\n\n\n\n\n\n\n\n\n\n\n\nA Growing State, but Not Everywhere\n\n\nMapping population change across Pennsylvania’s counties, 2020–2024\n\n\nA county map shows where Pennsylvania gained and lost residents, while population components help explain the differences.\n\n\n\n\n\nOct 8, 2026\n\n\nQianzhao Li\n\n\n\n\n\n\n\n\n\n\n\n\nBeyond the Sticker Price: The Cost of Financing a New Home\n\n\nPrices, mortgage rates, and the income benchmark, 2015–2024\n\n\nHow prices and mortgage rates changed a modeled new-home payment—and how that payment compares with median income.\n\n\n\n\n\nOct 3, 2026\n\n\n\n\n\n\n\n\n\n\n\n\nEducation and Unemployment: How Did the Gap Change?\n\n\nWhat weighted CPS data reveal about working-age adults, 2019–2024\n\n\nFour figures distinguish education-group rankings from changes in the unemployment-rate gap.\n\n\n\n\n\nSep 28, 2026\n\n\n\n\n\n\n\n\n\n\n\n\nBeyond the Highest Salary: Choosing a Quantitative Career\n\n\nWhat four O*NET profiles suggest about where to focus a job search\n\n\nAn ethical rvest scraping project comparing pay, projected openings, and preparation across four quantitative careers.\n\n\n\n\n\nSep 19, 2026\n\n\n\n\n\n\n\n\n\n\n\n\nWhy More Income Can Mean Less Instant Noodles\n\n\nUnderstanding inferior goods without confusing them with bad goods\n\n\n\n\n\n\n\n\nSep 9, 2026\n\n\nQianzhao Li\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "about.html",
@@ -207,7 +207,7 @@
     "href": "blog/posts/post4/index.html",
     "title": "Beyond the Sticker Price: The Cost of Financing a New Home",
     "section": "",
-    "text": "A lower advertised house price does not necessarily mean a lower monthly payment. Buyers finance both a property and the cost of borrowing. How did changes in real new-home prices and mortgage rates combine to change an illustrative buyer’s payment between 2019 and 2024? I place those endpoints within a decade of quarterly data, separating purchasing-power changes from financing costs. This is a payment comparison, not a complete measure of housing affordability relative to income."
+    "text": "What changed a new-home buyer’s monthly payment more between late 2019 and late 2024: the home’s price or the mortgage rate? In my model, the payment rose about $671 per month in 2024 dollars. Changing only the rate adds about $580; changing only the inflation-adjusted price adds about $66. The two changes also interact, adding the remaining $26. The rate increase did most of the work."
   },
   {
     "objectID": "blog/posts/post4/index.html#from-three-series-to-a-comparable-payment",
@@ -249,7 +249,7 @@
     "href": "blog/posts/post4/index.html#reproduce-the-analysis",
     "title": "Beyond the Sticker Price: The Cost of Financing a New Home",
     "section": "Reproduce the analysis",
-    "text": "Reproduce the analysis\nThe README documents folders, assumptions, and commands. Analysis code, plotting code, quarterly data, and download provenance are available alongside the GitHub repository. Ordinary rendering checks and reuses saved downloads; an explicit refresh retrieves new data, which may include revisions."
+    "text": "Reproduce the analysis\nThe README documents folders, assumptions, and commands. Analysis code, plotting code, quarterly data, income comparison, and download provenance are available alongside the GitHub repository. Ordinary rendering checks and reuses saved downloads; an explicit refresh retrieves new data, which may include revisions."
   },
   {
     "objectID": "blog/posts/post2/index.html#growth-market-size-and-openings-are-different-signals",
@@ -383,5 +383,40 @@
     "title": "Matching Parents and Children with SQL in Python",
     "section": "What the comparison can—and cannot—show",
     "text": "What the comparison can—and cannot—show\nOne year’s income may reflect a temporary shock or a particular career stage. Averaging several years can smooth short-lived changes, so it may better represent long-run economic status. A separate simulation in this repository makes the life-cycle problem explicit: its designed long-run sample slope is 0.444, while a single early-career year produces 0.149. Those numbers come from invented data, not the PSID.\nThe real PSID results show sensitivity to timing and averaging, but they do not isolate life-cycle bias. The child’s age changes between 2018 and 2022, and the economy changes too. We also cannot observe each family’s true permanent income. This sample excludes many families without complete positive income records, and I do not apply survey weights. It therefore does not represent a national mobility estimate.\nThe practical lesson is to verify family links with individual IDs, compare income measures on the same sample, and state exactly what each comparison identifies. The replication guide lists the extract variables, commands, outputs, and privacy rules. It links the aggregate estimates; the raw PSID records remain outside the public repository. Haider and Solon discuss why income measured at different ages can relate differently to long-run income."
+  },
+  {
+    "objectID": "blog/posts/post4/index.html#prices-and-rates-moved-differently",
+    "href": "blog/posts/post4/index.html#prices-and-rates-moved-differently",
+    "title": "Beyond the Sticker Price: The Cost of Financing a New Home",
+    "section": "1. Prices and rates moved differently",
+    "text": "1. Prices and rates moved differently\n\n\n\nReal median new-home prices and quarterly-average mortgage rates. Sources: Census/HUD, Freddie Mac, and BLS via FRED.\n\n\nThe median price of a new home rose just 4.5% after adjusting for overall inflation between 2019 Q4 and 2024 Q4. The average 30-year mortgage rate, however, climbed from 3.7% to 6.6%. A home can therefore cost much more each month even when its inflation-adjusted price changes only a little."
+  },
+  {
+    "objectID": "blog/posts/post4/index.html#turn-those-changes-into-a-monthly-payment",
+    "href": "blog/posts/post4/index.html#turn-those-changes-into-a-monthly-payment",
+    "title": "Beyond the Sticker Price: The Cost of Financing a New Home",
+    "section": "2. Turn those changes into a monthly payment",
+    "text": "2. Turn those changes into a monthly payment\n\n\n\nIllustrative real monthly payments, with a comparison holding the rate at its 2019 Q4 level. Calculations use 20% down and a 30-year term.\n\n\nI assume a 20% down payment and a 30-year fixed-rate loan. Under those assumptions, the monthly principal-and-interest payment rose from $1,478 to $2,149 in 2024 Q4 dollars. The dashed line asks what the payment would have been if the rate had stayed at its 2019 Q4 level while prices followed their actual path. At the 2024 price, that payment would have been $1,544, $606 below the modeled payment with the 2024 rate. This gap includes the small interaction between the higher rate and the changed price; it is not the rate-only figure quoted above."
+  },
+  {
+    "objectID": "blog/posts/post4/index.html#compare-the-payment-with-income",
+    "href": "blog/posts/post4/index.html#compare-the-payment-with-income",
+    "title": "Beyond the Sticker Price: The Cost of Financing a New Home",
+    "section": "3. Compare the payment with income",
+    "text": "3. Compare the payment with income\n\n\n\nAnnualized modeled Q4 new-home payment as a share of same-year U.S. median household income. Sources: Census Table H-5 and FRED series.\n\n\nThis third figure asks a different question: how large is the modeled payment beside a typical household’s income? I multiply each fourth-quarter monthly payment by 12 and divide it by the Census Bureau’s annual U.S. median household income. I use current dollars for both the payment and income in each year. The share rose from 21.0% in 2019 to 31.0% in 2024. Median income grew, but it did not keep up with the payment in this comparison."
+  },
+  {
+    "objectID": "blog/posts/post4/index.html#takeaway",
+    "href": "blog/posts/post4/index.html#takeaway",
+    "title": "Beyond the Sticker Price: The Cost of Financing a New Home",
+    "section": "Takeaway",
+    "text": "Takeaway\nOf the roughly $671 increase in the inflation-adjusted monthly payment, about $580 comes from the higher rate alone and only about $66 from the higher real price alone. Their interaction accounts for the rest. The payment also rose from about 21.0% to 31.0% of median income. For a prospective buyer, the interest rate deserves as much attention as the listing price.\nThese figures provide a national benchmark, not a measure of what a particular buyer can afford. The new-home median changes with the mix of homes sold; the median-income household need not buy a new home. I also leave out property taxes, insurance, maintenance, fees, and the down payment itself. The price, rate, and CPI data are not seasonally adjusted, so I compare the same quarter in each year. Freddie Mac changed its mortgage survey methodology in 2022."
+  },
+  {
+    "objectID": "blog/posts/post4/index.html#data-and-method",
+    "href": "blog/posts/post4/index.html#data-and-method",
+    "title": "Beyond the Sticker Price: The Cost of Financing a New Home",
+    "section": "Data and method",
+    "text": "Data and method\nI use new-home prices, mortgage rates, and consumer prices from FRED, plus Census Table H-5 for income. I average the weekly rates and monthly CPI values within each quarter, then convert prices and payments to 2024 Q4 dollars. I calculate the payment for each quarter’s price and rate and repeat the calculation with one 2019 Q4 input held fixed at a time. Those comparisons describe loan arithmetic, not a causal effect of interest-rate policy on house prices."
   }
 ]
