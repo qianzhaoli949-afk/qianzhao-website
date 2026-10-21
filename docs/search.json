@@ -81,7 +81,7 @@
     "href": "blog/index.html",
     "title": "Blog",
     "section": "",
-    "text": "Matching Parents and Children with SQL in Python\n\n\nHow income timing changes an intergenerational elasticity\n\n\nA PSID tutorial links birth mothers and adult children, then compares single-year and multi-year family-income measures.\n\n\n\n\n\nOct 19, 2026\n\n\n\n\n\n\n\n\n\n\n\n\nA Growing State, but Not Everywhere\n\n\nMapping population change across Pennsylvania’s counties, 2020–2024\n\n\nA county map shows where Pennsylvania gained and lost residents, while population components help explain the differences.\n\n\n\n\n\nOct 8, 2026\n\n\nQianzhao Li\n\n\n\n\n\n\n\n\n\n\n\n\nBeyond the Sticker Price: The Cost of Financing a New Home\n\n\nPrices, mortgage rates, and the income benchmark, 2015–2024\n\n\nHow prices and mortgage rates changed a modeled new-home payment—and how that payment compares with median income.\n\n\n\n\n\nOct 3, 2026\n\n\n\n\n\n\n\n\n\n\n\n\nEducation and Unemployment: How Did the Gap Change?\n\n\nWhat weighted CPS data reveal about working-age adults, 2019–2024\n\n\nFour figures distinguish education-group rankings from changes in the unemployment-rate gap.\n\n\n\n\n\nSep 28, 2026\n\n\n\n\n\n\n\n\n\n\n\n\nBeyond the Highest Salary: Choosing a Quantitative Career\n\n\nWhat four O*NET profiles suggest about where to focus a job search\n\n\nAn ethical rvest scraping project comparing pay, projected openings, and preparation across four quantitative careers.\n\n\n\n\n\nSep 19, 2026\n\n\n\n\n\n\n\n\n\n\n\n\nWhy More Income Can Mean Less Instant Noodles\n\n\nUnderstanding inferior goods without confusing them with bad goods\n\n\n\n\n\n\n\n\nSep 9, 2026\n\n\nQianzhao Li\n\n\n\n\n\nNo matching items"
+    "text": "Matching Parents and Children with SQL in Python\n\n\nHow income timing changes an intergenerational elasticity\n\n\nA PSID tutorial links birth mothers and adult children, then compares single-year and multi-year family-income measures.\n\n\n\n\n\nOct 19, 2026\n\n\n\n\n\n\n\n\n\n\n\n\nA Growing State, but Not Everywhere\n\n\nMapping population change across Pennsylvania’s counties, 2020–2024\n\n\nA county map shows where Pennsylvania gained and lost residents, while population components help explain the differences.\n\n\n\n\n\nOct 8, 2026\n\n\nQianzhao Li\n\n\n\n\n\n\n\n\n\n\n\n\nBeyond the Sticker Price: The Cost of Financing a New Home\n\n\nPrices, mortgage rates, and the income benchmark, 2015–2024\n\n\nHow prices and mortgage rates changed a modeled new-home payment—and how that payment compares with median income.\n\n\n\n\n\nOct 3, 2026\n\n\n\n\n\n\n\n\n\n\n\n\nEducation and Work: What Unemployment Rates Leave Out\n\n\nUnemployment, employment, and age patterns among U.S. adults, 2019–2024\n\n\nThree CPS charts show unemployment over time, employment among all adults, and differences within age groups.\n\n\n\n\n\nSep 28, 2026\n\n\n\n\n\n\n\n\n\n\n\n\nBeyond the Highest Salary: Choosing a Quantitative Career\n\n\nWhat four O*NET profiles suggest about where to focus a job search\n\n\nAn ethical rvest scraping project comparing pay, projected openings, and preparation across four quantitative careers.\n\n\n\n\n\nSep 19, 2026\n\n\n\n\n\n\n\n\n\n\n\n\nWhy More Income Can Mean Less Instant Noodles\n\n\nUnderstanding inferior goods without confusing them with bad goods\n\n\n\n\n\n\n\n\nSep 9, 2026\n\n\nQianzhao Li\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "about.html",
@@ -156,9 +156,9 @@
   {
     "objectID": "blog/posts/post3/index.html",
     "href": "blog/posts/post3/index.html",
-    "title": "Education and Unemployment: How Did the Gap Change?",
+    "title": "Education and Work: What Unemployment Rates Leave Out",
     "section": "",
-    "text": "How did unemployment differ across education groups from 2019 to 2024? I use IPUMS Current Population Survey (CPS) data to look at two separate questions: which groups had higher unemployment, and how far apart were their rates? A group can stay at the top of the ranking even when the distance between groups changes. I first compare the rates, then calculate that distance directly."
+    "text": "When unemployment falls, does that mean more people have jobs? Not necessarily: the unemployment rate excludes adults who are not looking for work. This matters when we compare education groups after a major labor-market shock. I use the Current Population Survey (CPS) to ask how unemployment changed from 2019 to 2024, whether employment among all adults followed the same path, and whether the education pattern also appears within age groups."
   },
   {
     "objectID": "blog/posts/post3/index.html#measuring-unemployment-consistently",
@@ -198,9 +198,9 @@
   {
     "objectID": "blog/posts/post3/index.html#data-and-reproducibility",
     "href": "blog/posts/post3/index.html#data-and-reproducibility",
-    "title": "Education and Unemployment: How Did the Gap Change?",
+    "title": "Education and Work: What Unemployment Rates Leave Out",
     "section": "Data and reproducibility",
-    "text": "Data and reproducibility\nSource: IPUMS CPS, University of Minnesota, using underlying U.S. Census Bureau and Bureau of Labor Statistics data. Extract created September 27, 2026. Education definitions follow IPUMS EDUC documentation.\nDownload the code and grouped summaries, analysis script, plotting script, annual gap calculations, and reproduction instructions. The GitHub repository contains this post under blog/posts/post3/. Licensed microdata are not redistributed; registered users can recreate the extract using the documented selections.\n\n\nShow R code\n# From the post3 folder, after running analyze.R with your local extract paths:\ns &lt;- readRDS(\"summary.rds\")\nsource(\"plots.R\")\ndraw_figures(s)"
+    "text": "Data and reproducibility\nSource: IPUMS CPS, University of Minnesota, using underlying U.S. Census Bureau and Bureau of Labor Statistics data. I use all 72 Basic Monthly samples from January 2019 through December 2024 and group completed education into four levels. The unemployment denominator includes employed and unemployed adults who are looking for work; the employment-share denominator includes all civilians in each group. Annual rates use sums of weighted monthly counts, not simple averages of monthly percentages. The extract was created September 27, 2026. Education definitions follow IPUMS EDUC documentation.\nDownload the code and grouped summaries, analysis script, plotting script, annual gap calculations, and reproduction instructions. The GitHub repository contains this post under blog/posts/post3/. Licensed microdata are not redistributed; registered users can recreate the extract using the documented selections.\n\n\nShow R code\n# From the post3 folder, after running analyze.R with your local extract paths:\ns &lt;- readRDS(\"summary.rds\")\nsource(\"plots.R\")\ndraw_figures(s)"
   },
   {
     "objectID": "blog/posts/post4/index.html",
@@ -418,5 +418,33 @@
     "title": "Beyond the Sticker Price: The Cost of Financing a New Home",
     "section": "Data and method",
     "text": "Data and method\nI use new-home prices, mortgage rates, and consumer prices from FRED, plus Census Table H-5 for income. I average the weekly rates and monthly CPI values within each quarter, then convert prices and payments to 2024 Q4 dollars. I calculate the payment for each quarter’s price and rate and repeat the calculation with one 2019 Q4 input held fixed at a time. Those comparisons describe loan arithmetic, not a causal effect of interest-rate policy on house prices."
+  },
+  {
+    "objectID": "blog/posts/post3/index.html#unemployment-jumped-but-rankings-do-not-show-the-size-of-a-gap",
+    "href": "blog/posts/post3/index.html#unemployment-jumped-but-rankings-do-not-show-the-size-of-a-gap",
+    "title": "Education and Work: What Unemployment Rates Leave Out",
+    "section": "1. Unemployment jumped, but rankings do not show the size of a gap",
+    "text": "1. Unemployment jumped, but rankings do not show the size of a gap\n\n\n\nMonthly unemployment rates by education. The shaded interval marks March–June 2020.\n\n\nThe spring 2020 spike affected all four education groups. The annual rate for adults without a high school diploma rose from 5.5% in 2019 to 11.7% in 2020. For bachelor’s degree holders, it rose from 2.1% to 4.7%. Their ranking stayed the same, but the difference between those two rates widened from 3.4 to 7.0 percentage points. Dividing the rates tells a different story: the ratio fell from 2.67 to 2.49. The gap grew in absolute terms, not relative terms. By 2024, the difference had narrowed to 4.0 points."
+  },
+  {
+    "objectID": "blog/posts/post3/index.html#count-adults-with-jobs-not-only-job-seekers",
+    "href": "blog/posts/post3/index.html#count-adults-with-jobs-not-only-job-seekers",
+    "title": "Education and Work: What Unemployment Rates Leave Out",
+    "section": "2. Count adults with jobs, not only job seekers",
+    "text": "2. Count adults with jobs, not only job seekers\n\n\n\nEmployed share of all adults ages 25–64 by education in 2019, 2020, and 2024. Source: weighted IPUMS CPS estimates.\n\n\nUnemployment counts only people in the labor force. The next chart instead divides the number with a job by all adults in each education group, including people who are not seeking work. Among adults without a high school diploma, the employed share fell from 58.2% in 2019 to 52.9% in 2020. Among bachelor’s degree holders, it fell from 84.0% to 81.1%. By 2024, those shares were 59.1% and 84.5%. This wider view confirms that a smaller share of both groups had jobs in 2020; the unemployment lines alone cannot tell us that. It also shows a persistent difference in employment levels between education groups."
+  },
+  {
+    "objectID": "blog/posts/post3/index.html#check-the-pattern-within-age-groups",
+    "href": "blog/posts/post3/index.html#check-the-pattern-within-age-groups",
+    "title": "Education and Work: What Unemployment Rates Leave Out",
+    "section": "3. Check the pattern within age groups",
+    "text": "3. Check the pattern within age groups\n\n\n\nAnnual rates within three age groups. Points show only 2019, 2020, and 2024; connecting segments are visual guides. All panels use the same vertical scale and WTFINL weights.\n\n\nThe education groups also contain different mixes of younger and older adults. The final figure compares unemployment within three age bands. In 2024, among 25–34-year-olds, the rate was 8.6% without a high school diploma versus 2.9% with a bachelor’s degree or higher. The pattern appears within the older bands too. Differences in age mix therefore do not fully account for the overall education pattern."
+  },
+  {
+    "objectID": "blog/posts/post3/index.html#takeaway",
+    "href": "blog/posts/post3/index.html#takeaway",
+    "title": "Education and Work: What Unemployment Rates Leave Out",
+    "section": "Takeaway",
+    "text": "Takeaway\nThe 2020 unemployment increase widened the lowest-to-highest education gap in percentage points, even as the ratio between their rates fell. Employment among all adults also dropped in 2020 and had largely recovered by 2024; the education difference remained. The age panels show that this pattern is not just a comparison of young people with older people. Looking at all three views gives a clearer picture of labor-market recovery than a single unemployment ranking.\nThese are descriptive, WTFINL-weighted estimates for ages 25–64, not evidence that a degree caused the differences. The monthly data are not seasonally adjusted, and the charts do not include confidence intervals. CPS collection changed during the pandemic, which also limits close comparisons."
   }
 ]

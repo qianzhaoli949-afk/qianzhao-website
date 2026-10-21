@@ -1,7 +1,7 @@
 BLOG POST 3 — Qianzhao Li
 
-Research question: How did unemployment differ by education before, during,
-and after the pandemic among U.S. civilian adults ages 25–64?
+Research question: How did unemployment and employment differ by education
+before, during, and after the pandemic among U.S. civilian adults ages 25–64?
 
 1. Obtain an authorized IPUMS CPS extract at https://cps.ipums.org/.
    Choose Cross-sectional, Basic Monthly, every month January 2019–December
@@ -20,7 +20,7 @@ and after the pandemic among U.S. civilian adults ages 25–64?
    10^4 once. It saves only grouped totals and rates in summary.rds.
    It overwrites summary.rds and session-info.txt with the new results.
 
-3. Recreate the four charts and education-gaps.csv in R:
+3. Recreate the three charts and education-gaps.csv in R:
    s <- readRDS("summary.rds")
    source("plots.R")
    draw_figures(s)
@@ -30,7 +30,10 @@ and after the pandemic among U.S. civilian adults ages 25–64?
    The difference uses percentage points, not percent change. The CSV
    also reports the ratio of those two rates for 2019 through 2024.
    A wider absolute difference need not imply a larger relative ratio.
-   The gap chart is descriptive, with no causal or significance claim.
+   The article reports this gap in text rather than repeating the monthly
+   unemployment series in another chart. The three charts show monthly
+   unemployment, employment among all adults, and unemployment within age
+   groups. They are descriptive, with no causal or significance claim.
 
 4. To render in the website, install knitr and rmarkdown and use Quarto:
    quarto render blog/posts/post3/index.qmd
@@ -50,6 +53,8 @@ Age bands: 25–34, 35–49, 50–64.
 
 Monthly rate = 100 * sum(weight * unemployed) / sum(weight * labor force).
 Annual rate = 100 * sum(monthly unemployment totals) / sum(monthly LF totals).
+Employment-to-population rate = 100 * sum(weighted employed) /
+sum(weighted civilian population) in the same group and period.
 Dividing both annual sums by 12 gives the same rate. Raw annual totals in
 summary.rds are person-month totals, not annual population counts.
 Observations repeat across months and must not be treated as independent

@@ -1,6 +1,6 @@
-# Post 3 — Education and Unemployment
+# Post 3 — Education and Work
 
-**Question:** How did unemployment vary by education before, during, and after the pandemic among U.S. adults ages 25–64?
+**Question:** How did unemployment and employment vary by education before, during, and after the pandemic among U.S. adults ages 25–64?
 
 [Read the post](https://qianzhaoli949-afk.github.io/qianzhao-website/blog/posts/post3/index.html) · [Repository guide](../../../README.md)
 
@@ -10,11 +10,11 @@
 | --- | --- |
 | Article | [index.qmd](index.qmd) |
 | Data processing | [analyze.R](analyze.R): reads a local licensed extract and calculates weighted summaries |
-| Visualization | [plots.R](plots.R): generates all four figures and annual gap calculations |
+| Visualization | [plots.R](plots.R): generates three figures and annual gap calculations |
 | Gap calculations | [education-gaps.csv](education-gaps.csv): annual rates, percentage-point differences, and rate ratios for the lowest and highest education groups |
 | Public data | [summary.rds](summary.rds): grouped totals, rates, exclusion counts, and input checksums; no individual records |
 | Private inputs | An authorized `.dat.gz` extract and its `.xml` DDI, stored outside this repository |
-| Results | [figures/](figures/): `monthly.png`, `annual.png`, `gap.png`, and `age.png` |
+| Results | [figures/](figures/): `monthly.png`, `employment.png`, and `age.png` |
 | Detailed methods | [REPRODUCE.txt](REPRODUCE.txt): sample selections, variable codes, formulas, and checks |
 | Software environment | [session-info.txt](session-info.txt) |
 
@@ -28,9 +28,9 @@ source("plots.R")
 draw_figures(s)
 ```
 
-The script writes or replaces four PNG files in `figures/` and `education-gaps.csv`. It uses base R. This reproduces the visuals and gap calculations from saved results; it does not rerun the microdata analysis.
+The script writes or replaces three PNG files in `figures/` and `education-gaps.csv`. It uses base R. This reproduces the visuals and gap calculations from saved results; it does not rerun the microdata analysis.
 
-The gap figure subtracts the bachelor's-or-higher annual unemployment rate from the less-than-high-school rate. Both rates already use WTFINL-weighted annual totals. The difference has units of percentage points. The CSV also divides the first rate by the second to show the rate ratio. From 2019 to 2020 the estimated difference grows (about 3.4 to 7.0 points), while the ratio falls (about 2.67 to 2.49). These are different comparisons; neither establishes causality or statistical significance. `education_gaps(s)` checks unique year matches and returns all six annual comparisons. The revised conclusion describes the figures rather than recommending untested interventions.
+The article uses a monthly unemployment chart, an employment-to-population chart, and age-group unemployment panels. The middle chart divides employed adults by all adults ages 25–64 in each education group; unlike the unemployment rate, it includes adults outside the labor force in its denominator. The gap CSV subtracts the bachelor's-or-higher annual unemployment rate from the less-than-high-school rate and divides one rate by the other. From 2019 to 2020 the difference grows (about 3.4 to 7.0 percentage points), while the ratio falls (about 2.67 to 2.49). `education_gaps(s)` checks year matches and returns all six annual comparisons. Neither measure establishes causality or statistical significance.
 
 ## Option B: Reproduce the analysis from microdata
 
@@ -65,6 +65,6 @@ Open `docs/blog/posts/post3/index.html`. Rendering uses `summary.rds` and redraw
 
 ## Methods and data use
 
-Estimates use the monthly person weight `WTFINL`. Unemployment rates divide weighted unemployed people by the weighted civilian labor force, not all adults. Annual rates are ratios of summed monthly weighted counts. Repeated respondents are person-month observations, not distinct individuals. Results are not seasonally adjusted and do not establish causality; no statistical significance is claimed. Full coding and validation details are in [REPRODUCE.txt](REPRODUCE.txt).
+Estimates use the monthly person weight `WTFINL`. Unemployment rates divide weighted unemployed people by the weighted civilian labor force. Employment-to-population rates divide weighted employed people by all civilian adults in the same group. Annual rates are ratios of summed monthly weighted counts. Repeated respondents are person-month observations, not distinct individuals. Results are not seasonally adjusted and do not establish causality; no statistical significance is claimed. Full coding and validation details are in [REPRODUCE.txt](REPRODUCE.txt).
 
 Source: IPUMS CPS, University of Minnesota, using underlying U.S. Census Bureau and Bureau of Labor Statistics data. Follow [IPUMS citation guidance](https://cps.ipums.org/cps/citation.shtml) and the data-use agreement. The repository intentionally excludes individual-level CPS extracts and their DDI files; obtain your own authorized copy for full replication.
