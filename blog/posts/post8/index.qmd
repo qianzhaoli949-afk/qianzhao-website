@@ -1,7 +1,7 @@
 ---
 title: "What Can a Sample Tell Us About a $50 Average?"
 subtitle: "A simulation of bootstrap intervals and hypothesis tests"
-date: 2026-10-27
+date: 2026-10-28
 categories: [simulation, statistics, data visualization]
 description: "Use simulated samples to see how bootstrap confidence intervals and hypothesis tests work."
 resources:
