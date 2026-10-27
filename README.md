@@ -14,6 +14,7 @@ A Quarto website featuring my profile, résumé, and coursework in economics and
 | [4. Beyond the Sticker Price: The Cost of Financing a New Home](https://qianzhaoli949-afk.github.io/qianzhao-website/blog/posts/post4/index.html) | Compares new-home prices, mortgage rates, modeled payments, and median household income with three visualizations, 2015–2024. | [Post 4](blog/posts/post4/) |
 | [5. A Growing State, but Not Everywhere](https://qianzhaoli949-afk.github.io/qianzhao-website/blog/posts/post5/index.html) | Maps population change across 67 Pennsylvania counties and examines migration and natural change, 2020–2024. | [Post 5](blog/posts/post5/) |
 | [6. Matching Parents and Children with SQL in Python](https://qianzhaoli949-afk.github.io/qianzhao-website/blog/posts/post6/index.html) | Links PSID birth mothers and adult children with SQL, then compares single-year and multi-year family-income elasticities. | [Post 6](blog/posts/post6/) |
+| [7. How Much Does County Size Change the Story?](https://qianzhaoli949-afk.github.io/qianzhao-website/blog/posts/post7/index.html) | Uses an interactive Plotly chart to compare county population changes in people and percentages. | [Post 7](blog/posts/post7/) |
 
 ## Run locally
 
@@ -29,6 +30,7 @@ Each post has a dedicated guide mapping its code, data, and results and explaini
 - [Post 4 replication guide](blog/posts/post4/README.md)
 - [Post 5 replication guide](blog/posts/post5/README.md)
 - [Post 6 replication guide](blog/posts/post6/README.md)
+- [Post 7 replication guide](blog/posts/post7/README.md)
 
 You will need [R](https://www.r-project.org/) and [Quarto](https://quarto.org/). RStudio is optional.
 Post 6 additionally uses Python 3.9 or later; its scripts need no third-party Python packages.

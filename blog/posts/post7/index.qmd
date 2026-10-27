@@ -1,0 +1,102 @@
+---
+title: "How Much Does County Size Change the Story?"
+subtitle: "An interactive look at population change in Pennsylvania, 2020–2024"
+date: 2026-10-27
+categories: [data visualization, population, Plotly]
+description: "Explore how population gains and losses look across Pennsylvania counties when measured in people or percentages."
+resources:
+  - code/chart.js
+  - code/prepare.R
+  - data/pa-counties.csv
+  - data/counties.js
+  - vendor/plotly-basic-2.35.2.min.js
+  - README.md
+---
+
+When a county grows quickly, does it also gain a large number of residents?
+Not always. A small county can grow faster in percentage terms while a larger
+county adds more people. That distinction matters when local governments think
+about housing, transportation, and public services.
+
+Living in Philadelphia made me curious about changes across the rest of the
+state. News about a fast-growing county can sound like a story about a large
+number of new residents, but the percentage alone does not tell us that.
+I wanted to see how much the comparison changes when I look at the number of
+people as well. Pennsylvania offers a useful example because its counties
+range from small rural communities to large urban areas.
+
+I use Census Bureau estimates for all 67 Pennsylvania counties to compare
+population change from the April 1, 2020 estimates base to July 1, 2024. This
+is the same Vintage 2024 dataset I used in Blog 5. Here I use an interactive
+chart to let readers examine individual counties and compare two ways to
+measure growth. The Census Bureau has since released newer estimates; I keep
+the 2024 vintage so the comparison stays consistent with my earlier post.
+
+## Explore the counties
+
+Each dot represents a county. The horizontal axis shows its 2020 population
+on a logarithmic scale, so the gap between 10,000 and 100,000 is the same
+width as the gap between 100,000 and 1 million. Choose a measure to switch
+between percentage change and the number of people gained or lost. Hover over
+a dot to see the county name, population at both endpoints, and both measures
+of change. You can also select a county to highlight it, or click a legend
+label to show or hide gainers or losers.
+
+```{=html}
+<div style="display:flex;flex-wrap:wrap;gap:1rem;margin:1rem 0;align-items:center">
+  <label for="measure">Measure: <select id="measure"><option value="percent">Percent change</option><option value="people">Change in people</option></select></label>
+  <label for="county">Highlight a county: <select id="county"><option value="">All counties</option></select></label>
+</div>
+<div id="county-chart" style="width:100%;min-height:500px" aria-label="Interactive scatterplot comparing county population size and population change"></div>
+<noscript>The interactive chart requires JavaScript. The linked county data remain available below.</noscript>
+<script src="vendor/plotly-basic-2.35.2.min.js"></script>
+<script src="data/counties.js"></script>
+<script src="code/chart.js"></script>
+```
+
+## What changes when we switch measures?
+
+Pike County had the fastest percentage growth in the state: its population
+rose by about 6.5%, or 3,831 people. Chester County grew by a smaller 4.9%,
+but added 26,327 people. Chester started with about nine times as many
+residents, so its smaller rate still meant a much larger increase in people.
+Switching the chart to “Change in people” makes that difference visible.
+
+Montgomery and Cumberland offer another comparison. Cumberland grew by about
+6.2%, while Montgomery grew by about 2.7%. Yet Montgomery added 22,777
+residents, compared with 16,048 in Cumberland. Montgomery began with more
+than three times Cumberland's population. If I ranked counties only by growth
+rate, I would miss how many more residents Montgomery gained. If I ranked them
+only by the number gained, I would miss how quickly Cumberland changed
+relative to its starting size. The two measures answer different questions,
+and the switch in the chart lets the reader see both for every county.
+
+The chart also shows why the state total can be misleading about local
+experience. Pennsylvania added about 75,842 residents overall, but 39 counties
+lost population. Philadelphia lost 29,878 residents, or about 1.9% of its
+2020 base. Select Philadelphia to find it among the other counties, then
+switch measures to compare the size of its loss with the losses elsewhere.
+
+## Takeaway
+
+For a county planner, a percentage helps compare the pace of change across
+places of different sizes. The number of people may matter more when
+estimating demand for homes or services. Neither number alone tells a planner
+how many homes to build: household size, vacancies, and population age also
+matter. The chart describes where changes occurred; it does not show why
+people moved or trace moves between counties.
+
+## Data and reproduction
+
+The data come from the [Census Bureau's Vintage 2024 county population
+estimates](https://www.census.gov/newsroom/press-kits/2025/population-estimates-components-change-counties-metro-micro-puerto-rico.html).
+The starting value is the estimates base, not the unadjusted 2020 census
+count. The Bureau can revise earlier estimates when it releases a new vintage.
+I calculate the change as the 2024 estimate minus the base and divide by the
+base for the percentage change.
+
+The chart uses Plotly's JavaScript library. The [county data](data/pa-counties.csv),
+[preparation code](code/prepare.R), [chart code](code/chart.js), and
+[reproduction instructions](README.md) are available with the post. The
+source CSV comes from the checked output of [Blog 5](../post5/index.html); its guide
+explains how to download and prepare the original Census data.
