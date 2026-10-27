@@ -15,6 +15,7 @@ A Quarto website featuring my profile, résumé, and coursework in economics and
 | [5. A Growing State, but Not Everywhere](https://qianzhaoli949-afk.github.io/qianzhao-website/blog/posts/post5/index.html) | Maps population change across 67 Pennsylvania counties and examines migration and natural change, 2020–2024. | [Post 5](blog/posts/post5/) |
 | [6. Matching Parents and Children with SQL in Python](https://qianzhaoli949-afk.github.io/qianzhao-website/blog/posts/post6/index.html) | Links PSID birth mothers and adult children with SQL, then compares single-year and multi-year family-income elasticities. | [Post 6](blog/posts/post6/) |
 | [7. How Much Does County Size Change the Story?](https://qianzhaoli949-afk.github.io/qianzhao-website/blog/posts/post7/index.html) | Uses an interactive Plotly chart to compare county population changes in people and percentages. | [Post 7](blog/posts/post7/) |
+| [8. What Can a Sample Tell Us About a $50 Average?](https://qianzhaoli949-afk.github.io/qianzhao-website/blog/posts/post8/index.html) | Simulates bootstrap intervals, coverage, and hypothesis tests with interactive charts. | [Post 8](blog/posts/post8/) |
 
 ## Run locally
 
@@ -31,6 +32,7 @@ Each post has a dedicated guide mapping its code, data, and results and explaini
 - [Post 5 replication guide](blog/posts/post5/README.md)
 - [Post 6 replication guide](blog/posts/post6/README.md)
 - [Post 7 replication guide](blog/posts/post7/README.md)
+- [Post 8 replication guide](blog/posts/post8/README.md)
 
 You will need [R](https://www.r-project.org/) and [Quarto](https://quarto.org/). RStudio is optional.
 Post 6 additionally uses Python 3.9 or later; its scripts need no third-party Python packages.
@@ -45,7 +47,7 @@ Post 6 additionally uses Python 3.9 or later; its scripts need no third-party Py
 2. Install the R packages once, from the R console:
 
    ```r
-   install.packages(c("knitr", "rmarkdown", "rvest", "httr", "xml2"))
+   install.packages(c("knitr", "rmarkdown", "rvest", "httr", "xml2", "jsonlite"))
    ```
 
 3. Preview the website from a terminal in the repository root:
@@ -130,6 +132,8 @@ blog/posts/post3/    CPS analysis, grouped summaries, and figures
 blog/posts/post4/    Housing and income analysis: code, data, results, and replication guide
 blog/posts/post5/    Census county GIS analysis: code, data, maps, and replication guide
 blog/posts/post6/    PSID mother-child SQL analysis, aggregate results, and separate simulation
+blog/posts/post7/    Interactive Pennsylvania county population comparison
+blog/posts/post8/    Bootstrap and hypothesis-testing simulations and interactive figures
 images/              Website images
 styles.css           Custom styling
 docs/                Rendered website for GitHub Pages
@@ -140,6 +144,10 @@ docs/                Rendered website for GitHub Pages
 Edit the source files, run `quarto render`, inspect the results, and commit the relevant source files together with the updated `docs/` output. Push the commit to GitHub to publish through the repository's GitHub Pages configuration. Local edits in RStudio do not automatically upload to GitHub. Edit `.qmd` sources rather than generated HTML files.
 
 ## Sources and data use
+
+- **Post 8:** fixed-seed simulations using hypothetical grocery spending; no real survey data.
+
+- **Post 7:** U.S. Census Bureau Vintage 2024 Pennsylvania county population estimates, using the prepared data from Post 5.
 
 - **Post 6:** PSID public-use Parent Identification and Cross-Year Individual extracts, plus FRED CPIAUCNS for inflation adjustment. Raw PSID person-level records are not included. A separate fixed-seed simulation uses invented records to illustrate life-cycle measurement concerns.
 

@@ -1,0 +1,127 @@
+---
+title: "What Can a Sample Tell Us About a $50 Average?"
+subtitle: "A simulation of bootstrap intervals and hypothesis tests"
+date: 2026-10-27
+categories: [simulation, statistics, data visualization]
+description: "Use simulated samples to see how bootstrap confidence intervals and hypothesis tests work."
+resources:
+  - code/simulate.R
+  - code/charts.js
+  - data/simulations.js
+  - data/simulations.rds
+  - vendor/plotly-basic-2.35.2.min.js
+  - README.md
+format:
+  html:
+    code-fold: true
+---
+
+```{r}
+#| include: false
+s <- readRDS("data/simulations.rds")[["50"]]
+usd <- function(x) sprintf("$%.2f", x)
+```
+
+Suppose a student wants to estimate average weekly spending on groceries.
+They ask 50 people and find that the sample average is close to $50. How much
+should they trust that number? A different group of 50 people would probably
+give a different average. A confidence interval and a hypothesis test give us
+two ways to describe that uncertainty.
+
+I use a simulated example so we can see the truth that real survey data usually
+hide. I generate individual spending from a normal distribution with a mean of
+$50 and a standard deviation of $10. These values are assumptions for a teaching
+example, not actual grocery data. The charts start with 50 people; use the menu
+to compare samples of 20 and 100. Each choice shows a separately generated
+sample and a fresh set of simulations saved with the post.
+
+```{=html}
+<div style="margin:1rem 0"><label for="sample-size">Sample size: <select id="sample-size"><option value="20">20 people</option><option value="50" selected>50 people</option><option value="100">100 people</option></select></label></div>
+```
+
+## 1. Build an interval from one sample
+
+First, I draw one sample from the population. To bootstrap it, I draw the same
+number of observations from that sample *with replacement*. Some people can
+appear more than once in a resample, while others do not appear at all. I
+calculate the mean each time and repeat this process 500 times. The middle 95%
+of those bootstrap means, between the 2.5th and 97.5th percentiles, gives a
+percentile bootstrap interval.
+
+```{=html}
+<div id="bootstrap-chart" style="width:100%;min-height:360px" aria-label="Histogram of bootstrap sample means"></div>
+<p id="bootstrap-note"></p>
+```
+
+For the sample of 50, the mean is `r usd(s$sample_mean)`, and the interval runs
+from `r usd(s$interval[1])` to `r usd(s$interval[2])`. The histogram shows how
+the mean changes when we reuse the observed sample. The interval is not a
+range containing 95% of individual grocery bills; it describes uncertainty
+about the population mean.
+
+## 2. Repeat the whole exercise
+
+One interval cannot tell us whether the procedure works in the long run. Here I
+draw 1,000 independent samples from the population and construct a new bootstrap
+interval for each one. The chart displays the first 100 intervals. A teal line
+contains the true mean of $50; an orange line misses it. The count below the
+chart uses all 1,000 intervals, including those not shown.
+
+```{=html}
+<div id="coverage-chart" style="width:100%;min-height:440px" aria-label="Bootstrap confidence intervals across repeated samples"></div>
+<p id="coverage-note"></p>
+```
+
+With 50 people, `r s$covered_count` of the 1,000 intervals contain $50:
+`r sprintf("%.1f", 100*s$coverage)`%. That is close to 95%, although it need
+not equal exactly 95% in a finite simulation. With 20 people, the same run
+covers $50 in `r sprintf("%.1f", 100*readRDS("data/simulations.rds")[["20"]]$coverage)`% of intervals. Simulation noise and the percentile method's
+finite-sample accuracy can both contribute to the difference. A 95% confidence level describes
+the performance of the procedure across repeated samples. Once we compute one
+interval, it either contains the fixed population mean or it does not; it is
+not correct to assign that particular fixed interval a 95% probability of
+containing the fixed mean.
+
+## 3. Test a $50 mean
+
+Now consider a different question: would the observed sample mean be unusual
+if the population mean really were $50? My null hypothesis is that the mean
+is $50. For this teaching example, I also assume the population distribution is
+normal with a known $10 standard deviation. I simulate 5,000 new sample means
+under those assumptions. The orange tails mark the most extreme 5% of the
+simulated absolute deviations from $50, split between the two sides.
+
+```{=html}
+<div id="null-chart" style="width:100%;min-height:360px" aria-label="Null distribution of sample means and rejection region"></div>
+<p id="null-note"></p>
+<noscript>These charts require JavaScript. The R simulation code and saved results are linked below.</noscript>
+<script src="vendor/plotly-basic-2.35.2.min.js"></script>
+<script src="data/simulations.js"></script>
+<script src="code/charts.js"></script>
+```
+
+The solid line shows the observed sample mean. I calculate a two-sided p-value
+as the fraction of null simulations at least as far from $50 as that mean. For
+50 people, it is about `r sprintf("%.3f", s$p_value)`, so this example does not
+reject the null at the 5% level. A p-value is not the probability that the null
+hypothesis is true. It measures how unusual the sample result would be under
+the stated null model. Both the simulated cutoff and p-value have some Monte
+Carlo variation; a different random seed can change them slightly.
+
+## Takeaway
+
+The bootstrap uses one sample to estimate uncertainty, while repeated sampling
+lets us check how often the interval procedure covers a known truth. A hypothesis
+test asks a related but different question: how unusual is the observed result
+under a particular null model? Try changing the sample size and compare the
+widths and p-values. The sample changes too, so the p-value need not move in
+one direction. The near-95% coverage here depends on this simulation setup and
+does not guarantee the same coverage for every population or bootstrap method.
+
+## Reproduce the simulation
+
+The [R script](code/simulate.R) records the random seed, 500 bootstrap
+resamples per interval, 1,000 coverage samples, and 5,000 null simulations.
+The [chart code](code/charts.js), [saved results](data/simulations.rds), and
+[README](README.md) explain how to rerun the example. The Plotly library is
+included locally, so the interactive charts do not require a live data service.

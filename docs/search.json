@@ -81,7 +81,7 @@
     "href": "blog/index.html",
     "title": "Blog",
     "section": "",
-    "text": "How Much Does County Size Change the Story?\n\n\nAn interactive look at population change in Pennsylvania, 2020–2024\n\n\nExplore how population gains and losses look across Pennsylvania counties when measured in people or percentages.\n\n\n\n\n\nOct 27, 2026\n\n\n\n\n\n\n\n\n\n\n\n\nMatching Parents and Children with SQL in Python\n\n\nHow income timing changes an intergenerational elasticity\n\n\nA PSID tutorial links birth mothers and adult children, then compares single-year and multi-year family-income measures.\n\n\n\n\n\nOct 19, 2026\n\n\n\n\n\n\n\n\n\n\n\n\nA Growing State, but Not Everywhere\n\n\nMapping population change across Pennsylvania’s counties, 2020–2024\n\n\nA county map shows where Pennsylvania gained and lost residents, while population components help explain the differences.\n\n\n\n\n\nOct 8, 2026\n\n\nQianzhao Li\n\n\n\n\n\n\n\n\n\n\n\n\nBeyond the Sticker Price: The Cost of Financing a New Home\n\n\nPrices, mortgage rates, and the income benchmark, 2015–2024\n\n\nHow prices and mortgage rates changed a modeled new-home payment—and how that payment compares with median income.\n\n\n\n\n\nOct 3, 2026\n\n\n\n\n\n\n\n\n\n\n\n\nEducation and Work: What Unemployment Rates Leave Out\n\n\nUnemployment, employment, and age patterns among U.S. adults, 2019–2024\n\n\nThree CPS charts show unemployment over time, employment among all adults, and differences within age groups.\n\n\n\n\n\nSep 28, 2026\n\n\n\n\n\n\n\n\n\n\n\n\nBeyond the Highest Salary: Choosing a Quantitative Career\n\n\nWhat four O*NET profiles suggest about where to focus a job search\n\n\nAn ethical rvest scraping project comparing pay, projected openings, and preparation across four quantitative careers.\n\n\n\n\n\nSep 19, 2026\n\n\n\n\n\n\n\n\n\n\n\n\nWhy More Income Can Mean Less Instant Noodles\n\n\nUnderstanding inferior goods without confusing them with bad goods\n\n\n\n\n\n\n\n\nSep 9, 2026\n\n\nQianzhao Li\n\n\n\n\n\nNo matching items"
+    "text": "How Much Does County Size Change the Story?\n\n\nAn interactive look at population change in Pennsylvania, 2020–2024\n\n\nExplore how population gains and losses look across Pennsylvania counties when measured in people or percentages.\n\n\n\n\n\nOct 27, 2026\n\n\n\n\n\n\n\n\n\n\n\n\nWhat Can a Sample Tell Us About a $50 Average?\n\n\nA simulation of bootstrap intervals and hypothesis tests\n\n\nUse simulated samples to see how bootstrap confidence intervals and hypothesis tests work.\n\n\n\n\n\nOct 27, 2026\n\n\n\n\n\n\n\n\n\n\n\n\nMatching Parents and Children with SQL in Python\n\n\nHow income timing changes an intergenerational elasticity\n\n\nA PSID tutorial links birth mothers and adult children, then compares single-year and multi-year family-income measures.\n\n\n\n\n\nOct 19, 2026\n\n\n\n\n\n\n\n\n\n\n\n\nA Growing State, but Not Everywhere\n\n\nMapping population change across Pennsylvania’s counties, 2020–2024\n\n\nA county map shows where Pennsylvania gained and lost residents, while population components help explain the differences.\n\n\n\n\n\nOct 8, 2026\n\n\nQianzhao Li\n\n\n\n\n\n\n\n\n\n\n\n\nBeyond the Sticker Price: The Cost of Financing a New Home\n\n\nPrices, mortgage rates, and the income benchmark, 2015–2024\n\n\nHow prices and mortgage rates changed a modeled new-home payment—and how that payment compares with median income.\n\n\n\n\n\nOct 3, 2026\n\n\n\n\n\n\n\n\n\n\n\n\nEducation and Work: What Unemployment Rates Leave Out\n\n\nUnemployment, employment, and age patterns among U.S. adults, 2019–2024\n\n\nThree CPS charts show unemployment over time, employment among all adults, and differences within age groups.\n\n\n\n\n\nSep 28, 2026\n\n\n\n\n\n\n\n\n\n\n\n\nBeyond the Highest Salary: Choosing a Quantitative Career\n\n\nWhat four O*NET profiles suggest about where to focus a job search\n\n\nAn ethical rvest scraping project comparing pay, projected openings, and preparation across four quantitative careers.\n\n\n\n\n\nSep 19, 2026\n\n\n\n\n\n\n\n\n\n\n\n\nWhy More Income Can Mean Less Instant Noodles\n\n\nUnderstanding inferior goods without confusing them with bad goods\n\n\n\n\n\n\n\n\nSep 9, 2026\n\n\nQianzhao Li\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "about.html",
@@ -481,5 +481,47 @@
     "title": "How Much Does County Size Change the Story?",
     "section": "Takeaway",
     "text": "Takeaway\nFor a county planner, a percentage helps compare the pace of change across places of different sizes. The number of people may matter more when estimating demand for homes or services. Neither number alone tells a planner how many homes to build: household size, vacancies, and population age also matter. The chart describes where changes occurred; it does not show why people moved or trace moves between counties."
+  },
+  {
+    "objectID": "blog/posts/post8/index.html",
+    "href": "blog/posts/post8/index.html",
+    "title": "What Can a Sample Tell Us About a $50 Average?",
+    "section": "",
+    "text": "Suppose a student wants to estimate average weekly spending on groceries. They ask 50 people and find that the sample average is close to $50. How much should they trust that number? A different group of 50 people would probably give a different average. A confidence interval and a hypothesis test give us two ways to describe that uncertainty.\nI use a simulated example so we can see the truth that real survey data usually hide. I generate individual spending from a normal distribution with a mean of $50 and a standard deviation of $10. These values are assumptions for a teaching example, not actual grocery data. The charts start with 50 people; use the menu to compare samples of 20 and 100. Each choice shows a separately generated sample and a fresh set of simulations saved with the post."
+  },
+  {
+    "objectID": "blog/posts/post8/index.html#build-an-interval-from-one-sample",
+    "href": "blog/posts/post8/index.html#build-an-interval-from-one-sample",
+    "title": "What Can a Sample Tell Us About a $50 Average?",
+    "section": "1. Build an interval from one sample",
+    "text": "1. Build an interval from one sample\nFirst, I draw one sample from the population. To bootstrap it, I draw the same number of observations from that sample with replacement. Some people can appear more than once in a resample, while others do not appear at all. I calculate the mean each time and repeat this process 500 times. The middle 95% of those bootstrap means, between the 2.5th and 97.5th percentiles, gives a percentile bootstrap interval.\n\n\nFor the sample of 50, the mean is $50.32, and the interval runs from $47.64 to $52.99. The histogram shows how the mean changes when we reuse the observed sample. The interval is not a range containing 95% of individual grocery bills; it describes uncertainty about the population mean."
+  },
+  {
+    "objectID": "blog/posts/post8/index.html#repeat-the-whole-exercise",
+    "href": "blog/posts/post8/index.html#repeat-the-whole-exercise",
+    "title": "What Can a Sample Tell Us About a $50 Average?",
+    "section": "2. Repeat the whole exercise",
+    "text": "2. Repeat the whole exercise\nOne interval cannot tell us whether the procedure works in the long run. Here I draw 1,000 independent samples from the population and construct a new bootstrap interval for each one. The chart displays the first 100 intervals. A teal line contains the true mean of $50; an orange line misses it. The count below the chart uses all 1,000 intervals, including those not shown.\n\n\nWith 50 people, 945 of the 1,000 intervals contain $50: 94.5%. That is close to 95%, although it need not equal exactly 95% in a finite simulation. With 20 people, the same run covers $50 in 92.7% of intervals. Simulation noise and the percentile method’s finite-sample accuracy can both contribute to the difference. A 95% confidence level describes the performance of the procedure across repeated samples. Once we compute one interval, it either contains the fixed population mean or it does not; it is not correct to assign that particular fixed interval a 95% probability of containing the fixed mean."
+  },
+  {
+    "objectID": "blog/posts/post8/index.html#test-a-50-mean",
+    "href": "blog/posts/post8/index.html#test-a-50-mean",
+    "title": "What Can a Sample Tell Us About a $50 Average?",
+    "section": "3. Test a $50 mean",
+    "text": "3. Test a $50 mean\nNow consider a different question: would the observed sample mean be unusual if the population mean really were $50? My null hypothesis is that the mean is $50. For this teaching example, I also assume the population distribution is normal with a known $10 standard deviation. I simulate 5,000 new sample means under those assumptions. The orange tails mark the most extreme 5% of the simulated absolute deviations from $50, split between the two sides.\n\n\nThese charts require JavaScript. The R simulation code and saved results are linked below.\n\n\n\nThe solid line shows the observed sample mean. I calculate a two-sided p-value as the fraction of null simulations at least as far from $50 as that mean. For 50 people, it is about 0.820, so this example does not reject the null at the 5% level. A p-value is not the probability that the null hypothesis is true. It measures how unusual the sample result would be under the stated null model. Both the simulated cutoff and p-value have some Monte Carlo variation; a different random seed can change them slightly."
+  },
+  {
+    "objectID": "blog/posts/post8/index.html#takeaway",
+    "href": "blog/posts/post8/index.html#takeaway",
+    "title": "What Can a Sample Tell Us About a $50 Average?",
+    "section": "Takeaway",
+    "text": "Takeaway\nThe bootstrap uses one sample to estimate uncertainty, while repeated sampling lets us check how often the interval procedure covers a known truth. A hypothesis test asks a related but different question: how unusual is the observed result under a particular null model? Try changing the sample size and compare the widths and p-values. The sample changes too, so the p-value need not move in one direction. The near-95% coverage here depends on this simulation setup and does not guarantee the same coverage for every population or bootstrap method."
+  },
+  {
+    "objectID": "blog/posts/post8/index.html#reproduce-the-simulation",
+    "href": "blog/posts/post8/index.html#reproduce-the-simulation",
+    "title": "What Can a Sample Tell Us About a $50 Average?",
+    "section": "Reproduce the simulation",
+    "text": "Reproduce the simulation\nThe R script records the random seed, 500 bootstrap resamples per interval, 1,000 coverage samples, and 5,000 null simulations. The chart code, saved results, and README explain how to rerun the example. The Plotly library is included locally, so the interactive charts do not require a live data service."
   }
 ]
