@@ -16,6 +16,7 @@ A Quarto website featuring my profile, résumé, and coursework in economics and
 | [6. Matching Parents and Children with SQL in Python](https://qianzhaoli949-afk.github.io/qianzhao-website/blog/posts/post6/index.html) | Links PSID birth mothers and adult children with SQL, then compares single-year and multi-year family-income elasticities. | [Post 6](blog/posts/post6/) |
 | [7. How Much Does County Size Change the Story?](https://qianzhaoli949-afk.github.io/qianzhao-website/blog/posts/post7/index.html) | Uses an interactive Plotly chart to compare county population changes in people and percentages. | [Post 7](blog/posts/post7/) |
 | [8. What Can a Sample Tell Us About a $50 Average?](https://qianzhaoli949-afk.github.io/qianzhao-website/blog/posts/post8/index.html) | Simulates bootstrap intervals, coverage, and hypothesis tests with interactive charts. | [Post 8](blog/posts/post8/) |
+| [9. Can a Simpler Model Predict Stock Returns Better?](https://qianzhaoli949-afk.github.io/qianzhao-website/blog/posts/post9/index.html) | Revisits the classroom XGBoost experiment with time-ordered model and portfolio comparisons. | [Post 9](blog/posts/post9/) |
 
 ## Run locally
 
@@ -33,9 +34,11 @@ Each post has a dedicated guide mapping its code, data, and results and explaini
 - [Post 6 replication guide](blog/posts/post6/README.md)
 - [Post 7 replication guide](blog/posts/post7/README.md)
 - [Post 8 replication guide](blog/posts/post8/README.md)
+- [Post 9 replication guide](blog/posts/post9/README.md)
 
 You will need [R](https://www.r-project.org/) and [Quarto](https://quarto.org/). RStudio is optional.
 Post 6 additionally uses Python 3.9 or later; its scripts need no third-party Python packages.
+To reproduce Post 9, use Python 3.12 and install the packages listed in its [replication guide](blog/posts/post9/README.md).
 
 1. Clone this repository and open its folder:
 
@@ -134,6 +137,7 @@ blog/posts/post5/    Census county GIS analysis: code, data, maps, and replicati
 blog/posts/post6/    PSID mother-child SQL analysis, aggregate results, and separate simulation
 blog/posts/post7/    Interactive Pennsylvania county population comparison
 blog/posts/post8/    Bootstrap and hypothesis-testing simulations and interactive figures
+blog/posts/post9/    Stock-return models, saved price data, results, and replication guide
 images/              Website images
 styles.css           Custom styling
 docs/                Rendered website for GitHub Pages
@@ -144,6 +148,8 @@ docs/                Rendered website for GitHub Pages
 Edit the source files, run `quarto render`, inspect the results, and commit the relevant source files together with the updated `docs/` output. Push the commit to GitHub to publish through the repository's GitHub Pages configuration. Local edits in RStudio do not automatically upload to GitHub. Edit `.qmd` sources rather than generated HTML files.
 
 ## Sources and data use
+
+- **Post 9:** Yahoo-derived historical stock and SPY price snapshots; see the post's guide for sources and limitations.
 
 - **Post 8:** fixed-seed simulations using hypothetical grocery spending; no real survey data.
 
