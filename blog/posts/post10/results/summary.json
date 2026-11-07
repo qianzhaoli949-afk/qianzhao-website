@@ -1,0 +1,55 @@
+{
+  "n_development": 280,
+  "n_validation": 58,
+  "n_test": 60,
+  "missing_horsepower": 6,
+  "validation_rmse": {
+    "Ridge": 6.296434498632162,
+    "Random forest": 6.68158926656089
+  },
+  "chosen_by_validation": "Ridge",
+  "cv_best_rmse": {
+    "Ridge": 3.5524897735005116,
+    "Random forest": 2.826688816609067
+  },
+  "best_params": {
+    "Ridge": {
+      "model__alpha": 0.1
+    },
+    "Random forest": {
+      "model__max_depth": 10,
+      "model__min_samples_leaf": 3
+    }
+  },
+  "test": {
+    "Training mean": {
+      "rmse": 10.403325844155777,
+      "mae": 9.091637080867851
+    },
+    "Ridge": {
+      "rmse": 3.4280868482057945,
+      "mae": 2.6813201321204696
+    },
+    "Random forest": {
+      "rmse": 3.6606352109282887,
+      "mae": 2.4817791076331095
+    }
+  },
+  "test_actual_mean": 31.044999999999998,
+  "training_mean": 22.177810650887576,
+  "test_prediction_means": {
+    "Training mean": 22.177810650887572,
+    "Ridge": 30.541573714967623,
+    "Random forest": 31.070931101713104
+  },
+  "features": [
+    "cylinders",
+    "displacement",
+    "horsepower",
+    "weight",
+    "acceleration",
+    "model_year",
+    "origin"
+  ],
+  "importance_source": "1979\u20131980 validation cars, selected model fitted through 1978"
+}
